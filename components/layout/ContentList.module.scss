@@ -1,0 +1,22 @@
+.metadataView {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 0 0.42rem;
+  gap: 0.42rem;
+  width: 100%;
+  overflow-x: auto;
+  z-index: 3;
+  overflow-y: hidden;
+
+  .listElements {
+    display: flex;
+    flex-wrap: nowrap;
+    // padding-bottom: 0.3rem;
+    // gap: 0.42rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+  }
+
+}

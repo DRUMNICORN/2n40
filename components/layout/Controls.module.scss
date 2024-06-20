@@ -1,0 +1,46 @@
+// Controls.module.scss
+.filterSearchContainer {
+  display: flex;
+  align-items: center;
+  padding: 8px; // Added padding for better spacing
+  gap: 8px; // Increased gap for better spacing between elements
+}
+
+.filterSearch {
+  flex-grow: 1;
+  background-color: transparent; // Transparent background for a lighter feel
+  border-radius: 12px; // Slightly increased border radius for softer edges
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.6); // Lighter border for subtle definition
+  padding: 8px 12px; // Added padding for better touch targets and aesthetics
+  transition: border-color 0.3s, box-shadow 0.3s; // Smooth transitions for interactive feedback
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.9); // Brighter border on focus for visibility
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); // Subtle glow effect on focus
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6); // Placeholder text color for better readability
+  }
+}
+
+.icon {
+  cursor: pointer;
+  transition: transform 0.3s; // Smooth transformation for interactive icons
+
+  &:hover {
+    transform: scale(1.1); // Slight scale increase on hover for feedback
+  }
+}
+
+.filter 
+{
+  width: 100%;
+}
+
+.filterEntries {
+  padding-top: 0.5rem;
+  position: absolute;
+  width: 100%;
+}

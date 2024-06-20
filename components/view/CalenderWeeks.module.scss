@@ -1,0 +1,54 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  background: rgba(var(--dark), 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .weekDays {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+ }
+ 
+ .week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  padding-bottom: 10px;
+ }
+ 
+ .day {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  height: 100px; // Fixed height
+  overflow: hidden;
+ }
+ 
+ .day:hover {
+  background: rgba(255, 255, 255, 0.1);
+ }
+ 
+ .dateInfo {
+  margin-bottom: 5px;
+  text-align: center;
+  color: #fff;
+  flex-grow: 1; // Ensures text does not affect size
+ }
+ 
+ .cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1; // Ensures content does not affect size
+ }
+ 

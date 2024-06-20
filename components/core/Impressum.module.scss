@@ -1,0 +1,103 @@
+.impressumPage {
+  background-color: var(--background-color);
+  // min-height: 100vh;
+  // max-width: 90vh;
+  display: flex;
+  width: 100%;
+
+  padding-top: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.impressumContainer {
+  background-color: var(--white);
+  max-width: 800px;
+  padding: 30px;
+  /* Increased padding for more space */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    /* Increased margin above the title */
+  }
+
+  .sectionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* Increased gap between sections */
+    //   max-height: 600px; /* Set maximum height for scrollbar */
+    overflow-y: auto;
+    /* Enable vertical scrollbar */
+    padding-right: 20px;
+    /* Add padding to avoid scrollbar overlay */
+    max-height: 50vh;
+  }
+
+  .section {
+    background-color: var(--light-gray);
+    padding: 20px;
+    /* Increased padding for sections */
+    border-radius: 8px;
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      /* Adjusted margin below headings */
+    }
+
+    p {
+      margin-bottom: 15px;
+      /* Adjusted margin between paragraphs */
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
+
+      li {
+        margin-bottom: 10px;
+        /* Adjusted margin between list items */
+      }
+    }
+  }
+
+  .privacyList {
+    padding-left: 20px;
+    /* Adjust padding for bullet points */
+  }
+}
+
+.personCard {
+  background-color: var(--light-gray);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  /* Increased margin below person card */
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    /* Increased margin below headings */
+  }
+
+  .personalInfo {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+    /* Adjusted gap between personal info */
+    margin-bottom: 15px;
+    /* Increased margin below personal info */
+
+    p {
+      margin: 5px 0;
+    }
+
+    .tempEmail {
+      font-style: italic;
+    }
+  }
+}

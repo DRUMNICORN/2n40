@@ -1,0 +1,42 @@
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-shadow: var(--box-shadow);
+    padding: 0 0.42rem;
+    z-index: 100;
+
+    width: 100%;
+
+    .left {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .right {
+      white-space: nowrap;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      height: 2em;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding-right: 3rem;
+      padding-left: 3rem;
+    }
+  }

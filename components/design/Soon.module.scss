@@ -1,0 +1,17 @@
+.workContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+  padding-top: 42vh;
+  position: relative; /* Ensure the container is positioned relative */
+}
+
+.workContainer p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: center;
+}

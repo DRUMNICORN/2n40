@@ -1,0 +1,90 @@
+:root {
+  --font: Inter, Arial, Helvetica, sans-serif;
+  --font-size: 20px;
+  --heading-font-size: 1.5rem;
+  --header-height: 3rem;
+
+  --light-rgb: 222, 222, 222;
+  --light: #C4C4C4;
+  --dark-rgb: 10, 10, 10;
+  --dark: #0a0a0a;
+  --primary-rgb: 255, 42, 42;
+  --primary: #ff2a2a;
+  --secondary-rgb: 222, 87, 87;
+  --secondary: #de5454;
+  --tertiary-rgb: 64, 168, 168;
+  --tertiary: #40a8a8;
+  --quaternary-rgb: 168, 64, 168;
+  --quaternary: #a840a8;
+  --quinary-rgb: 168, 168, 64;
+  --quinary: #a8a840;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./Inter.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color-scheme: dark;
+  background-color: rgb(var(--dark-rgb));
+  color: rgb(var(--light-rgb));
+  font-family: var(--font);
+  font-size: var(--font-size);
+  line-height: 1.5;
+  overflow: hidden;
+  height: 100vh;
+
+  /* CSS to make scrollbars smaller in Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+a {
+  color: rgb(var(--light-rgb));
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    /* text-decoration: underline; */
+    color: rgb(var(--primary-rgb));
+  }
+
+  /* &:active {
+    color: rgb(var(--secondary-rgb));
+  } */
+
+  &:visited {
+    color: rgba(var(--light-rgb), 0.8);
+    mix-blend-mode: difference;
+  }
+
+  /* not visited */
+/* 
+  &:link {
+    color: rgb(var(--secondary-rgb));
+  } */
+
+
+  &:focus {
+    outline: 2px solid rgb(var(--quaternary-rgb));
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--quinary-rgb));
+  }
+}

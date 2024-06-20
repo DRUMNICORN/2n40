@@ -1,0 +1,75 @@
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    user-select: none;
+    padding: 1.3rem 2.6rem;
+  }
+  
+  @media (max-width: 768px) {
+    .cardGrid {
+      padding: 1rem;
+      // gap: 0.42rem;
+    }
+  }
+  
+  .cardWrapper {
+    
+    min-height: 300px;
+    height: 30rem;
+  
+    &:hover {
+      transform: scale(1.042);
+      /* Scale on hover for a subtle interactive effect */
+      // box-shadow: 0 4px 8px rgba(var(--dark-rgb), 0.2);
+    }
+  }
+  
+  .fileCard {
+    padding: 16px;
+    /* Adjust padding as needed */
+  }
+  
+  .title {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .socialMediaContainer {
+    margin-top: 12px;
+    /* Spacing between title and connections */
+  }
+  
+  .original {
+    font-size: 14px;
+  }
+  
+  .folderCard {
+    width: 100%;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  
+  
+    .folderContent {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  
+    .folderTitle {
+      font-size: 18px;
+    }
+  
+    .folderIcon {
+      font-size: 24px;
+    }
+  
+    &.selected {
+      border: 1px solid var(--primary-color);
+      background-color: var(--secondary-color);
+    }
+  }
