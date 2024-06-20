@@ -36,9 +36,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# docs
-docs/.obsidian
-docs/.trash
+/data
+data
+data\*
 
 # yarn / npm
 yarn.lock

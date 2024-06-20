@@ -2,7 +2,7 @@
   background-color: var(--background-color);
   // min-height: 100vh;
   // max-width: 90vh;
-  display: flex;
+  // display: flex;
   width: 100%;
 
   padding-top: 4rem;
@@ -85,6 +85,8 @@
   }
 
   .personalInfo {
+    // width: 100vw;
+    
     display: grid;
     grid-template-columns: auto auto;
     gap: 15px;
@@ -98,6 +100,12 @@
 
     .tempEmail {
       font-style: italic;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .personalInfo {
+      grid-template-columns: auto;
     }
   }
 }

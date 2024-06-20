@@ -1,53 +1,73 @@
+/* Header */
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  background: rgba(var(--dark-rgb), 0.5);
+  padding: 0 0.96rem;
+  width: 100%;
+  margin-top: 0;
+  justify-content: space-between;
+  z-index: 100;
+  height: var(--header-height);
 
-  /* Header */
-  .header {
-    position: fixed;
+  /* Tooltip */
+  .tooltip {
+    // display: inline-block;
+    padding: 0.42rem;
+    padding-left: calc(0.42 * 3rem);
+    position: relative;
+    top: 0;
+    left: 0;
+    max-width: 90vw;
+    transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out, width 0.3s ease-in-out;
+    white-space: nowrap;
     display: flex;
-    align-items: center;
-    background: rgba(var(--dark-rgb), 0.5);
-    padding: 0 0.96rem;
     width: 100%;
-    margin-top: 0;
-    justify-content: space-between;
-    z-index: 100;
-    height: var(--header-height);
 
-    /* Tooltip */
-    .tooltip {
-      // display: inline-block;
-      padding: 0.42rem;
-      padding-left: calc(0.42 * 3rem);
-      position: relative;
-      top: 0;
-      left: 0;
-      max-width: 90vw;
-      transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out, width 0.3s ease-in-out;
+    .description {
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
-      display: flex;
-      width: 100%;
-
-      .description {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-
-      .name {
-        padding-right: 1rem;
-        font-weight: bold;
-        text-align: center;
-        /* Additional styles for mobile view */
-        @media (max-width: 768px) {
-          opacity: 0;
-          padding: 0;
-        }
-      }
-
-      &.changing {
-        animation: fadeOutLeft 0.3s ease-in-out forwards;
-      }
-
-
     }
+
+
+    .name {
+      width: 100%;
+      opacity: 1;
+      transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      // padding-right: 1rem;
+      // font-weight: bold;
+      // text-align: center;
+      /* Additional styles for mobile view */
+    }
+
+    &.changing {
+      animation: fadeOutLeft 0.3s ease-in-out forwards;
+    }
+
+
+
   }
+}
+
+.logo {
+  margin: 0.2rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding-left: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 0.42rem;
+  }
+
+  
+  .name {
+    width: 0%;
+    opacity: 0;
+    // font-size: 0.2rem !important;
+    /* Additional styles for mobile view */
+  }
+}

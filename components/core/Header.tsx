@@ -9,6 +9,8 @@ import { useContentOverlay } from "@/providers/OverlayProvider";
 import { useTooltip } from "@/providers/TooltipProvider";
 import Controls from "../layout/Controls";
 import { useQueryParam } from "@/providers/QueryParamProvider";
+import Image from "next/image";
+import Link from "../design/Link";
 
 const useHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,32 +31,23 @@ const useHeader = () => {
 
 const Header: React.FC = () => {
   const { setMenuOpen, menuOpen, handleHamburgerClick, handleTitleClick } = useHeader();
-  const { tooltip } = useTooltip();
-  // const [param, setParams] = useState({} as any);
-  const [name, description] = tooltip.split("-");
 
   const { param, setParam, toggleParam
   } = useQueryParam();
 
-  // const setParam = (key: any, value: string | string[] | null) => {
-  //   setParams((prevParam: any) => {
-  //     return { ...prevParam, [key]: value };
-  //   });
-  // }
 
   const handleToggleParam = (key: any, value: string) => {
-    console.log("toggleParam", key, value);
     toggleParam(key, value);
   }
 
   return (
     <nav className={styles.header}>
-      <Title onClick={handleTitleClick} />
-
-      {/* <div className={styles.tooltip}>
-        <p className={styles.name}>{name}</p>
-        <p className={styles.description}>{description}</p>
-      </div> */}
+      <div className={styles.name}>
+        <Title onClick={handleTitleClick} />
+      </div>
+      <div className={styles.logo}>
+          <Image src="/icon.png" alt="logo" height={38} width={38} />
+      </div>
       <div className={styles.tooltip}>
         <Controls param={param} setParam={setParam} toggleParam={handleToggleParam} />
       </div>
