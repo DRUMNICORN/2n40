@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from "react";
 import styles from "./Content.module.scss";
-import { ContentType, MetadataType } from "@/app/types";
+import { ContentType, MetadataType, MetadataTypes } from "@/app/types";
 import { IoMdEye } from "react-icons/io";
 import Markdown from "../util/Markdown";
 import Link from "../design/Link";
 import SoundCloudEmbed from "../util/SoundCloudEmbed";
 import List from "./ContentList";
 import { useContentOverlay } from "@/providers/OverlayProvider";
-// import { useContentControllerWithSearchParams } from "@/hooks/useContentControllerWithSearchParams";
 import ContentActions from "./ContentActions";
 import { CATEGORY_ICONS } from "@/app/defaults";
 import DateContainer from "../design/DateContainer";
@@ -25,11 +24,15 @@ const Content: React.FC<ContentProps> = ({
   showDetailsOverlay = false,
   isOverlay = false,
 }) => {
+  // Destructure content object
   const { metadata, category, context, id } = content ?? {};
   const { name, date, image, trackUrl } = metadata ?? {};
-  const { setContent, toggleVisibility, setVisible , setClosed} = useContentOverlay();
+
+  // State management
+  const { setContent, toggleVisibility, setVisible, setClosed } = useContentOverlay();
   const [isScrolling, setScrolling] = useState(showDetailsOverlay);
 
+  // Event handlers
   const handleClick = useCallback(() => {
     if (showDetailsOverlay && isOverlay) return;
     toggleVisibility();
@@ -51,7 +54,6 @@ const Content: React.FC<ContentProps> = ({
       e?.preventDefault();
       if (showDetailsOverlay) setScrolling(showDetailsOverlay);
       if (isOverlay) {
-        // toggleVisibility();
         setVisible(false);
       }
     },
@@ -79,34 +81,49 @@ const Content: React.FC<ContentProps> = ({
     setClosed(true);
   }, []);
 
+  // Component rendering
   return (
     <div
       className={`${styles.card} ${showDetailsOverlay ? styles.detailsOverlay : ""}`}
       onClick={handleClick}
       onContextMenu={handleContextMenu}
     >
-      {isOverlay && <ContentActions handleClose={handleClose} handleShare={handleShareClick} />}
+      {/* Header section */}
       <div className={styles.header}>
-       {/* { isOverlay && <DateContainer date={date as string} />} */}
         <h2 className={styles.titleContainer}>
-          <Link noBorder noStyle>
+          {/* Category Icon */}
+          <Link type={MetadataTypes.name}>
             {CATEGORY_ICONS[category ?? "default"]}
           </Link>
-          <Link fittingText shortenedText onClick={handleFileClick}>
+          {/* Name */}
+          <Link onClick={handleFileClick} type={MetadataTypes.name}>
             {name}
           </Link>
+          {/* Eye icon for details */}
           {!showDetailsOverlay && (
             <Link onClick={handleDetailsButtonClick}>
               <IoMdEye />
             </Link>
           )}
+          {/* Actions for overlay */}
+          {isOverlay && <ContentActions handleClose={handleClose} handleShare={handleShareClick} />}
         </h2>
+        {/* Date information */}
+        {isOverlay && <DateContainer date={date as string} />}
+        {/* List of metadata entries */}
         <List metadataEntries={metadata} onEntryClick={onConnectionClick} />
       </div>
+
+      {/* Embedded SoundCloud player */}
       {trackUrl && <SoundCloudEmbed trackUrl={trackUrl as string} active={false} />}
+
+      {/* Content container with optional scroll */}
       <div className={`${styles.contentContainer} ${isScrolling ? styles.scrollable : ""}`}>
+        {/* Markdown content */}
         {context && <Markdown content={context} active={isScrolling} />}
       </div>
+
+      {/* Image container */}
       {image && (
         <div className={styles.imageContainer}>
           <img

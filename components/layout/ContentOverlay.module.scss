@@ -1,9 +1,9 @@
 .popup {
   position: fixed;
-  top: 6.66rem;
-  right: 1rem;
-  bottom: 2.22rem;
-  left: 1rem;
+  top: 3rem;
+  // // right: 1rem;
+  // // bottom: 2.22rem;
+  // left: 0rem;
   z-index: 2;
   opacity: 0;
   display: flex;
@@ -11,11 +11,23 @@
   justify-content: space-between;
   background-color: rgba(var(--dark-rgb), 0.8);
   backdrop-filter: blur(10px);
-  border-radius: 2.1rem;
-  padding: 1rem;
-  overflow: hidden;
+  // border-radius: 2.1rem;
+  // // padding: 1rem;
+  // overflow: hidden;
 
-  transition: all 0.42s ease-in-out;
+  // width: 100vw;
+  // height: 100vh;
+
+  
+  // top: 6rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 0;
+  // padding-bottom: 2rem;
+  // padding-bottom: 3rem;
+
+  transition: opacity 0.42s ease-in-out;
 
   &.show {
     opacity: 1;
@@ -38,12 +50,15 @@
     white-space: pre-wrap;
     flex-direction: column;
     gap: 1rem;
+    height: 100%;
+    // overflow: hidden;;
     
     .detailsContainer {
       height: max-content;
       display: flex;
       justify-content: space-between;
       gap: 1rem;
+      height: 100%;
 
       .titleInput {
         font-size: var(--heading-font-size);
@@ -98,7 +113,7 @@
       .markdownContentContainer {
         flex: 1;
         overflow-y: auto;
-        height: 100vh;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -121,12 +136,6 @@
 
 @media (max-width: 768px) {
   .popup {
-    top: 6rem;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 0;
-    padding-bottom: 2rem;
   }
   
 }

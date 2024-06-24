@@ -15,6 +15,20 @@ export function getMetadataString(context: string): MetadataType {
     }
   }
 
+  if (metadata.address){
+    // it must contain chemnitz and no other regex
+    let isChemnitz = false;
+
+    let address = metadata.address;
+
+    if ((address as string).toLowerCase().includes("chemnitz"))
+      isChemnitz = true;
+
+    if (!isChemnitz) {
+      delete metadata.address
+    }
+  }
+
   if (metadata.name) {
     metadata.name = (metadata.name as string).replace("name:", "").replace(":", "").trim();
   }

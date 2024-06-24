@@ -1,73 +1,60 @@
-/* Header */
 .header {
   position: fixed;
   display: flex;
   align-items: center;
   background: rgba(var(--dark-rgb), 0.5);
-  padding: 0 0.96rem;
   width: 100%;
   margin-top: 0;
-  justify-content: space-between;
+  // justify-content: space-between;
   z-index: 100;
   height: var(--header-height);
-
-  /* Tooltip */
-  .tooltip {
-    // display: inline-block;
-    padding: 0.42rem;
-    padding-left: calc(0.42 * 3rem);
-    position: relative;
-    top: 0;
-    left: 0;
-    max-width: 90vw;
-    transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out, width 0.3s ease-in-out;
-    white-space: nowrap;
-    display: flex;
-    width: 100%;
-
-    .description {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .name {
-      width: 100%;
-      opacity: 1;
-      transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
-      // padding-right: 1rem;
-      // font-weight: bold;
-      // text-align: center;
-      /* Additional styles for mobile view */
-    }
-
-    &.changing {
-      animation: fadeOutLeft 0.3s ease-in-out forwards;
-    }
-
-
-
-  }
+  transition: height 0.3s ease; /* Transition for header height change */
 }
 
 .logo {
-  margin: 0.2rem;
-  height: 2.5rem;
-  width: 2.5rem;
-  padding-left: 0.7rem;
+  margin: 0 auto; /* Center the logo horizontally */
 }
 
-@media (max-width: 768px) {
-  .header {
-    padding: 0 0.42rem;
-  }
-
+.name {
+  transition: opacity 0.3s ease, width 0.3s ease, padding-right 0.3s ease;
+  width: 0%;
+  opacity: 0;
+  justify-self: left;
   
+  padding-right: 0rem;
+}
+
+.controls {
+  align-items: center;
+  overflow: hidden; /* Allow controls to scroll horizontally on mobile */
+  // max-width: 100%; /* Take up full width initially */
+  display: flex; /* Ensure controls are always displayed */
+  // padding: 0.5rem; /* Add padding for spacing */
+  padding-right: 0.5rem;
+  ;
+  // white-space: nowrap;
+  width: 100%; /* Take up full width initially */
+  justify-content: space-between;
+  // height: 100%;
+  transition: max-width 0.3s ease;
+}
+
+.controls > * {
+  margin-right: 0.5rem; /* Adjust margin between control elements */
+}
+
+@media (min-width: 769px) {
+  .header {
+    padding: 0 0.96rem; /* Restore padding for larger screens */
+  }
+
   .name {
-    width: 0%;
-    opacity: 0;
-    // font-size: 0.2rem !important;
-    /* Additional styles for mobile view */
+    padding-right: 1.5rem;
+    display: flex; /* Display title on larger screens */
+    justify-content: center; /* Center align title horizontally */
+    opacity: 1; /* Ensure title is visible */
+    width: 20%;
+    min-width: fit-content;
   }
 }
+

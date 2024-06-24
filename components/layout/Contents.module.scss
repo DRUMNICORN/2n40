@@ -1,7 +1,12 @@
-.filterCardsContainer {
-    opacity: 0;
+.container {
+    opacity: 1;
     animation: fadeIn 0.3s ease-in-out forwards;
+    height: calc(101vh - var(--header-height) );
+    // height: 100%;
+    // position: absolute;
     padding-top: var(--header-height);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 @keyframes fadeIn {
@@ -9,45 +14,3 @@
         opacity: 1;
     }
 }
-
-.description {
-  height: 4.2rem;
-}
-
-
-.cardsContainer {
-    height: calc(100vh - var(--header-height) );
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-// centered on all screen
-.noResults {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    // height: 74vh;
-    padding: 20px;
-}
-.noResults svg {
-    font-size: 10rem;
-    color: rgba(var(--light-rgb), 0.2);
-    transition: color 0.3s ease-in-out;
-
-    :hover {
-        color: rgba(var(--light-rgb), 1);
-    }
-}
-
-.pannel {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    // height: 100vh;
-    // padding: 20px;
-}
-

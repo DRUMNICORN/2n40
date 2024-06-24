@@ -2,13 +2,20 @@
     display: block;
     position: relative;
     width: 11rem;
+    max-width: 15%;
     height: 22.5px;
     z-index: 3;
     cursor: pointer;
+    margin-top: 0.2rem;
     transition: all 0.25s ease-in-out;
+    margin-right: 1rem;
     &:hover span:nth-child(2) {
         animation: hamburger-hover 0.25s ease-in-out forwards;
     }
+
+    @media (max-width: 300px) {
+    }
+
 }
 
 @keyframes hamburger-hover {
@@ -21,8 +28,8 @@
 }
 .hamburger span {
     @media (max-width: 300px) {
-        width: 0;
-        right: -4rem;
+        // width: 0;
+        // right: -4rem;
     }
     display: block;
     position: absolute;
@@ -30,8 +37,8 @@
     height: 2px;
     background: rgb(var(--light-rgb));
     opacity: 1;
-    left: 0;
     transform: rotate(0deg);
+
     transition: all 0.25s ease-in-out;
 }
 

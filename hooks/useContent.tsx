@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import axios, { CancelToken } from 'axios';
 import { getUrl, loadContents } from '@/utils/web';
 import { CategoryType, ContentType, MetadataType } from '@/app/types';
-import { useQueryParam } from '@/providers/QueryParamProvider';
+import { useQuery } from '@/providers/QueryProvider';
 
 interface UseContentControllerReturn {
   contentFiles: ContentType[];
@@ -20,7 +20,7 @@ interface SearchParamsController {
   syncSearchParams: () => void;
 }
 
-export const useContentControllerWithSearchParams = (): UseContentControllerReturn & SearchParamsController => {
+export const useContent = (): UseContentControllerReturn & SearchParamsController => {
   const [contentFiles, setContentFiles] = useState<ContentType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -28,13 +28,13 @@ export const useContentControllerWithSearchParams = (): UseContentControllerRetu
 
   // const [param, setParamState] = useState<MetadataType>({} as MetadataType);
   const { param, setParam, toggleParam, setParamState
-  } = useQueryParam();
+  } = useQuery();
   const { connections: paramConnections, name: paramName, category: paramCategory } = param;
 
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const updateParamFromQueryParams = () => {
+    const updateParamFromQuerys = () => {
       const newParam = {
         name: searchParams.get('name') || '',
         connections: (searchParams.get('connections')?.split(',') || []).filter(Boolean),
@@ -44,9 +44,9 @@ export const useContentControllerWithSearchParams = (): UseContentControllerRetu
       updateDecodedHash();
       setParamState(newParam);
     };
-    updateParamFromQueryParams();
-    window.addEventListener('popstate', updateParamFromQueryParams);
-    return () => window.removeEventListener('popstate', updateParamFromQueryParams);
+    updateParamFromQuerys();
+    window.addEventListener('popstate', updateParamFromQuerys);
+    return () => window.removeEventListener('popstate', updateParamFromQuerys);
   }, []);
 
   const syncSearchParams = useCallback(() => {

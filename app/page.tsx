@@ -3,7 +3,7 @@ import Contents from '@/components/layout/Contents';
 import { CategoryType } from './types';
 
 const homePage: React.FC = () => {
-  return <Contents />;
+  return <Contents mode={CategoryType.Collaboration} />;
 };
 
 export default homePage;

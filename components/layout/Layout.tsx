@@ -1,15 +1,13 @@
 "use client";
 
 import React from "react";
-import styles from "./Content.module.scss";
+import styles from "./Layout.module.scss";
 import Background from "../design/Background";
 import Footer from "../core/Footer";
 import { OverlayProvider } from "@/providers/OverlayProvider";
-// import { ContentOverlay } from "./ContentOverlay";
-import { TooltipProvider } from "@/providers/TooltipProvider";
 import Header from "../core/Header";
 import ContentOverlay from "./ContentOverlay";
-import { QueryParamProvider } from "@/providers/QueryParamProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -26,19 +24,19 @@ const Layout = React.memo((props: Props) => {
 
   return (
     <div className={styles.content}>
-      <Background />
-      <OverlayProvider>
-        <QueryParamProvider>
-        <ContentOverlay />
-        <TooltipProvider>
-          <Header />
-          <main className={styles.main}>
-            {memoizedChildren}
-          </main>
-        </TooltipProvider>
-        </QueryParamProvider>
-      </OverlayProvider>
-      <Footer />
+        <Background />
+        <OverlayProvider>
+          <QueryProvider>
+            <ContentOverlay />
+            {/* <TooltipProvider> */}
+            <Header />
+            <main className={styles.main}>
+              {memoizedChildren}
+            </main>
+            {/* </TooltipProvider> */}
+          </QueryProvider>
+        </OverlayProvider>
+        <Footer />
     </div>
   );
 });

@@ -34,7 +34,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`link-group-${i}`} className={styles.links}>
           {line.split(linkRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Link fittingText key={`link-${k}`} name={part}>{part}</Link>
+            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Link key={`link-${k}`} name={part}>{part}</Link>
           ))}
         </div>
       );

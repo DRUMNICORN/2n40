@@ -68,4 +68,12 @@ export const SOCIAL_MEDIA_ICONS: { [key in MetadataTypes]: JSX.Element } = {
   [MetadataTypes.telegram]: <FaTelegramPlane />,
   [MetadataTypes.twitter]: <FaTwitter />,
   [MetadataTypes.add]: <MdAdd />,
+  [MetadataTypes.name]: <MdPerson />,
+  [MetadataTypes.time]: <IoTimeSharp />,
+  [MetadataTypes.connections]: <BiSolidNetworkChart />,
+  [MetadataTypes.concepts]: <FaHashtag />,
+  [MetadataTypes.description]: <MdPages />,
+  [MetadataTypes.category]: <MdGroups />,
+  [MetadataTypes.collectives]: <MdGroups />,
+  [MetadataTypes.creatives]: <MdGroups />,
 };

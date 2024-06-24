@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useMemo, useState, useEffect } from 
 import { ContentType } from '@/app/types';
 
 interface EntityContextInterface {
-  content: ContentType | null;
+  content: ContentType;
   setContent: (content: ContentType) => void;
   isClosed: boolean;
   setClosed: (isClosed: boolean) => void;
@@ -18,7 +18,7 @@ interface EntityProviderProps {
 }
 
 export const OverlayProvider: React.FC<EntityProviderProps> = ({ children }: EntityProviderProps) => {
-  const [content, setContent] = useState<ContentType | null>(null);
+  const [content, setContent] = useState<ContentType>({} as ContentType);
   const [isVisible, setVisible] = useState<boolean>(false);
   const [isClosed, setClosed] = useState<boolean>(false);
 

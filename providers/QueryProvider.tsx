@@ -2,27 +2,21 @@ import React from "react";
 import { createContext, ReactNode, useState } from "react";
 
 
-interface QueryParamContextInterface {
+interface QueryContextInterface {
     param: Record<string, string | string[]>; // Current query parameters
     setParam: (key: string, value: string | string[] | null) => void; // Set a single query parameter
     setParamState: (param: Record<string, string | string[]>) => void; // Set all query parameters
     toggleParam: (key: string, value: string) => void; // Toggle a query parameter value
 }
 
-
-
-
-
-const QueryParamContext = createContext<QueryParamContextInterface>({
+const QueryContext = createContext<QueryContextInterface>({
     param: {},
     setParam: () => { },
     setParamState: () => { },
     toggleParam: () => { },
 });
 
-
-
-export const QueryParamProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const QueryProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [param, setParamState] = useState<Record<string, string | string[]>>({});
 
     const setParam = (key: string, value: string | string[] | null) => {
@@ -32,6 +26,8 @@ export const QueryParamProvider: React.FC<{ children: ReactNode }> = ({ children
     };
 
     const toggleParam = (key: string, value: string) => {
+        // replace value in param "name" with ''
+
         setParamState(prevParam => {
             const currentValue = prevParam[key] || [];
             const newValue = Array.isArray(currentValue)
@@ -39,11 +35,14 @@ export const QueryParamProvider: React.FC<{ children: ReactNode }> = ({ children
                     ? currentValue.filter(v => v !== value)
                     : [...currentValue, value]
                 : value;
+            let name = prevParam.name as string;
+            name = name.replace(value, '');
+            prevParam.name = name;
             return { ...prevParam, [key]: newValue };
         });
     };
 
-    const queryParamContextValue: QueryParamContextInterface = {
+    const QueryContextValue: QueryContextInterface = {
         param,
         setParam,
         setParamState,
@@ -51,13 +50,13 @@ export const QueryParamProvider: React.FC<{ children: ReactNode }> = ({ children
     };
 
     return (
-        <QueryParamContext.Provider value={queryParamContextValue}>
+        <QueryContext.Provider value={QueryContextValue}>
             {children}
-        </QueryParamContext.Provider>
+        </QueryContext.Provider>
     );
 };
 
 
-export const useQueryParam = () => {
-    return React.useContext(QueryParamContext);
+export const useQuery = () => {
+    return React.useContext(QueryContext);
 };

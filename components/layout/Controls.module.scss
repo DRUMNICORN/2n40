@@ -1,15 +1,20 @@
 // Controls.module.scss
 .filterSearchContainer {
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 8px; // Added padding for better spacing
-  gap: 8px; // Increased gap for better spacing between elements
+  // padding: 8px; // Added padding for better spacing
+  // gap: 8px; // Increased gap for better spacing between elements
 }
 
 .filterSearch {
+  z-index: 5;
   flex-grow: 1;
   background-color: transparent; // Transparent background for a lighter feel
   border-radius: 12px; // Slightly increased border radius for softer edges
+  // right no radius
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   outline: none;
   border: 1px solid rgba(255, 255, 255, 0.6); // Lighter border for subtle definition
   padding: 8px 12px; // Added padding for better touch targets and aesthetics
@@ -25,6 +30,14 @@
   }
 }
 
+.filterSearchIcon {
+  
+  border-radius: 12px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
 .icon {
   cursor: pointer;
   transition: transform 0.3s; // Smooth transformation for interactive icons
@@ -37,10 +50,18 @@
 .filter 
 {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 
 .filterEntries {
-  padding-top: 0.5rem;
-  position: absolute;
-  width: 100%;
+  transition: width 0.42s ease-in-out;
+  width: 42%;
+
+  &.empty {
+    transition: width 0.42s ease-in-out;
+    width: 0%;
+  }
 }

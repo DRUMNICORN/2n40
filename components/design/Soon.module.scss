@@ -15,3 +15,13 @@
   line-height: 1.5;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .workContainer {
+    flex-direction: column;
+    padding-top: 30vh;
+    padding-bottom: 30vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

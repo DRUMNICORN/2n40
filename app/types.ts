@@ -19,6 +19,7 @@ export enum MetadataTypes {
   mail = "mail",
   date = "date",
   price = "price",
+  time = "time",
   address = "address",
   tel = "tel",
   instagram = "instagram",
@@ -30,6 +31,14 @@ export enum MetadataTypes {
   telegram = "telegram",
   twitter = "twitter",
   add = "add",
+  name = "name",
+  description = "description",
+  category = "category",
+  concepts = "concepts",
+  connections = "connections",
+  collectives = "collectives",
+  creatives = "creatives",
+
 }
 
 // Descriptions for different categories
@@ -64,6 +73,7 @@ export const SITE_METADATA = {
 
 // Regular expressions matrix for different categories
 export const REGEX_MATRIX: Record<string, RegExp[]> = { 
+  address: [/\b[A-Za-zÄÖÜäöüß]+(?:\s[A-Za-zÄÖÜäöüß]+)*\s\d{1,5}\s[A-Za-zÄÖÜäöüß]+(?:\s[A-Za-zÄÖÜäöüß]+)*\b/i],
   time: [/\d{1,2}:\d{2} Uhr?/, /\d{1,2} Uhr/, /\d{1,2}:\d{2} (am|pm)/, /\d{1,2} (am|pm)/, /\d{1,2}:\d{2} (am|pm)/],
   date: [/\d{4}-\d{2}-\d{2}/, /\d{1,2}\.\d{1,2}\.\d{4}/, /\d{1,2}\.\d{1,2}\./, /\bheute\b/],
   price: [/eintritt.*frei/i, /eintritt.*kostenlos/i, /\bkostenlos\b/i, /\d{1,2}€/i, /\d{1,2} €/i, /free/],
@@ -71,6 +81,7 @@ export const REGEX_MATRIX: Record<string, RegExp[]> = {
   name: [/\bname:.*\b/i, /\b.*\b/i],
   // tel is +49 123 4567890 or 0123 4567890 and ignores spaces / make optional
   // tel: [/\+\d{2}(?:\s\d{3}){2,3}/, /\d{4,5}\s\d{6,7}/],
+  // adress Annaberger Str. 24, 09111 Chemnitz or Erich Mühsam Straße 6 09112 Chemnitz as regex string
 };
 
 export interface NodeConnectionType {
@@ -173,6 +184,7 @@ export interface Message {
   command?: CommandType;
   content: ContentType;
 }
+
 
 // Define an enum for languages
 export enum Language {

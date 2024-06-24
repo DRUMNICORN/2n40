@@ -1,68 +1,34 @@
-"use client";
+"use client"
 
 import React, { useState } from 'react';
-import { MdCreate } from 'react-icons/md';
 import styles from './Link.module.scss';
+import { SOCIAL_MEDIA_ICONS } from '@/app/defaults';
+import { MetadataTypes } from '@/app/types';
 
 interface LinkProps {
-  children?: React.ReactNode;
-  spinOnClick?: boolean;
-  preventDefault?: boolean;
-  stopPropagation?: boolean;
-  noBorder?: boolean;
-  noHover?: boolean;
-  noName?: boolean;
-  noStyle?: boolean;
-  disableClick?: boolean;
-  onClick?: (e: React.MouseEvent) => void;
-  fittingText?: boolean;
-  shortenedText?: boolean;
   href?: string;
   label?: string;
-  type?: string;
-  textLeft?: boolean; // New property to position text to the left of the icon
+  children?: React.ReactNode;
+  spinOnClick?: boolean;
+  disableClick?: boolean;
+  textLeft?: boolean; // Position text to the left of the icon
+  type?: MetadataTypes;
+  onClick?: (e: React.MouseEvent) => void;
   [key: string]: any; // For additional dynamic properties
 }
 
 const Link: React.FC<LinkProps> = ({
-  spinOnClick = false,
-  onClick,
-  children,
-  preventDefault = false,
-  stopPropagation = false,
-  noBorder = false,
-  noHover = false,
-  noName = false,
-  disableClick = false,
-  noStyle = false,
-  fittingText = false,
-  shortenedText = false,
   href,
-  type,
   label,
-  textLeft = false, // Default value is false
+  children,
+  spinOnClick = false,
+  disableClick = false,
+  textLeft = false,
+  type,
+  onClick,
   ...rest
 }) => {
   const [iconAnimated, setIconAnimated] = useState(false);
-
-  const handleLinkClick = (e: React.MouseEvent) => {
-    if (preventDefault) e.preventDefault();
-    if (stopPropagation) e.stopPropagation();
-    if (onClick) onClick(e);
-
-    if (spinOnClick) {
-      setIconAnimated(true);
-      setTimeout(() => setIconAnimated(false), 500);
-    }
-
-    if (!noName && !children) {
-      console.warn('No name provided for Link component');
-    }
-
-    if (type && label && !disableClick) {
-      handleRedirect(label, type);
-    }
-  };
 
   const handleRedirect = (value: string, key: string) => {
     switch (key) {
@@ -84,45 +50,51 @@ const Link: React.FC<LinkProps> = ({
     }
   };
 
-  const fittingTextClass = fittingText ? styles.fittingText : '';
-  const shortenedTextClass = shortenedText ? styles.shortenedText : '';
-  const noNameTextClass = noName ? styles.noName : '';
-  const textLeftClass = textLeft ? styles.textLeft : '';
+  const handleLinkClick = (e: React.MouseEvent) => {
+    if (disableClick) {
+      e.preventDefault();
+      return;
+    }
+    if (onClick) onClick(e);
+
+    if (spinOnClick) {
+      setIconAnimated(true);
+      setTimeout(() => setIconAnimated(false), 500);
+    }
+
+    if (type && label) {
+      handleRedirect(label, type);
+    }
+  };
+
+  const LinkText = () => (
+    <span className={styles.linkText}>{label}</span>
+  );
+
+  const isExternalLink = type === 'address' || type === 'website';
+
+  // Determine if the link is a quadratic (square) style based on presence of label
+  const isQuadratic = !label && !type;
+
+
+  const linkClassName = `
+    ${styles.link} 
+    ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} 
+    ${isExternalLink ? styles.externalLink : ''}
+    ${isQuadratic ? styles.quadratic : ''} 
+  `;
 
   return href ? (
-    <a
-      href={href}
-      className={`${styles.link} ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} ${noBorder ? styles.noBorder : ''} ${noHover ? styles.noHover : ''} ${noStyle ? styles.noStyle : ''} ${fittingTextClass} ${shortenedTextClass} ${noNameTextClass} ${textLeftClass}`}
-      onClick={handleLinkClick}
-      {...rest}
-    >
-      {textLeft && label && <span className={styles.label}>{label}</span>}
-      {children ? (
-        <div className={`${styles.textContainer} ${shortenedTextClass}`}>
-          {children}
-        </div>
-      ) : (
-        <MdCreate />
-      )}
-      {!textLeft && label && <span className={styles.label}>{label}</span>}
-    </a>)
-    : (
-      <button
-        className={`${styles.link} ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} ${noBorder ? styles.noBorder : ''} ${noHover ? styles.noHover : ''} ${noStyle ? styles.noStyle : ''} ${fittingTextClass} ${shortenedTextClass} ${noNameTextClass} ${textLeftClass}`}
-        onClick={handleLinkClick}
-        {...rest}
-      >
-        {textLeft && label && <span className={styles.label}>{label}</span>}
-        {children ? (
-          <div className={`${styles.textContainer} ${shortenedTextClass}`}>
-            {children}
-          </div>
-        ) : (
-          <MdCreate />
-        )}
-        {!textLeft && label && <span className={styles.label}>{label}</span>}
-      </button>)
-
+    <a href={href} className={linkClassName} onClick={handleLinkClick} {...rest}>
+      {children || SOCIAL_MEDIA_ICONS[type as keyof typeof SOCIAL_MEDIA_ICONS]}
+      {label && <LinkText />}
+    </a>
+  ) : (
+    <button className={linkClassName} onClick={handleLinkClick} {...rest}>
+      {children || SOCIAL_MEDIA_ICONS[type as keyof typeof SOCIAL_MEDIA_ICONS]}
+      {label && <LinkText />}
+    </button>
+  );
 };
 
 export default Link;

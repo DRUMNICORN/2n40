@@ -12,10 +12,10 @@ interface ContentActionsProps {
 const ContentActions: React.FC<ContentActionsProps> = ({ handleClose, handleShare, handleDetails }) => {
   return (
     <div className={styles.buttons}>
-      {handleShare && <Link noBorder noStyle onClick={handleShare}>
+      {handleShare && <Link onClick={handleShare}>
         <MdShare />
       </Link>}
-      {handleClose && <Link noBorder noStyle onClick={handleClose}>
+      {handleClose && <Link onClick={handleClose}>
         <MdClose />
       </Link>}
     </div>

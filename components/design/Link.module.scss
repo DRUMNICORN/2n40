@@ -1,6 +1,5 @@
 .link {
-  gap: 0.5rem;
-  white-space: nowrap;
+  // gap: 0.5rem;
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
@@ -11,13 +10,8 @@
   border-radius: 10px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  // width: auto;
-  // position: relative;
-
-  &:hover {
-    background-color: rgba(var(--secondary-rgb), 0.2);
-  }
+  justify-content: left;
+  text-align: left; /* Ensure text aligns left within the container */
 
   &:focus {
     outline: none;
@@ -25,47 +19,11 @@
 
   svg {
     position: relative;
-    bottom: 0.042rem;
-    vertical-align: middle;
-  }
-
-  &.noHover {
-    background: var(--light);
-
-    &:hover {
-      background: var(--light);
-    }
-
-    svg {
-      filter: invert(1);
-    }
-  }
-
-  &.noName {
-    &:hover {
-      text-decoration: none;
-    }
-
-    &:link {
-      color: var(--light);
-    }
-  }
-
-  &.noBorder {
-    border: none;
-    background: var(--dark);
-
-    &:hover {
-      background: var(--dark);
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &.noStyle {
-    background: transparent !important;
+    vertical-align: left;
+    // padding: 0.1rem;
+    // scale the icon
+    transform: scale(1.2);
+    margin: 0.4rem;
   }
 
   &.iconAnimated {
@@ -74,42 +32,35 @@
     }
   }
 
-  &.shortenedText {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  &.externalLink {
+    color: var(--primary-rgb); /* Add your external link color here */
+    border-color: var(--primary-rgb); /* Optionally change the border color */
   }
 
-  &.fittingText {
-    display: inline;
-    margin: 0;
-    padding: 0;
-    font-size: var(--font-size);
-    font-weight: bold;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Ensure text truncation with ellipsis */
-    background: transparent;
+  &.quadratic {
+    width: 2rem !important;
+    height: 2rem !important;
+    padding: 0rem;
+    margin: 0rem;
 
-    &:hover {
-      background: transparent;
-    }
-
-    .textContainer {
-      overflow: hidden; /* Inherit overflow properties */
-      text-overflow: ellipsis; /* Ensure text truncation with ellipsis */
-    }
-  }
-
-  .textContainer {
-    display: inline-flex;
+    // center 
+    display: flex;
+    justify-content: center;
+    // padding-right: 0.3rem;
     align-items: center;
+
   }
 
-  .label {
+  .linkText {
     margin-left: 0.5rem;
+    display: block; /* Ensure each line of the address is on a new line */
+    align-items: flex-start; /* Align lines to the left within the container */
   }
+
+  &:hover {
+    background-color: rgba(var(--secondary-rgb), 0.2);
+  }
+
 }
 
 @keyframes spin {

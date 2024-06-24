@@ -12,7 +12,7 @@ const Footer = () => {
           */}
       </div>
       <div className={styles.right}>
-        <Link textLeft noStyle label={'Impressum'} href='/impressum'>
+        <Link textLeft label={'Impressum'} href='/impressum'>
           <MdInfo />
         </Link>
       </div>

@@ -16,7 +16,7 @@ interface EntityFilterProps {
   toggleParam: (key: any, value: string) => void;
 }
 
-const Controls: React.FC<EntityFilterProps> = React.memo(({  param, setParam, toggleParam }) => {
+const Controls: React.FC<EntityFilterProps> = React.memo(({ param, setParam, toggleParam }) => {
   // const nextMode = mode === ViewType.Carousel ? ViewType.CalendarDays : ViewType.Carousel;
   // const { mode, cycleViewMode} = useViewMode();
   // Memoized callbacks
@@ -37,6 +37,8 @@ const Controls: React.FC<EntityFilterProps> = React.memo(({  param, setParam, to
   // Memoized metadataEntries derived from param.connections
   const metadataEntries = useMemo(() => param?.connections || [], [param]) as string[];
 
+  const filterEntitiesClasses = `${styles.filterEntities} ${metadataEntries.length > 0 ? '' : styles.empty}`;
+
   return (
     <div className={styles.filter}>
       <div className={styles.filterSearchContainer}>
@@ -49,19 +51,21 @@ const Controls: React.FC<EntityFilterProps> = React.memo(({  param, setParam, to
           onChange={(e) => setParam('name', e.target.value)}
           onKeyPress={handleKeyPress}
         />
-        <Link onClick={handleSwap}>
-          <FaSearch />
-        </Link>
+        <div className={styles.filterSearchIcon} >
+          <Link onClick={handleSwap}>
+            <FaSearch />
+          </Link>
+        </div>
         {/* <Link onClick={cycleViewMode} spinOnClick={true}>
           {VIEW_ICONS[mode]}
         </Link> */}
       </div>
-      <div className={styles.filterEntries}>
-      <List
-        metadataEntries={metadataEntries}
-        disableClick={true}
-        onEntryClick={(element) => toggleParam('connections', element as string)}
-      />
+      <div className={filterEntitiesClasses}>
+        <List
+          metadataEntries={metadataEntries}
+          // disableClick={true}
+          onEntryClick={(element) => toggleParam('connections', element as string)}
+        />
       </div>
     </div>
   );

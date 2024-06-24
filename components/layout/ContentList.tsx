@@ -35,7 +35,7 @@ const List: React.FC<ListViewProps> = ({
   const handleBlur = () => setIsAdding(false);
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && newEntryKey && newEntryValue) {
-      const updatedEntries = {...metadataEntries, [newEntryKey]: newEntryValue };
+      const updatedEntries = { ...metadataEntries, [newEntryKey]: newEntryValue };
       setNewEntryKey('');
       setNewEntryValue('');
       setIsAdding(false);
@@ -57,24 +57,22 @@ const List: React.FC<ListViewProps> = ({
   const removeEntry = (key: string) => {
     if (typeof metadataEntries === 'string') return;
 
-    const { [key]: _,...remainingEntries } = metadataEntries as MetadataType;
+    const { [key]: _, ...remainingEntries } = metadataEntries as MetadataType;
 
     if (onMetadataChange) onMetadataChange(remainingEntries as MetadataType);
   };
 
-  // const toggleEditMode = () => 
   return (
     <div className={styles.metadataView} onDrag={
       e => {
         e.preventDefault();
         e.stopPropagation();
       }
-    } onTouchMove={ e => { e.preventDefault(); e.stopPropagation(); }}>
+    } onTouchMove={e => { e.preventDefault(); e.stopPropagation(); }}>
       {Object.entries(metadataEntries || {}).map(([key, value], index) => {
         const entryContent = `${value.toString()}`;
-        const iconKey = determineIcon(entryContent) as keyof typeof SOCIAL_MEDIA_ICONS;
+        const iconKey = (key ||  determineIcon(entryContent)) as keyof typeof SOCIAL_MEDIA_ICONS;
         const icon = typeof value === 'string' && SOCIAL_MEDIA_ICONS[iconKey];
-       
 
         if (excludedKeys.includes(key)) return null;
 
@@ -85,59 +83,21 @@ const List: React.FC<ListViewProps> = ({
             stopPropagation
             disableClick={disableClick}
             noName
-            noBorder={selectedKeys.includes(key)}
             onClick={() => {
               if (isEditable) {
                 removeEntry(key);
               } else if (onEntryClick) {
-                if (typeof metadataEntries!== 'string') onEntryClick(value as string);
+                if (typeof metadataEntries !== 'string') onEntryClick(value as string);
                 else onEntryClick({ [key]: value });
               }
             }}
             label={entryContent}
-            type={key}
+            type={key as MetadataTypes}
           >
-            {icon? icon : <MdTag />}
+            {icon ? icon : <MdTag />}
           </Link>
         );
       })}
-      {isEditable && (
-        <>
-          {isAdding? (
-            <div className={styles.addElementContainer}>
-              <input
-                className={styles.addElementInput}
-                type="text"
-                name="newEntryKey"
-                value={newEntryKey}
-                onChange={handleKeyChange}
-                onBlur={handleBlur}
-                onKeyPress={handleKeyPress}
-                placeholder="Key"
-              />
-              <input
-                className={styles.addElementInput}
-                type="text"
-                name="newEntryValue"
-                value={newEntryValue}
-                onChange={handleValueChange}
-                onBlur={handleBlur}
-                onKeyPress={handleKeyPress}
-                placeholder="Value"
-              />
-            </div>
-          ) : (
-            <Link preventDefault stopPropagation onClick={addEntry}>
-              <MdAdd />
-            </Link>
-          )}
-          {/* <button className={styles.editButtonContainer} onClick={toggleEditMode}>
-            <Link>
-              {isEditable? <MdUndo /> : <MdEdit />}
-            </Link>
-          </button> */}
-        </>
-      )}
     </div>
   );
 };

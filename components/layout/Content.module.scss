@@ -63,15 +63,16 @@
   &:hover {
     // fade out box shadow
     box-shadow: 0 0.42rem 0.42rem rgba(0, 0, 0, 0.1);
+
   }
 }
 
 .titleContainer {
   background: rgba(var(--dark-rgb), 0.2);
   border-radius: 8px;
-  padding: 0.42rem;
+  // padding: 0.42rem;
   margin: 0;
-  margin-bottom: 12px;
+  // margin-bottom: 12px;
   display: flex;
   font-size: 18px;
   font-weight: bold;
@@ -80,4 +81,13 @@
   text-align: center;
   align-items: center;
   justify-content: space-between;
+  padding: 0 8px;
+}
+
+.detailsOverlay {
+  background-color: rgba(var(--dark-rgb), 0.42);
+  border-radius: 8px;
+  // padding: 0.42rem;
+  // padding-left: 0;
+  margin-left: 0;
 }

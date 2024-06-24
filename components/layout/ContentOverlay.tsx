@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./ContentOverlay.module.scss";
-import Loading from "../design/Loading";
 import Content from "./Content";
 import { useContentOverlay } from "@/providers/OverlayProvider";
 
@@ -14,15 +13,9 @@ const ContentOverlay: React.FC<ContentOverlayProps> = () => {
 
   return (
     <div className={`${styles.popup} ${isVisible ? styles.show : styles.hide}`}>
-      {content ? (
-        <div className={styles.contentContainer}>
-          <Content content={content} isOverlay showDetailsOverlay onConnectionClick={() => { }} />
-        </div>
-      ) : (
-        <div className={styles.noContentMessage}>
-          <Loading />
-        </div>
-      )}
+      <div className={styles.contentContainer}>
+        <Content content={content} isOverlay showDetailsOverlay onConnectionClick={() => { }} />
+      </div>
     </div>
   );
 };

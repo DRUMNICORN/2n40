@@ -13,7 +13,6 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const { isVisible, toggleVisibility, setContent } = useContentOverlay();
-  const [lastClicked, setLastClicked] = React.useState("");
 
   const categoriesList = useMemo(() => {
     return Object.keys(CATEGORY_DESCRIPTIONS).map((type: string) => `/${type}`);
@@ -24,7 +23,6 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
       toggleVisibility();
     }
 
-    setLastClicked(page.replace("/", ""));
     setTimeout(onClose, 42);
   };
 
