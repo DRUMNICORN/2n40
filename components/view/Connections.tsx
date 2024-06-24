@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ContentType } from "@/app/types";
 // import Graph from "../util/Graph";
-import Loading from "../design/Loading";
+// import Loading from "../design/Loading";
 import { useConnections } from '@/hooks/useConnections';
 
 interface ConnectionsProps {
@@ -33,8 +33,6 @@ const Connections: React.FC<ConnectionsProps> = ({ contents: files }) => {
   return (
     <>
       {/* {displayGraph && <Graph graphData={connections as any} />} */}
-      {loading && <Loading />}
-      {!loading && asyncLoading && <Loading />}
     </>
   );
 };
