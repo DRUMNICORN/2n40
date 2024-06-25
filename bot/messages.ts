@@ -16,13 +16,13 @@ export class MessageController {
   constructor(private telegramService: TelegramService) {}
 
   handleStart(msg: Message): void {
-    this.telegramService.sendCommandText(msg.chat_id, this.telegramService.getMessage(MessageType.WELCOME), [CommandType.Create]);
+    this.telegramService.sendCommandMessage(msg.chat_id, this.telegramService.getMessage(MessageType.WELCOME), [CommandType.Create]);
   }
 
   handleCreate(msg: Message): void {
     msg.content = msg.content;
-    
-    this.telegramService.sendCommandMarkdown(msg, [CommandType.Change, CommandType.Cancel, CommandType.Confirm]);
+
+    this.telegramService.sendCommandMessageMarkdown(msg, [CommandType.Change, CommandType.Cancel, CommandType.Confirm]);
     this.telegramService.bot.deleteMessage(msg.chat_id, msg.message_id);
   }
 
@@ -31,7 +31,6 @@ export class MessageController {
     let newContent = msg.content as ContentType;
 
     let mergedContent = this.mergeContent(oldContent, newContent);
-
 
     if (oldContent.context === mergedContent.context) {
       this.telegramService.sendAutoRemovalMessage(msg.chat_id, this.telegramService.getMessage(MessageType.NO_CHANGES_DETECTED));

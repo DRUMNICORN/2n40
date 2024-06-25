@@ -1,5 +1,4 @@
 .link {
-  // gap: 0.5rem;
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
@@ -11,7 +10,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: left;
-  text-align: left; /* Ensure text aligns left within the container */
+  text-align: left;
 
   &:focus {
     outline: none;
@@ -20,8 +19,6 @@
   svg {
     position: relative;
     vertical-align: left;
-    // padding: 0.1rem;
-    // scale the icon
     transform: scale(1.2);
     margin: 0.4rem;
   }
@@ -33,8 +30,8 @@
   }
 
   &.externalLink {
-    color: var(--primary-rgb); /* Add your external link color here */
-    border-color: var(--primary-rgb); /* Optionally change the border color */
+    color: var(--primary-rgb);
+    border-color: var(--primary-rgb);
   }
 
   &.quadratic {
@@ -42,23 +39,33 @@
     height: 2rem !important;
     padding: 0rem;
     margin: 0rem;
-
-    // center 
     display: flex;
     justify-content: center;
-    // padding-right: 0.3rem;
     align-items: center;
+  }
 
+  &.inline {
+    display: inline; /* Make the link display inline */
+  }
+
+  &.noWrap {
+    white-space: nowrap; /* Prevent wrapping */
   }
 
   .linkText {
     margin-left: 0.5rem;
-    display: block; /* Ensure each line of the address is on a new line */
-    align-items: flex-start; /* Align lines to the left within the container */
+    padding-right: 0.5rem;
+    display: block;
+    align-items: flex-start;
   }
 
   &:hover {
-    background-color: rgba(var(--secondary-rgb), 0.2);
+    background-color: rgba(var(--secondary-rgb), 0.42);
+  }
+
+  // &:click
+  &:active {
+    background-color: rgba(var(--secondary-rgb), 0.84);
   }
 
 }

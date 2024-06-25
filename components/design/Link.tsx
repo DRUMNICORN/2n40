@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import styles from './Link.module.scss';
@@ -11,10 +11,12 @@ interface LinkProps {
   children?: React.ReactNode;
   spinOnClick?: boolean;
   disableClick?: boolean;
-  textLeft?: boolean; // Position text to the left of the icon
+  textLeft?: boolean;
   type?: MetadataTypes;
+  openInNewTab?: boolean;
   onClick?: (e: React.MouseEvent) => void;
-  [key: string]: any; // For additional dynamic properties
+  inline?: boolean; // New property for inline placement
+  noWrap?: boolean; // New property for no-wrap behavior
 }
 
 const Link: React.FC<LinkProps> = ({
@@ -23,10 +25,11 @@ const Link: React.FC<LinkProps> = ({
   children,
   spinOnClick = false,
   disableClick = false,
-  textLeft = false,
   type,
+  openInNewTab = false,
   onClick,
-  ...rest
+  inline = false, // Default to false
+  noWrap = false, // Default to false
 }) => {
   const [iconAnimated, setIconAnimated] = useState(false);
 
@@ -67,30 +70,46 @@ const Link: React.FC<LinkProps> = ({
     }
   };
 
+  const extractDomain = (url: string) => {
+    try {
+      const { hostname } = new URL(url);
+      return hostname.replace('www.', '');
+    } catch (error) {
+      return url;
+    }
+  };
+
   const LinkText = () => (
-    <span className={styles.linkText}>{label}</span>
+    <span className={styles.linkText}>
+      {label?.includes('https') ? extractDomain(label) : label}
+    </span>
   );
 
   const isExternalLink = type === 'address' || type === 'website';
-
-  // Determine if the link is a quadratic (square) style based on presence of label
-  const isQuadratic = !label && !type;
-
+  const isQuadratic = !label && !type && !href;
 
   const linkClassName = `
     ${styles.link} 
     ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} 
     ${isExternalLink ? styles.externalLink : ''}
     ${isQuadratic ? styles.quadratic : ''} 
+    ${inline ? styles.inline : ''}
+    ${noWrap ? styles.noWrap : ''}
   `;
 
   return href ? (
-    <a href={href} className={linkClassName} onClick={handleLinkClick} {...rest}>
+    <a
+      href={href}
+      className={linkClassName}
+      onClick={handleLinkClick}
+      target={openInNewTab ? '_blank' : '_self'}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
+    >
       {children || SOCIAL_MEDIA_ICONS[type as keyof typeof SOCIAL_MEDIA_ICONS]}
       {label && <LinkText />}
     </a>
   ) : (
-    <button className={linkClassName} onClick={handleLinkClick} {...rest}>
+    <button className={linkClassName} onClick={handleLinkClick}>
       {children || SOCIAL_MEDIA_ICONS[type as keyof typeof SOCIAL_MEDIA_ICONS]}
       {label && <LinkText />}
     </button>

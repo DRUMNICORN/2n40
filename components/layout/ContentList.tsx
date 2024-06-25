@@ -79,10 +79,10 @@ const List: React.FC<ListViewProps> = ({
         return (
           <Link
             key={index}
-            preventDefault
-            stopPropagation
+            // preventDefault
+            // stopPropagation
             disableClick={disableClick}
-            noName
+            // noName
             onClick={() => {
               if (isEditable) {
                 removeEntry(key);

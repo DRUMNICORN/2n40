@@ -5,17 +5,25 @@
   align-items: center;
   // padding: 8px; // Added padding for better spacing
   // gap: 8px; // Increased gap for better spacing between elements
+  // flex-grow: 1;
 }
 
 .filterSearch {
   z-index: 5;
-  flex-grow: 1;
   background-color: transparent; // Transparent background for a lighter feel
   border-radius: 12px; // Slightly increased border radius for softer edges
   // right no radius
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   outline: none;
+  // width: 10%;
+  // width: 1%;  // 
+  width: 100%;
+  flex-grow: 1;
+
+  // width: 100%;
+  // min-width: 6rem;
+
   border: 1px solid rgba(255, 255, 255, 0.6); // Lighter border for subtle definition
   padding: 8px 12px; // Added padding for better touch targets and aesthetics
   transition: border-color 0.3s, box-shadow 0.3s; // Smooth transitions for interactive feedback
@@ -49,17 +57,24 @@
 
 .filter 
 {
+  // width: 42%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  // width: 1%;
 }
 
-.filterEntries {
+.filterEntities {
+  flex-grow: 1;
+  padding: 0 0.2rem;
   transition: width 0.42s ease-in-out;
-  width: 42%;
+  // height: 3rem;
 
+  // width: 1%;
+  min-width: 3rem;
+  max-width: 70%;
   &.empty {
     transition: width 0.42s ease-in-out;
     width: 0%;

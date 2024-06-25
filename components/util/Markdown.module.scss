@@ -45,9 +45,11 @@
 
 .links {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap; // Allow wrapping if needed
   align-items: center; // Vertically align items
   gap: 0.42rem;
+  display: inline; /* Make the link display inline */
 }
 
 .link {

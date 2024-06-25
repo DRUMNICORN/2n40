@@ -2,12 +2,23 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  padding: 0.42rem 0rem;
+  padding: 0.42rem 0.32rem;
   gap: 0.42rem;
-  // width: 100%;
+  max-width: 50vw;
   overflow-x: auto;
   z-index: 3;
-  overflow-y: hidden;
+  // thin scroll bar
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+
+
+
+  // overflow-y: hidden;
 
   .listElements {
     display: flex;
@@ -19,3 +30,5 @@
   }
 
 }
+
+

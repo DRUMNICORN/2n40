@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
 import Link from '../design/Link';
+import { MetadataTypes } from '@/app/types';
 
 interface EntityContentProps {
   content: string;
@@ -17,6 +18,7 @@ const applyMarkdown = (str: string) => {
   const hrefRegex = /\[([^\]]+)\]\(([^\)]+)\)/g;
   const noteRegex = />(.+)/gm;
   const boldRegex = /\*\*(.*?)\*\*/g; // Regex to match text between **
+  const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g; // Regex to match URLs
 
   const lineRegex = /\n/gm;
 
@@ -34,7 +36,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`link-group-${i}`} className={styles.links}>
           {line.split(linkRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Link key={`link-${k}`} name={part}>{part}</Link>
+            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Link key={`link-${k}`} label={part}>{part}</Link>
           ))}
         </div>
       );
@@ -43,17 +45,28 @@ const applyMarkdown = (str: string) => {
     const hrefMatches = Array.from(line.matchAll(hrefRegex));
     if (hrefMatches.length > 0) {
       return (
-        <div key={`href-group-${i}`}>
+        <div key={`href-group-${i}`} className={styles.links}>
           {line.split(hrefRegex).map((part, k) => {
             const match = hrefMatches.find((m) => m.includes(part));
             if (match) {
               const [_, name, href] = match;
               return (
-                k % 2 === 0 ? <span key={`href-text-${k}`}>{part}</span> : <Link key={`href-link-${k}`} href={href}>{name}</Link>
+                k % 2 === 0 ? <span key={`href-text-${k}`}>{part}</span> : <Link key={`href-link-${k}`} href={href} label={name} />
               );
             }
             return <span key={`href-text-${k}`}>{part}</span>;
           })}
+        </div>
+      );
+    }
+
+    const urlMatches = Array.from(line.matchAll(urlRegex));
+    if (urlMatches.length > 0) {
+      return (
+        <div key={`url-group-${i}`} className={styles.links}>
+          {line.split(urlRegex).map((part, k) => (
+            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Link key={`url-link-${k}`}  type={MetadataTypes.website} href={part} label={part} />
+          ))}
         </div>
       );
     }

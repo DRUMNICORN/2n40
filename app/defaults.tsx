@@ -3,6 +3,7 @@ import {
   MdAdd,
   MdCalendarViewWeek,
   MdGroups,
+  MdInfo,
   MdOutlineCalendarMonth,
   MdPages,
   MdPerson,
@@ -76,4 +77,5 @@ export const SOCIAL_MEDIA_ICONS: { [key in MetadataTypes]: JSX.Element } = {
   [MetadataTypes.category]: <MdGroups />,
   [MetadataTypes.collectives]: <MdGroups />,
   [MetadataTypes.creatives]: <MdGroups />,
+  [MetadataTypes.info]: <MdInfo />
 };

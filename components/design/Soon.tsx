@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Soon.module.scss';
 import Logo from './Logo';
 import { SITE_METADATA } from '@/app/types';
+// import { SITE_METADATA } from '@/app/types';
 
 const Soon: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const Soon: React.FC = () => {
       <p>Thank you for your patience.</p>
 
       <Logo />
-      {SITE_METADATA.title}
+      {SITE_METADATA.title as string}
     </div>
   );
 };

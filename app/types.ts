@@ -1,4 +1,5 @@
 // import { Edge, Node } from "vis-network";
+import { Metadata as NextMetadata } from 'next';
 
 // Regular expressions for different filters
 export const dateRegex = /(\d{1,2})\.(\d{1,2})\.(\d{2,4})/;
@@ -38,7 +39,7 @@ export enum MetadataTypes {
   connections = "connections",
   collectives = "collectives",
   creatives = "creatives",
-
+  info = "info",
 }
 
 // Descriptions for different categories
@@ -69,7 +70,7 @@ export const SITE_METADATA = {
     },
   ],
   robots: "index, follow",
-} ;
+} as NextMetadata
 
 // Regular expressions matrix for different categories
 export const REGEX_MATRIX: Record<string, RegExp[]> = { 

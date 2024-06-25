@@ -1,18 +1,21 @@
 .header {
   position: fixed;
   display: flex;
-  align-items: center;
+  align-items: left;
   background: rgba(var(--dark-rgb), 0.5);
   width: 100%;
   margin-top: 0;
   // justify-content: space-between;
   z-index: 100;
-  height: var(--header-height);
+  height: 3rem;
   transition: height 0.3s ease; /* Transition for header height change */
 }
 
 .logo {
-  margin: 0 auto; /* Center the logo horizontally */
+  // margin: 0 auto; /* Center the logo horizontally */
+  padding-right: 0.42rem;
+  padding-left: 0.42rem;
+  padding-top: 0.1rem;
 }
 
 .name {
@@ -26,14 +29,14 @@
 
 .controls {
   align-items: center;
-  overflow: hidden; /* Allow controls to scroll horizontally on mobile */
-  // max-width: 100%; /* Take up full width initially */
+  // overflow: hidden; /* Allow controls to scroll horizontally on mobile */
+  max-width: 69%; /* Take up full width initially */
   display: flex; /* Ensure controls are always displayed */
   // padding: 0.5rem; /* Add padding for spacing */
   padding-right: 0.5rem;
-  ;
   // white-space: nowrap;
-  width: 100%; /* Take up full width initially */
+  width: 80%; /* Take up full width initially */
+  // max-width: 80vw;
   justify-content: space-between;
   // height: 100%;
   transition: max-width 0.3s ease;

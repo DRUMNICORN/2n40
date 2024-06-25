@@ -4,10 +4,13 @@ const nextConfig = {
     swcMinify: true,
     webpack: (config, { isServer }) => {
         if (!isServer) {
-            config.resolve.fallback.fs = false
+            config.resolve.fallback.fs = false;
         }
-        return config
+        return config;
     },
-}
+    experimental: {
+        webpackBuildWorker: true,
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

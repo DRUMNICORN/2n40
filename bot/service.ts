@@ -1,15 +1,48 @@
 import TelegramBot from "node-telegram-bot-api";
-import { settings } from "./settings";
 import { CommandType, ContentType, Language, MessageType, Message, i18n } from "../app/types";
 import { MarkdownParser } from "../utils/markdown";
 import { getMetadataString } from "../utils/string";
+import dotenv from "dotenv";
+// telegram message type
 
 export class TelegramService {
   public bot: TelegramBot;
-  public settings = settings;
   private currentLanguage: Language = Language.DE;
+  private settings: {
+    telegramBotToken?: string;
+    modChannelId?: number;
+    dataDir?: string;
+  };
+
+  public getModChannelId(): number {
+    return this.settings.modChannelId as number;
+  }
+
+  public getDataDir(): string {
+    return this.settings.dataDir as string;
+  }
 
   constructor() {
+    dotenv.config();
+    this.settings = {
+      telegramBotToken: process.env.TELEGRAM_BOT_TOKEN || '',
+      modChannelId: process.env.MOD_CHANNEL_ID ? parseInt(process.env.MOD_CHANNEL_ID) : undefined,
+      dataDir: process.env.DATA_DIR || undefined,
+    };
+
+    if (!this.settings.telegramBotToken) {
+      throw new Error("Telegram bot token is not set");
+    }
+
+
+    if (!this.settings.modChannelId) {
+      throw new Error("Mod channel id is not set");
+    }
+
+    if (!this.settings.dataDir) {
+      throw new Error("Data dir is not set");
+    }
+    
     this.bot = new TelegramBot(this.settings.telegramBotToken as string, { polling: true });
   }
 
@@ -36,14 +69,14 @@ export class TelegramService {
     this.bot.editMessageText(text, opts);
   }
 
-  sendCommandText(chatId: number, text: string, commands: CommandType[]): void {
+  sendCommandMessage(chatId: number, text: string, commands: CommandType[]): void {
     this.bot.sendMessage(chatId, text, {
       parse_mode: "Markdown",
       reply_markup: { inline_keyboard: this.buildInlineKeyboard(commands) },
     });
   }
 
-  sendCommandMarkdown(msg: Message, commands: CommandType[]): void {
+  sendCommandMessageMarkdown(msg: Message, commands: CommandType[]): void {
     const opts = {
       reply_to_message_id: msg.reply.message_id,
       reply_markup: { inline_keyboard: this.buildInlineKeyboard(commands) },

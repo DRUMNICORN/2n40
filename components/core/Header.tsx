@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <div className={styles.controls}>
         <Controls param={param} setParam={setParam} toggleParam={toggleParam} />
       </div>
-        <Hamburger onClick={handleHamburgerClick} menuOpen={menuOpen} />
+      <Hamburger onClick={handleHamburgerClick} menuOpen={menuOpen} />
       <Menu open={menuOpen} onClose={() => setMenuOpen(false)} />
     </nav>
   );

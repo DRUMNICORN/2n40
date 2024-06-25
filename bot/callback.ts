@@ -43,7 +43,7 @@ export class CallbackQueryController {
         await this.telegramService.bot.deleteMessage(msg.chat_id, msg.message_id);
         break;
       default:
-        this.telegramService.sendCommandText(msg.chat_id, this.telegramService.getMessage(MessageType.INVALID_COMMAND), [CommandType.Clear]);
+        this.telegramService.sendCommandMessage(msg.chat_id, this.telegramService.getMessage(MessageType.INVALID_COMMAND), [CommandType.Clear]);
         break;
     }
   } catch (error) {
@@ -54,7 +54,7 @@ export class CallbackQueryController {
   }
 
   private async handleConfirm(msg: Message): Promise<void> {
-    if (msg.chat_id === this.telegramService.settings.modChannelId) {
+    if (msg.chat_id === this.telegramService.getModChannelId()) {
       return this.handleModConfirm(msg);
     }
 
@@ -66,7 +66,7 @@ export class CallbackQueryController {
       reply_markup: { inline_keyboard: this.telegramService.buildInlineKeyboard([CommandType.Confirm, CommandType.Change, CommandType.Cancel]) },
     } as any;
 
-    this.telegramService.bot.sendMessage(this.telegramService.settings.modChannelId, generatedMarkdown, opts);
+    this.telegramService.bot.sendMessage(this.telegramService.getModChannelId(), generatedMarkdown, opts);
 
     this.telegramService.bot.sendMessage(msg.chat_id, `${this.telegramService.getMessage(MessageType.MODERATION_REQUEST)}\n---\n${generatedMarkdown}`, {
       parse_mode: "Markdown",
@@ -79,7 +79,7 @@ export class CallbackQueryController {
   private handleChange(msg: Message): void {
     const exampleMessage = this.telegramService.getMessage(MessageType.EXAMPLE_MESSAGE);
     const exampleResponse = getMetadataString(exampleMessage);
-    this.telegramService.sendCommandText(
+    this.telegramService.sendCommandMessage(
         msg.chat_id,
         this.telegramService.getMessage(MessageType.CHANGE_MESSAGE) + "\n" +
         this.telegramService.getMessage(MessageType.EXAMPLE_MESSAGE) + "\n" +
@@ -95,7 +95,7 @@ export class CallbackQueryController {
     const serializedContent = MarkdownParser.serialize(content);
     if (!serializedContent) return;
 
-    let path = `${this.telegramService.settings.dataDir}/${content.id}.md`;
+    let path = `${this.telegramService.getDataDir()}/${content.id}.md`;
   
     fs.writeFile(path, serializedContent, (err) => {
       if (err) {
@@ -110,7 +110,7 @@ export class CallbackQueryController {
     if (!serializedContent2) return;
 
     this.telegramService.bot.editMessageText(serializedContent2, {
-      chat_id: this.telegramService.settings.modChannelId,
+      chat_id: this.telegramService.getModChannelId(),
       message_id: content.id,
       parse_mode: "Markdown",
       reply_markup: { inline_keyboard: this.telegramService.buildInlineKeyboard([CommandType.Cancel]) },
@@ -120,17 +120,17 @@ export class CallbackQueryController {
   private handleModCancel(msg: Message): void {
     const moderatedContent = getContent(msg);
 
-    let path = `${this.telegramService.settings.dataDir}/${moderatedContent.id}.md`;
+    let path = `${this.telegramService.getDataDir()}/${moderatedContent.id}.md`;
     let isFileExists = fs.existsSync(path)
     
     if (isFileExists) fs.unlinkSync(path);
-    else this.telegramService.sendCommandText(msg.chat_id, this.telegramService.getMessage(MessageType.INVALID_COMMAND), [CommandType.Clear]);
+    else this.telegramService.sendCommandMessage(msg.chat_id, this.telegramService.getMessage(MessageType.INVALID_COMMAND), [CommandType.Clear]);
     
     this.telegramService.bot.deleteMessage(msg.chat_id, msg.message_id);
   }
 
   private handleCancel(msg: Message): void {
-    if (msg.chat_id == this.telegramService.settings.modChannelId) {
+    if (msg.chat_id == this.telegramService.getModChannelId()) {
       return this.handleModCancel(msg);
     }
 
@@ -139,7 +139,7 @@ export class CallbackQueryController {
 
     let text = this.telegramService.getMessage(MessageType.MODERATION_CANCEL_REQUEST) + "\n---\n" + serializedContent + "\n---\n";
     
-    this.telegramService.bot.sendMessage(this.telegramService.settings.modChannelId, text, {
+    this.telegramService.bot.sendMessage(this.telegramService.getModChannelId(), text, {
       parse_mode: "Markdown",
       reply_markup: { inline_keyboard: this.telegramService.buildInlineKeyboard([CommandType.Clear]) },
     } as any);
@@ -151,7 +151,7 @@ export class CallbackQueryController {
   private async handleModConfirm(msg: Message): Promise<void> {
     const moderatedContent = getContent(msg);
 
-    let member_count_mod_channel = await this.telegramService.bot.getChatMemberCount(this.telegramService.settings.modChannelId)
+    let member_count_mod_channel = await this.telegramService.bot.getChatMemberCount(this.telegramService.getModChannelId())
 
     let confirmedRegex = /confirmed: (\d+)/g;
     let confirmedCount = 0;
@@ -170,7 +170,7 @@ export class CallbackQueryController {
     const serializedContent = MarkdownParser.serialize(moderatedContent);
 
     this.telegramService.bot.editMessageText(serializedContent, {
-      chat_id: this.telegramService.settings.modChannelId,
+      chat_id: this.telegramService.getModChannelId(),
       message_id: msg.message_id,
       parse_mode: "Markdown",
       reply_markup: { inline_keyboard: this.telegramService.buildInlineKeyboard([CommandType.Confirm, CommandType.Change, CommandType.Cancel]) },
