@@ -4,14 +4,14 @@ import React, { useEffect, useMemo } from 'react';
 import styles from "./Contents.module.scss";
 // import Loading from "../design/Loading";
 import Controls from "./Controls";
-import { CategoryType } from '@/app/types';
+import { MetadataTypes } from '@/app/types';
 import { useContent } from '@/hooks/useContent';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';
 import CalendarDays from '../view/CalenderDays';
 // import { useQuery } from '@/providers/QueryProvider';
 
-const Contents = ({mode}: {mode: CategoryType}) => {
+const Contents = ({mode}: {mode: MetadataTypes}) => {
   const ViewComponent = CalendarDays;
   
   const { param  } = useQuery();

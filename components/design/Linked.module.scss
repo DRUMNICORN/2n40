@@ -2,7 +2,7 @@
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.3s ease;
   background-color: rgba(var(--dark-rgb), 0.1);
   border: 1px solid rgba(var(--light-rgb), 0);
   padding: 3px 3px 0;
@@ -21,17 +21,20 @@
     vertical-align: left;
     transform: scale(1.2);
     margin: 0.4rem;
+
+
   }
 
-  &.iconAnimated {
+  &:hover {
     svg {
-      animation: spin 0.5s linear infinite;
+      animation: spin 0.42s ease-in-out forwards;
     }
   }
 
+
   &.externalLink {
-    color: var(--primary-rgb);
-    border-color: var(--primary-rgb);
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
+    background-color: rgba(var(--primary-rgb), 0.1);
   }
 
   &.quadratic {
@@ -42,14 +45,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &:hover {
+      svg {
+        animation: none;
+      }
+    }
+
   }
 
   &.inline {
-    display: inline; /* Make the link display inline */
+    display: inline;
   }
 
   &.noWrap {
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
   }
 
   .linkText {
@@ -60,21 +70,32 @@
   }
 
   &:hover {
+    color: rgb(var(--secondary-rgb));
     background-color: rgba(var(--secondary-rgb), 0.42);
   }
 
-  // &:click
   &:active {
     background-color: rgba(var(--secondary-rgb), 0.84);
   }
-
 }
 
 @keyframes spin {
-  from {
+  0% {
     transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+
+  42% {
+    transform: rotate(42deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .link {
+    // font-size: 1.6rem;
   }
 }

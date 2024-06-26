@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ContentOverlay.module.scss";
-import Content from "./Content";
+import Content from "../content/Content";
 import { useContentOverlay } from "@/providers/OverlayProvider";
 
 interface ContentOverlayProps { }

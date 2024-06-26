@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ContentColumns.module.scss";
 import { ContentType } from "@/app/types";
-import Content from "./Content";
+import Content from "../content/Content";
 
 interface CardsProps {
   contents: ContentType[];

@@ -1,7 +1,8 @@
 import React from 'react';
-import { MdClose, MdShare } from "react-icons/md";
-import Link from "../design/Link";
+// import { MdClose, MdShare } from "react-icons/md";
+import Linked from "../design/Linked";
 import styles from "./ContentOverlay.module.scss";
+import { MetadataTypes } from '@/app/types';
 
 interface ContentActionsProps {
   handleClose?: () => void;
@@ -12,12 +13,8 @@ interface ContentActionsProps {
 const ContentActions: React.FC<ContentActionsProps> = ({ handleClose, handleShare, handleDetails }) => {
   return (
     <div className={styles.buttons}>
-      {handleShare && <Link onClick={handleShare}>
-        <MdShare />
-      </Link>}
-      {handleClose && <Link onClick={handleClose}>
-        <MdClose />
-      </Link>}
+      {handleShare && <Linked onClick={handleShare} type={MetadataTypes.share} />}
+      {handleClose && <Linked onClick={handleClose} type={MetadataTypes.close} />}
     </div>
   );
 };

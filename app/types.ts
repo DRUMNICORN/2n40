@@ -38,25 +38,32 @@ export enum MetadataTypes {
   concepts = "concepts",
   connections = "connections",
   collectives = "collectives",
+  collaborations = "collaborations",
   creatives = "creatives",
   info = "info",
+  close = "close",
+  share = "share",
+  days = "days",
+  weeks = "weeks",
+  carousel = "carousel",
+  github = "github",
 }
 
 // Descriptions for different categories
 export const CATEGORY_DESCRIPTIONS: { [key: string]: string } = {
   collaborations: "Veranstaltungen, die durch kreative Konzepte entstehen.",
   collectives: "Gruppen, die gemeinsam inspirierende Inhalte erstellen.",
-  // creatives: "Inhaltsschöpfer, die ihre Vorstellungskraft in die Tat umsetzen.",
-  // concepts: "Ideen, die unseren Content formen.",
+  creatives: "Inhaltsschöpfer, die ihre Vorstellungskraft in die Tat umsetzen.",
+  concepts: "Ideen, die unseren Content formen.",
 };
 
 // Metadata for the site
 export const SITE_METADATA = {
   title: "Singularity",
-  description: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
-  abstract: "The Singularity is a collection of creative, concepts, collectives, and collaborations.",
-  keywords: ["Singularity", "Creative", "Concepts", "Collectives", "Collaborations", "Chemnitz"],
-  applicationName: "Singularity",
+  description: "Singularity is a hub dedicated to exploring and showcasing various subcultures from around the world.",
+  abstract: "Singularity is a platform that connects and highlights diverse subcultures, providing a space for a creative's expression, unique concepts, and collaborative efforts.",
+  keywords: ["Singularity", "Subcultures", "Creative Expressions", "Unique Concepts", "Collectives", "Collaborations", "Chemnitz"],
+  applicationName: "Singularity Subculture Hub",
   authors: [
     {
       name: "Robin Seerig",
@@ -80,9 +87,6 @@ export const REGEX_MATRIX: Record<string, RegExp[]> = {
   price: [/eintritt.*frei/i, /eintritt.*kostenlos/i, /\bkostenlos\b/i, /\d{1,2}€/i, /\d{1,2} €/i, /free/],
   website: [/\bhttps?:\/\/\S+/],
   name: [/\bname:.*\b/i, /\b.*\b/i],
-  // tel is +49 123 4567890 or 0123 4567890 and ignores spaces / make optional
-  // tel: [/\+\d{2}(?:\s\d{3}){2,3}/, /\d{4,5}\s\d{6,7}/],
-  // adress Annaberger Str. 24, 09111 Chemnitz or Erich Mühsam Straße 6 09112 Chemnitz as regex string
 };
 
 export interface NodeConnectionType {
@@ -132,27 +136,11 @@ export interface DetailsType {
 
 export interface ContentType {
   id: number;
-  category: CategoryType;
+  category: MetadataTypes;
   metadata: MetadataType;
   context: string;
   connections: ContentConnectionType[];
   details: DetailsType;
-}
-
-export enum CategoryType {
-  Collaboration = "collaborations",
-  Collective = "collectives",
-  Creative = "creatives",
-  Concept = "concepts",
-  Change = "changes",
-}
-
-export enum ViewType {
-  CalendarDays = "calendar-days",
-  // Columns = "columns",
-  Carousel = "carousel",
-  CalenderWeeks = "calendar-weeks",
-  // Connections = "connections",
 }
 
 export enum CommandType {

@@ -2,11 +2,13 @@ import React from "react";
 import {
   MdAdd,
   MdCalendarViewWeek,
+  MdClose,
   MdGroups,
   MdInfo,
   MdOutlineCalendarMonth,
   MdPages,
   MdPerson,
+  MdShare,
   MdViewCarousel,
   MdWeb,
 } from "react-icons/md";
@@ -23,37 +25,15 @@ import {
   FaTelegramPlane,
   FaTwitter,
   FaFacebook,
+  FaGithub,
 } from "react-icons/fa";
 import { IoTimeSharp } from "react-icons/io5";
 import { BiSolidNetworkChart } from "react-icons/bi";
 import { IoMdPricetag } from "react-icons/io";
-import { ViewType } from "./types";
 import { MetadataTypes } from "./types";
 
-// Icons mapping for different views
-export const VIEW_ICONS: { [key: string]: JSX.Element } = {
-  [ViewType.CalendarDays]: <MdCalendarViewWeek />,
-  [ViewType.Carousel]: <MdViewCarousel />,
-};
-
-// Icons mapping for different categories
-export const CATEGORY_ICONS: { [key: string]: JSX.Element } = {
-  collaborations: <MdOutlineCalendarMonth />,
-  collectives: <MdGroups />,
-  // creatives: <MdPerson />,
-  // concepts: <MdPages />,
-};
-
-// Icons mapping for different filters
-export const FILTER_ICONS: { [key: string]: JSX.Element } = {
-  costs: <IoMdPricetag />,
-  time: <IoTimeSharp />,
-  concepts: <FaHashtag />,
-  connections: <BiSolidNetworkChart />,
-};
-
 // Icons mapping for social media and metadata types
-export const SOCIAL_MEDIA_ICONS: { [key in MetadataTypes]: JSX.Element } = {
+export const REACT_ICONS: { [key in MetadataTypes]: JSX.Element } = {
   [MetadataTypes.website]: <MdWeb />,
   [MetadataTypes.mail]: <FaEnvelope />,
   [MetadataTypes.address]: <FaMapMarkerAlt />,
@@ -76,6 +56,14 @@ export const SOCIAL_MEDIA_ICONS: { [key in MetadataTypes]: JSX.Element } = {
   [MetadataTypes.description]: <MdPages />,
   [MetadataTypes.category]: <MdGroups />,
   [MetadataTypes.collectives]: <MdGroups />,
-  [MetadataTypes.creatives]: <MdGroups />,
-  [MetadataTypes.info]: <MdInfo />
+  [MetadataTypes.creatives]: <MdPerson />,
+  [MetadataTypes.info]: <MdInfo />,
+  [MetadataTypes.close]: <MdClose />,
+  [MetadataTypes.share]: <MdShare />,
+  [MetadataTypes.collaborations]: <MdOutlineCalendarMonth />,
+  // [MetadataTypes.change]: <MdOutlineCalendarMonth />,
+  [MetadataTypes.days]: <MdCalendarViewWeek />,
+  [MetadataTypes.carousel]: <MdViewCarousel />,
+  [MetadataTypes.weeks]: <MdCalendarViewWeek />,
+  [MetadataTypes.github]: <FaGithub />
 };

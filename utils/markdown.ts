@@ -1,4 +1,4 @@
-import { CategoryType, ContentType, MetadataType } from '@/app/types';
+import { MetadataTypes, ContentType, MetadataType } from '@/app/types';
 export class MarkdownParser {
 
     static parse(contentString: string): ContentType {
@@ -63,7 +63,7 @@ export class MarkdownParser {
             id: -1,
             metadata,
             context,
-            category: metadata.category as CategoryType,
+            category: metadata.category as MetadataTypes,
             connections: [],
             details: {
                 created: new Date(),

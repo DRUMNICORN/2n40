@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
-import Link from '../design/Link';
+import Linked from '../design/Linked';
 import { MetadataTypes } from '@/app/types';
 
 interface EntityContentProps {
@@ -36,7 +36,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`link-group-${i}`} className={styles.links}>
           {line.split(linkRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Link key={`link-${k}`} label={part}>{part}</Link>
+            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Linked key={`link-${k}`} label={part}>{part}</Linked>
           ))}
         </div>
       );
@@ -51,7 +51,7 @@ const applyMarkdown = (str: string) => {
             if (match) {
               const [_, name, href] = match;
               return (
-                k % 2 === 0 ? <span key={`href-text-${k}`}>{part}</span> : <Link key={`href-link-${k}`} href={href} label={name} />
+                k % 2 === 0 ? <span key={`href-text-${k}`}>{part}</span> : <Linked key={`href-link-${k}`} href={href} label={name} />
               );
             }
             return <span key={`href-text-${k}`}>{part}</span>;
@@ -65,7 +65,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`url-group-${i}`} className={styles.links}>
           {line.split(urlRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Link key={`url-link-${k}`}  type={MetadataTypes.website} href={part} label={part} />
+            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Linked key={`url-link-${k}`}  type={MetadataTypes.website} href={part} label={part} />
           ))}
         </div>
       );

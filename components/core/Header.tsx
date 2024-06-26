@@ -7,7 +7,7 @@ import Controls from '../layout/Controls';
 import Logo from '../design/Logo';
 import useHeader from '@/hooks/useHeader';
 import { useQuery } from '@/providers/QueryProvider';
-import Link from '../design/Link';
+import Linked from '../design/Linked';
 
 const Header: React.FC = () => {
   const { setMenuOpen, setParam, toggleParam, menuOpen, handleHamburgerClick, handleTitleClick } = useHeader();

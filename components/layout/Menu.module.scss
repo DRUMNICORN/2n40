@@ -17,7 +17,7 @@
 }
 
 .menu.show {
-  width: 100%;
+  width: 142%;
   right: 0rem;
   transition: right 0.3s ease, width 0.3s ease;
 }
@@ -28,70 +28,26 @@
   align-items: right;
   position: relative;
   width: 100%;
-  right: -3rem;
-  transition-delay: calc(0.2s * 4.2);
+  min-height: 1rem;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  
 }
 
-.menuLink {
-  padding-right: 5rem;
-  text-decoration: none;
-  padding-left: 1rem;
-  display: flex;
-  align-items: right;
-  justify-content: right;
-  font-size: var(--heading-font-size);
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: right;
-  transition: all 0.3s ease;
+.menuItem:hover {
+  background-color: rgba(var(--light-rgb), 0.1);
+  border-bottom-right-radius: 0.66rem;
+  border-top-right-radius: 0.66rem;
+  color: rgb(var(--secondary-rgb));
+  transform: translateX(-1rem);
 
-  &:hover {
-    color: rgb(var(--secondary-rgb));
-    transform: translateX(1rem);
-  }
-}
-
-.menuLink:hover .icon {
-  animation: spin 0.42s ease-in-out forwards;
-  transform: scale(1.2);
-}
-
-.selected .menuLink {
-  font-style: italic;
-}
-
-.icon {
-  margin-left: 1rem;
-  width: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+  &:active {
+    background-color: rgba(var(--light-rgb), 0.2);
   }
 
-  42% {
-    transform: rotate(42deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
 }
-
-
-// on mobile make font smaller
 
 @media (max-width: 768px) {
-  .menuLink {
-    font-size: 1.6rem;
-    
-  }
-
   .menu {
     top:  3rem;
     backdrop-filter: none;

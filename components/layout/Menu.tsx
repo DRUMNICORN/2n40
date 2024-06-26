@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import styles from "./Menu.module.scss";
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname } from 'next/navigation';
-import { CATEGORY_DESCRIPTIONS, ContentType } from "@/app/types";
+import { CATEGORY_DESCRIPTIONS } from "@/app/types";
 import { useContentOverlay } from "@/providers/OverlayProvider";
-import { CATEGORY_ICONS } from "@/app/defaults";
+import { REACT_ICONS } from "@/app/Icons";
+import Linked from "../design/Linked";
 
 interface MenuProps {
   open: boolean;
@@ -13,6 +14,7 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
   const { isVisible, toggleVisibility, setContent } = useContentOverlay();
+  const menuRef = useRef(null);
 
   const categoriesList = useMemo(() => {
     return Object.keys(CATEGORY_DESCRIPTIONS).map((type: string) => `/${type}`);
@@ -28,25 +30,29 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
 
   const getCurrentPageClass = (page: string) => {
     const pathname = usePathname();
-    return pathname === page ? styles.selected : styles.notSelected;
+    return pathname === page? styles.selected : styles.notSelected;
   };
 
-  const isMenuOpen = open ? styles.show : "";
+  const isMenuOpen = open? styles.show : "";
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !(menuRef.current as HTMLElement).contains(event.target as HTMLElement)) {
+      // toggleVisibility()
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
 
   return (
-    <ul className={`${styles.menu} ${isMenuOpen}`}>
+    <ul className={`${styles.menu} ${isMenuOpen}`} ref={menuRef}>
       {categoriesList.map((page, index) => {
         const innerText = page.replace("/", "");
-        const icon = CATEGORY_ICONS[innerText];
-
         return (
           <li key={index} className={`${styles.menuItem} ${getCurrentPageClass(page)}`}>
-            <Link href={page} className={styles.menuLink} onClick={() => handleLinkClick(page)}>
-              {innerText}
-              <div className={styles.icon}>
-                {icon}
-              </div>
-            </Link>
+            <Linked href={page} onClick={() => handleLinkClick(page)} type={innerText as keyof typeof REACT_ICONS} label={innerText} />
           </li>
         );
       })}

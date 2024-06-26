@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios, { CancelToken } from 'axios';
 import { getUrl, loadContents } from '@/utils/web';
-import { CategoryType, ContentType, MetadataType } from '@/app/types';
+import { MetadataTypes, ContentType, MetadataType } from '@/app/types';
 import { useQuery } from '@/providers/QueryProvider';
 
 interface UseContentControllerReturn {
@@ -13,11 +13,6 @@ interface UseContentControllerReturn {
 }
 
 interface SearchParamsController {
-  // param: MetadataType;
-  // setParam: (key: string, value: string | number | string[] | null) => void;
-  // getParam: (key: string) => string | number | string[] | null;
-  // toggleParam: (key: keyof SearchParamsController['param'], value: string) => void;
-  syncSearchParams: () => void;
 }
 
 export const useContent = (): UseContentControllerReturn & SearchParamsController => {
@@ -33,25 +28,30 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
 
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    const updateParamFromQuerys = () => {
-      const newParam = {
-        name: searchParams.get('name') || '',
-        connections: (searchParams.get('connections')?.split(',') || []).filter(Boolean),
-        category: searchParams.get('category') || CategoryType.Collaboration,
-      };
+  const updateParamFromQuerys = useCallback(() => {
+    
+    const hash = window.location.hash || '';
+    let name = hash ? decodeURI(hash.replace('#', '')) : searchParams.get('name') || '';
 
-      updateDecodedHash();
-      setParamState(newParam);
+    const newParam = {
+      name,
+      connections: (searchParams.get('connections')?.split(',') || []).filter(Boolean),
+      category: searchParams.get('category') || MetadataTypes.collaborations,
     };
+
+    setParamState(newParam);
+  }, []);
+
+  useEffect(() => {
     updateParamFromQuerys();
-    window.addEventListener('popstate', updateParamFromQuerys);
-    return () => window.removeEventListener('popstate', updateParamFromQuerys);
+    // window.addEventListener('popstate', updateParamFromQuerys);
+    // return () => window.removeEventListener('popstate', updateParamFromQuerys);
   }, []);
 
   const syncSearchParams = useCallback(() => {
     const params = new URLSearchParams();
     const path = window.location.pathname.split('/').filter(p => p)[0];
+    let hash = window.location.hash || '';
 
     for (const [key, value] of Object.entries(param)) {
       if (!value) continue;
@@ -63,26 +63,9 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
       }
     }
     // updateDecodedHash();
-    const newUrl = `${window.location.pathname}?${params}`;
+    const newUrl = `${window.location.pathname}?${params}${hash}`;
     window.history.replaceState({}, '', newUrl);
   }, [param]);
-
-  // useEffect(() => {
-  //   const path = window.location.pathname.split('/').filter(p => p)[0];
-  //   setParamState(prev => ({ ...prev, category: path || CategoryType.Collaboration }));
-  //   updateDecodedHash()
-  // }, []);
-
-  const updateDecodedHash = useCallback(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      const name = decodeURI(hash.replace('#', ''));
-      setParam('name', name);	
-      // setParamState(prev => ({ ...prev, name }));
-    } else {
-      const currentPath = window.location.pathname;
-    }
-  }, []);
 
   const filter = useCallback((content: ContentType): boolean => {
     const itemName = (content.metadata?.name as string || '').toLowerCase();
@@ -105,7 +88,7 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
       setIsLoading(true);
       try {
 
-        const result = await loadContents(url, { name: paramName, connections: paramConnections || []}, paramCategory as string, cancelToken);
+        const result = await loadContents(url, { name: paramName, connections: paramConnections || [] }, paramCategory as string, cancelToken);
         setContentFiles(result.files);
         setRelatedContents(result.connections);
         setLoadError(result.error || null);
@@ -133,10 +116,5 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
     isLoading,
     loadError,
     relatedContents,
-    // param,
-    // setParam,
-    // getParam,
-    // toggleParam,
-    syncSearchParams,
   };
 };

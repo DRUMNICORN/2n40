@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { MdAdd } from 'react-icons/md';
 import styles from './CalenderWeeks.module.scss';
-import Content from '../layout/Content';
+import Content from '../content/Content';
 import { ContentType, MetadataType } from '@/app/types';
-import Link from '../design/Link';
+import Linked from '../design/Linked';
 
 interface CalendarProps {
   contents: ContentType[];
@@ -100,9 +100,9 @@ const CalenderWeeks: React.FC<CalendarProps> = (props) => {
           <div className={styles.dateInfo}>
             {day === 1 ? `${new Date(date).toLocaleString('default', { month: 'long' })} ${new Date(date).getFullYear()}` : day}
             {hoveredDate === date && (
-              <Link>
+              <Linked>
                 <MdAdd className={styles.addIcon} />
-              </Link>
+              </Linked>
             )}
           </div>
           <div className={styles.cardsContainer}>

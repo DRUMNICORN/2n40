@@ -1,14 +1,13 @@
 import React, { useCallback, useState } from "react";
 import styles from "./Content.module.scss";
 import { ContentType, MetadataType, MetadataTypes } from "@/app/types";
-import { IoMdEye } from "react-icons/io";
 import Markdown from "../util/Markdown";
-import Link from "../design/Link";
+import Linked from "../design/Linked";
 import SoundCloudEmbed from "../util/SoundCloudEmbed";
-import List from "./ContentList";
+import List from "../layout/ContentList";
 import { useContentOverlay } from "@/providers/OverlayProvider";
-import ContentActions from "./ContentActions";
-import { CATEGORY_ICONS } from "@/app/defaults";
+import ContentActions from "../layout/ContentActions";
+import { REACT_ICONS } from "@/app/Icons";
 import DateContainer from "../design/DateContainer";
 
 interface ContentProps {
@@ -92,19 +91,13 @@ const Content: React.FC<ContentProps> = ({
       <div className={styles.header}>
         <h2 className={styles.titleContainer}>
           {/* Category Icon */}
-          <Link type={MetadataTypes.name}>
-            {CATEGORY_ICONS[category ?? "default"]}
-          </Link>
+          <Linked type={MetadataTypes.name}>
+            {REACT_ICONS[category as keyof typeof REACT_ICONS]}
+          </Linked>
           {/* Name */}
-          <Link onClick={handleFileClick} type={MetadataTypes.name}>
+          <Linked onClick={handleFileClick} type={MetadataTypes.name}>
             {name}
-          </Link>
-          {/* Eye icon for details */}
-          {!showDetailsOverlay && (
-            <Link onClick={handleDetailsButtonClick}>
-              <IoMdEye />
-            </Link>
-          )}
+          </Linked>
           {/* Actions for overlay */}
           {isOverlay && <ContentActions handleClose={handleClose} handleShare={handleShareClick} />}
         </h2>

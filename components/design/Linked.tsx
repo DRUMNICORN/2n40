@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from './Link.module.scss';
-import { SOCIAL_MEDIA_ICONS } from '@/app/defaults';
+import styles from './Linked.module.scss';
+import { REACT_ICONS } from '@/app/Icons';
 import { MetadataTypes } from '@/app/types';
+import Link from 'next/link';
 
-interface LinkProps {
+export type { MetadataTypes }
+
+interface LinkedProps {
   href?: string;
   label?: string;
   children?: React.ReactNode;
@@ -19,7 +22,7 @@ interface LinkProps {
   noWrap?: boolean; // New property for no-wrap behavior
 }
 
-const Link: React.FC<LinkProps> = ({
+const Linked: React.FC<LinkedProps> = ({
   href,
   label,
   children,
@@ -98,22 +101,22 @@ const Link: React.FC<LinkProps> = ({
   `;
 
   return href ? (
-    <a
+    <Link
       href={href}
       className={linkClassName}
       onClick={handleLinkClick}
       target={openInNewTab ? '_blank' : '_self'}
       rel={openInNewTab ? 'noopener noreferrer' : undefined}
     >
-      {children || SOCIAL_MEDIA_ICONS[type as keyof typeof SOCIAL_MEDIA_ICONS]}
+      {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
       {label && <LinkText />}
-    </a>
+    </Link>
   ) : (
     <button className={linkClassName} onClick={handleLinkClick}>
-      {children || SOCIAL_MEDIA_ICONS[type as keyof typeof SOCIAL_MEDIA_ICONS]}
+      {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
       {label && <LinkText />}
     </button>
   );
 };
 
-export default Link;
+export default Linked;

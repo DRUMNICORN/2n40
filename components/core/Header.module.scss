@@ -16,6 +16,10 @@
   padding-right: 0.42rem;
   padding-left: 0.42rem;
   padding-top: 0.1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .name {
@@ -23,6 +27,12 @@
   width: 0%;
   opacity: 0;
   justify-self: left;
+  // not dragable or selectable
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  // pointer-events: none;
   
   padding-right: 0rem;
 }

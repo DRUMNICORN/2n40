@@ -5,7 +5,7 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 import styles from './Carousel.module.scss';
-import Content from '../layout/Content';
+import Content from '../content/Content';
 import { ContentType } from '@/app/types';
 import Swiper from 'swiper';
 

@@ -1,11 +1,11 @@
 import React, { useCallback, useMemo } from 'react';
 import styles from './Controls.module.scss';
 import { FaSearch } from 'react-icons/fa';
-import Link from '../design/Link';
-// import { VIEW_ICONS } from '@/app/defaults';
+import Linked from '../design/Linked';
+// import { REACT_ICONS } from '@/app/defaults';
 import List from './ContentList';
-import { MetadataType, ViewType } from '@/app/types';
-// import { VIEW_ICONS } from '@/app/defaults';
+import { MetadataType, MetadataTypes } from '@/app/types';
+// import { REACT_ICONS } from '@/app/defaults';
 // import { useViewMode } from '@/hooks/useViewMode';
 
 interface EntityFilterProps {
@@ -17,7 +17,7 @@ interface EntityFilterProps {
 }
 
 const Controls: React.FC<EntityFilterProps> = React.memo(({ param, setParam, toggleParam }) => {
-  // const nextMode = mode === ViewType.Carousel ? ViewType.CalendarDays : ViewType.Carousel;
+  // const nextMode = mode === MetadataTypes.Carousel ? MetadataTypes.CalendarDays : MetadataTypes.Carousel;
   // const { mode, cycleViewMode} = useViewMode();
   // Memoized callbacks
   const handleSwap = useCallback(() => {
@@ -52,12 +52,12 @@ const Controls: React.FC<EntityFilterProps> = React.memo(({ param, setParam, tog
           onKeyPress={handleKeyPress}
         />
         <div className={styles.filterSearchIcon} >
-          <Link onClick={handleSwap}>
+          <Linked onClick={handleSwap}>
             <FaSearch />
-          </Link>
+          </Linked>
         </div>
         {/* <Link onClick={cycleViewMode} spinOnClick={true}>
-          {VIEW_ICONS[mode]}
+          {REACT_ICONS[mode]}
         </Link> */}
       </div>
       <div className={filterEntitiesClasses}>

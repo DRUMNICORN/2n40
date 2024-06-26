@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styles from './ContentList.module.scss';
 import { MdAdd, MdTag, MdEdit, MdUndo } from 'react-icons/md';
-import Link from '../design/Link';
+import Linked from '../design/Linked';
 import { MetadataType, MetadataTypes } from '@/app/types';
-import { SOCIAL_MEDIA_ICONS } from '@/app/defaults';
+import { REACT_ICONS } from '@/app/Icons';
 
 
 interface ListViewProps {
@@ -43,7 +43,7 @@ const List: React.FC<ListViewProps> = ({
     }
   };
 
-  const determineIcon = (content: string): keyof typeof SOCIAL_MEDIA_ICONS => {
+  const determineIcon = (content: string): keyof typeof REACT_ICONS => {
     let iconKey = MetadataTypes.website;
     for (const social of Object.values(MetadataTypes)) {
       if (content.includes(social)) {
@@ -71,13 +71,13 @@ const List: React.FC<ListViewProps> = ({
     } onTouchMove={e => { e.preventDefault(); e.stopPropagation(); }}>
       {Object.entries(metadataEntries || {}).map(([key, value], index) => {
         const entryContent = `${value.toString()}`;
-        const iconKey = (key ||  determineIcon(entryContent)) as keyof typeof SOCIAL_MEDIA_ICONS;
-        const icon = typeof value === 'string' && SOCIAL_MEDIA_ICONS[iconKey];
+        const iconKey = (key ||  determineIcon(entryContent)) as keyof typeof REACT_ICONS;
+        const icon = typeof value === 'string' && REACT_ICONS[iconKey];
 
         if (excludedKeys.includes(key)) return null;
 
         return (
-          <Link
+          <Linked
             key={index}
             // preventDefault
             // stopPropagation
@@ -95,7 +95,7 @@ const List: React.FC<ListViewProps> = ({
             type={key as MetadataTypes}
           >
             {icon ? icon : <MdTag />}
-          </Link>
+          </Linked>
         );
       })}
     </div>

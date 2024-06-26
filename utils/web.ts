@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CategoryType, ContentType, MetadataType } from '@/app/types';
+import { MetadataTypes, ContentType, MetadataType } from '@/app/types';
 import { MarkdownParser } from './markdown';
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -14,7 +14,7 @@ export const getUrl = (endpoint: string, params: Record<string, any>): string =>
     const url = new URL(`${BASE_API_URL}${endpoint}`);
     let params_ = { ...params };
     if (!params_.category) {
-        params_.category = CategoryType.Collaboration;
+        params_.category = MetadataTypes.collaborations;
     }
     Object.entries(params_).forEach(([key, value]) => {
         if (value) {
@@ -62,7 +62,7 @@ export const loadContents = async (url: string, params: Record<string, any> = {}
                 const data = await fetchData(fileUrl, { id, category }, cancelToken);
                 let file: ContentType = MarkdownParser.parse(data);
                 file.id = id;
-                file.category = CategoryType[category as keyof typeof CategoryType];
+                file.category = MetadataTypes[category as keyof typeof MetadataTypes];
                 newFiles.push(file);
 
                 // Extract and process connections metadata
