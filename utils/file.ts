@@ -11,7 +11,6 @@ function isPathSafe(base: string, target: string): boolean {
 }
 
 export function loadFiles(query: ContentType): string[] {
-    console.log("loadFiles", query);
     const dir = path.join(DATA_DIR, query.category);
 
     if (!isPathSafe(DATA_DIR, dir)) {

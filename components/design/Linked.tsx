@@ -1,12 +1,10 @@
-"use client";
-
 import React, { useState } from 'react';
 import styles from './Linked.module.scss';
 import { REACT_ICONS } from '@/app/Icons';
 import { MetadataTypes } from '@/app/types';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
-export type { MetadataTypes }
+export type { MetadataTypes };
 
 interface LinkedProps {
   href?: string;
@@ -14,12 +12,10 @@ interface LinkedProps {
   children?: React.ReactNode;
   spinOnClick?: boolean;
   disableClick?: boolean;
-  textLeft?: boolean;
   type?: MetadataTypes;
-  openInNewTab?: boolean;
-  onClick?: (e: React.MouseEvent) => void;
-  inline?: boolean; // New property for inline placement
-  noWrap?: boolean; // New property for no-wrap behavior
+  onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
+  inline?: boolean;
+  noWrap?: boolean;
 }
 
 const Linked: React.FC<LinkedProps> = ({
@@ -29,94 +25,99 @@ const Linked: React.FC<LinkedProps> = ({
   spinOnClick = false,
   disableClick = false,
   type,
-  openInNewTab = false,
   onClick,
-  inline = false, // Default to false
-  noWrap = false, // Default to false
+  inline = false,
+  noWrap = false,
 }) => {
   const [iconAnimated, setIconAnimated] = useState(false);
 
-  const handleRedirect = (value: string, key: string) => {
-    switch (key) {
-      case 'mail':
-        window.open(`mailto:${value}`);
-        break;
-      case 'address':
-        window.open(`https://www.google.com/maps/search/?api=1&query=${value}`);
-        break;
-      case 'tel':
-        window.open(`tel:${value}`);
-        break;
-      case 'website':
-        const url = value.startsWith('https://') ? value : `https://${value}`;
-        window.open(url);
-        break;
-      default:
-        break;
-    }
+  const handleRedirect = (value: string, key: string): void => {
+    const actions: Record<string, () => void> = {
+      mail: () => window.open(`mailto:${value}`),
+      address: () => window.open(`https://www.google.com/maps/search/?api=1&query=${value}`),
+      tel: () => window.open(`tel:${value}`),
+      website: () => window.open(value.startsWith('https://') ? value : `https://${value}`, '_blank'),
+    };
+
+    actions[key]?.();
   };
 
-  const handleLinkClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
     if (disableClick) {
       e.preventDefault();
       return;
     }
-    if (onClick) onClick(e);
+
+    onClick?.(e);
 
     if (spinOnClick) {
       setIconAnimated(true);
       setTimeout(() => setIconAnimated(false), 500);
     }
 
-    if (type && label) {
-      handleRedirect(label, type);
+    if ((type === 'address' || type === 'website' || (!!href && href.startsWith('http'))) && !disableClick) {
+      e.preventDefault();
+      handleRedirect(href || label || '', type || 'website');
     }
   };
 
-  const extractDomain = (url: string) => {
+  const extractDomain = (url: string): string => {
     try {
-      const { hostname } = new URL(url);
-      return hostname.replace('www.', '');
-    } catch (error) {
+      return new URL(url).hostname.replace('www.', '');
+    } catch {
       return url;
     }
   };
 
-  const LinkText = () => (
-    <span className={styles.linkText}>
-      {label?.includes('https') ? extractDomain(label) : label}
-    </span>
-  );
+  const effectiveHref = href || label || '';
+  const isExternalLink = effectiveHref.startsWith('http');
+  const isLocalLink = effectiveHref.startsWith('/');
 
-  const isExternalLink = type === 'address' || type === 'website';
-  const isQuadratic = !label && !type && !href;
+  const linkClassName = `${styles.link} ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} 
+    ${isExternalLink ? styles.externalLink : ''} ${(!label && !type && !effectiveHref) ? styles.quadratic : ''} 
+    ${inline ? styles.inline : ''} ${noWrap ? styles.noWrap : ''}`;
 
-  const linkClassName = `
-    ${styles.link} 
-    ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} 
-    ${isExternalLink ? styles.externalLink : ''}
-    ${isQuadratic ? styles.quadratic : ''} 
-    ${inline ? styles.inline : ''}
-    ${noWrap ? styles.noWrap : ''}
-  `;
+  if (isExternalLink) {
+    const linkProps = {
+      href: effectiveHref,
+      onClick: handleClick,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+      className: linkClassName,
+    };
 
-  return href ? (
-    <Link
-      href={href}
-      className={linkClassName}
-      onClick={handleLinkClick}
-      target={openInNewTab ? '_blank' : '_self'}
-      rel={openInNewTab ? 'noopener noreferrer' : undefined}
-    >
-      {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
-      {label && <LinkText />}
-    </Link>
-  ) : (
-    <button className={linkClassName} onClick={handleLinkClick}>
-      {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
-      {label && <LinkText />}
-    </button>
-  );
+    return (
+      <a {...linkProps}>
+        {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
+        {(label || label) && <span className={styles.linkText}>{label?.includes('https') ? extractDomain(label) : label}</span>}
+      </a>
+    );
+  } else if (isLocalLink) {
+    const linkProps = {
+      href: effectiveHref,
+      onClick: handleClick,
+      className: linkClassName,
+    };
+
+    return (
+      <NextLink {...linkProps} href={effectiveHref}>
+        {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
+        {(label || label) && <span className={styles.linkText}>{label}</span>}
+      </NextLink>
+    );
+  } else {
+    const buttonProps = {
+      onClick: handleClick,
+      className: linkClassName,
+    };
+
+    return (
+      <button {...buttonProps}>
+        {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
+        {(label || label) && <span className={styles.linkText}>{label}</span>}
+      </button>
+    );
+  }
 };
 
 export default Linked;

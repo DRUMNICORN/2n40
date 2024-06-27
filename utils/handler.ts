@@ -65,7 +65,6 @@ export async function handleFilePost(req: NextRequest, res: NextResponse): Promi
 // Handler for GET requests to fetch multiple files
 export async function handleFilesGet(req: NextRequest, res: NextResponse): Promise<Response> {
     const params = parseContentFromNextRequest(req);
-    console.log("params", params);
 
     if (areParamsEmpty(params)) {
         return createResponse([], 200);

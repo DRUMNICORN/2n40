@@ -42,6 +42,7 @@ export enum MetadataTypes {
   weeks = "weeks",
   carousel = "carousel",
   github = "github",
+  form = "form"
 }
 
 // Descriptions for different categories

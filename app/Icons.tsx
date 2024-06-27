@@ -27,7 +27,7 @@ import {
   FaFacebook,
   FaGithub,
 } from "react-icons/fa";
-import { IoTimeSharp } from "react-icons/io5";
+import { IoLogIn, IoTimeSharp } from "react-icons/io5";
 import { BiSolidNetworkChart } from "react-icons/bi";
 import { IoMdPricetag } from "react-icons/io";
 import { MetadataTypes } from "./types";
@@ -61,7 +61,7 @@ export const REACT_ICONS: { [key in MetadataTypes]: JSX.Element } = {
   [MetadataTypes.close]: <MdClose />,
   [MetadataTypes.share]: <MdShare />,
   [MetadataTypes.collaborations]: <MdOutlineCalendarMonth />,
-  // [MetadataTypes.change]: <MdOutlineCalendarMonth />,
+  [MetadataTypes.form]: <IoLogIn />,
   [MetadataTypes.days]: <MdCalendarViewWeek />,
   [MetadataTypes.carousel]: <MdViewCarousel />,
   [MetadataTypes.weeks]: <MdCalendarViewWeek />,
