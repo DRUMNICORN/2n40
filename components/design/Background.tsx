@@ -5,7 +5,7 @@ interface BackgroundProps {
   animationDisabled?: boolean; // Optional prop to disable animation
 }
 
-const Background: React.FC<BackgroundProps> = ({ animationDisabled = false }) => {
+const Background: React.FC<BackgroundProps> = ({ animationDisabled = true }) => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const lerpPos = useRef({ x: 0, y: 0 });
   const [fps, setFps] = useState(60);
@@ -23,7 +23,7 @@ const Background: React.FC<BackgroundProps> = ({ animationDisabled = false }) =>
     return () => document.body.removeEventListener('pointermove', handlePointerMove);
   }, [handlePointerMove]);
 
-  // Smoothly interpolate target position
+  // Smoothly interpolate target position once per second
   useEffect(() => {
     const intervalId = setInterval(() => {
       lerpPos.current = {
@@ -34,10 +34,10 @@ const Background: React.FC<BackgroundProps> = ({ animationDisabled = false }) =>
         cursorStyleRef.current.style.setProperty('--cursor-x', `${lerpPos.current.x}px`);
         cursorStyleRef.current.style.setProperty('--cursor-y', `${lerpPos.current.y}px`);
       }
-    }, 1000 / fps);
+    }, 1000); // Update once per second
 
     return () => clearInterval(intervalId);
-  }, [fps, pos, animationDisabled]);
+  }, [pos, animationDisabled]);
 
   // Calculate FPS using requestAnimationFrame
   useEffect(() => {
@@ -70,9 +70,9 @@ const Background: React.FC<BackgroundProps> = ({ animationDisabled = false }) =>
   return (
     <div className={`${styles.background} ${shouldFadeIn ? styles.fadeIn : ''}`} ref={cursorStyleRef}>
       {/* Uncomment to show disabled animation message */}
-      {/* {animationDisabled && (
+      {animationDisabled && (
         <div className={styles.disabled}>Your hardware is struggling. Animation is disabled.</div>
-      )} */}
+      )} 
     </div>
   );
 };

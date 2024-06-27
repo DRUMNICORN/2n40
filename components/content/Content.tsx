@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from "react";
 import styles from "./Content.module.scss";
-import { ContentType, MetadataType, MetadataTypes } from "@/app/types";
+import { ContentType, MetadataType } from "@/app/types";
 import Markdown from "../util/Markdown";
 import Linked from "../design/Linked";
 import SoundCloudEmbed from "../util/SoundCloudEmbed";
 import List from "../layout/ContentList";
 import { useContentOverlay } from "@/providers/OverlayProvider";
 import ContentActions from "../layout/ContentActions";
-import { REACT_ICONS } from "@/app/Icons";
 import DateContainer from "../design/DateContainer";
 
 interface ContentProps {
@@ -91,13 +90,7 @@ const Content: React.FC<ContentProps> = ({
       <div className={styles.header}>
         <h2 className={styles.titleContainer}>
           {/* Category Icon */}
-          <Linked type={MetadataTypes.name}>
-            {REACT_ICONS[category as keyof typeof REACT_ICONS]}
-          </Linked>
-          {/* Name */}
-          <Linked onClick={handleFileClick} type={MetadataTypes.name}>
-            {name}
-          </Linked>
+          <Linked onClick={handleFileClick} type={category} label={name as string} />
           {/* Actions for overlay */}
           {isOverlay && <ContentActions handleClose={handleClose} handleShare={handleShareClick} />}
         </h2>
