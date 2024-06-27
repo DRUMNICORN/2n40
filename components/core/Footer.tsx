@@ -11,8 +11,6 @@ const Footer = () => {
         <Linked type={MetadataTypes.github} href="https://github.com/DRUMNICORN/2n40" />
       </div>
       <div className={styles.center}>
-        {/* Center content, e.g., navigation links (optional) */}
-        Made with ❤️
       </div>
       <div className={styles.right}>
         <Linked label={'Impressum'} href='/impressum' type={MetadataTypes.info} />

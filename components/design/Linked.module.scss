@@ -5,10 +5,12 @@
   transition: background-color 0.2s, transform 0.3s ease;
   background-color: rgba(var(--dark-rgb), 0.1);
   border: 1px solid rgba(var(--light-rgb), 0);
-  padding: 3px 3px 0;
+  // padding: 3px 3px 0;
   border-radius: 10px;
   display: inline-flex;
   align-items: center;
+  // white-space: nowrap;
+  white-space: normal;
   justify-content: left;
   text-align: left;
 
@@ -63,7 +65,7 @@
   }
 
   .linkText {
-    margin-left: 0.5rem;
+    // margin-left: 0.5rem;
     padding-right: 0.5rem;
     display: block;
     align-items: flex-start;

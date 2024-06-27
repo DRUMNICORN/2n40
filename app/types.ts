@@ -11,6 +11,7 @@ export const FILTER_REGEX: { [key: string]: RegExp } = {
 
 // Enum for metadata types
 export enum MetadataTypes {
+  default = "default",
   website = "website",
   mail = "mail",
   date = "date",
@@ -42,7 +43,8 @@ export enum MetadataTypes {
   weeks = "weeks",
   carousel = "carousel",
   github = "github",
-  form = "form"
+  form = "form",
+  search = "search"
 }
 
 // Descriptions for different categories

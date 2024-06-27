@@ -5,23 +5,44 @@
   align-items: center;
   height: 100%;
   padding: 0 1rem;
-  padding-top: 42vh;
-  position: relative; /* Ensure the container is positioned relative */
-}
-
-.workContainer p {
-  font-size: 1.5rem;
-  font-weight: 300;
-  line-height: 1.5;
-  text-align: center;
+  padding-top: 42vh; // Original top padding
+  position: relative; // Ensure the container is positioned relative
+  background-color: rgba(var(--secondary-rgb), 0.3); // Using CSS variable for secondary color
+  
+  animation: dropDown 1s ease-out forwards; /* Apply the animation */
+  
+  h1 {
+    font-size: 2rem; // Slightly larger for emphasis
+    margin-bottom: 1rem; // Adds space below the heading
+  }
+  
+  p {
+    font-size: 1.2rem; // Slightly smaller for balance
+    font-weight: 300;
+    line-height: 1.5; // Enhanced line height for readability
+    text-align: center; // Center-aligned text
+    margin-top: 0.5rem; // Adds space above each paragraph
+    margin-bottom: 0.5rem; // Adds space below each paragraph
+  }
 }
 
 @media (max-width: 768px) {
-  .workContainer {
-    flex-direction: column;
-    padding-top: 30vh;
-    padding-bottom: 30vh;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.workContainer {
+    flex-direction: column; // Stack items vertically on smaller screens
+    padding-top: 30vh; // Adjusted top padding for smaller screens
+    padding-bottom: 30vh; // Adjusted bottom padding for smaller screens
+    padding-left: 1rem; // Consistent left padding
+    padding-right: 1rem; // Consistent right padding
+  }
+}
+
+@keyframes dropDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0; /* Optional: Start with reduced opacity */
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1; /* Optional: End with full opacity */
   }
 }

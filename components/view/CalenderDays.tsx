@@ -13,6 +13,7 @@ interface CalendarProps {
 
 const CalendarDays: React.FC<CalendarProps> = ({ contents }) => {
   const [groupedFiles, setGroupedFiles] = useState<{ [key: string]: ContentType[] }>({});
+  const [revealedDays, setRevealedDays] = useState<string[]>([]);
 
   useEffect(() => {
     if (!contents) return;
@@ -39,10 +40,17 @@ const CalendarDays: React.FC<CalendarProps> = ({ contents }) => {
     (a, b) => new Date(a).getTime() - new Date(b).getTime()
   ), [groupedFiles]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setRevealedDays(sortedDates);
+    }, 500); // Adjust the delay as needed
+  }, [sortedDates]);
+  
+
   return (
     <div className={styles.calendar}>
       {sortedDates.map((date) => (
-        <div key={date} className={styles.calendarItem}>
+        <div key={date} className={`${styles.calendarItem} ${revealedDays.includes(date)? styles.reveal : ''}`}>
           <div className={styles.dateInfo}>
             <DateContainer date={date} />
           </div>

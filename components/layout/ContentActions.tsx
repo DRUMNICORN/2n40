@@ -1,5 +1,4 @@
 import React from 'react';
-// import { MdClose, MdShare } from "react-icons/md";
 import Linked from "../design/Linked";
 import styles from "./ContentOverlay.module.scss";
 import { MetadataTypes } from '@/app/types';

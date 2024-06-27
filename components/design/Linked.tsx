@@ -103,7 +103,7 @@ const Linked: React.FC<LinkedProps> = ({
 
     return (
       <NextLink {...linkProps} href={effectiveHref}>
-        {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
+        {(children || REACT_ICONS[type as keyof typeof REACT_ICONS])}
         {(label || label) && <span className={styles.linkText}>{label}</span>}
       </NextLink>
     );
@@ -112,10 +112,9 @@ const Linked: React.FC<LinkedProps> = ({
       onClick: handleClick,
       className: linkClassName,
     };
-
     return (
       <button {...buttonProps}>
-        {children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
+        {!isNaN(Number(children)) && children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
         {(label || label) && <span className={styles.linkText}>{label}</span>}
       </button>
     );

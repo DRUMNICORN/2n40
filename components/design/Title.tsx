@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Title.module.scss';
 import { SITE_METADATA } from '@/app/types';
 import Linked from './Linked';
+import Link from 'next/link';
 
 interface TitleProps {
     onClick?: () => void;
@@ -11,9 +12,9 @@ interface TitleProps {
 const Title: React.FC<TitleProps> = ({ onClick, title }) => {
     return (
         <div onClick={onClick} className={styles.container}>
-            <Linked href="/">
+            <Link href="/" className={styles.title}>
                 {title ? title : SITE_METADATA.title as string}
-            </Linked>
+            </Link>
         </div>
     );
 };

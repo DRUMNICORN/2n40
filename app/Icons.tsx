@@ -26,6 +26,7 @@ import {
   FaTwitter,
   FaFacebook,
   FaGithub,
+  FaSearch,
 } from "react-icons/fa";
 import { IoLogIn, IoTimeSharp } from "react-icons/io5";
 import { BiSolidNetworkChart } from "react-icons/bi";
@@ -34,6 +35,7 @@ import { MetadataTypes } from "./types";
 
 // Icons mapping for social media and metadata types
 export const REACT_ICONS: { [key in MetadataTypes]: JSX.Element } = {
+  [MetadataTypes.default]: <></>,
   [MetadataTypes.website]: <MdWeb />,
   [MetadataTypes.mail]: <FaEnvelope />,
   [MetadataTypes.address]: <FaMapMarkerAlt />,
@@ -65,5 +67,6 @@ export const REACT_ICONS: { [key in MetadataTypes]: JSX.Element } = {
   [MetadataTypes.days]: <MdCalendarViewWeek />,
   [MetadataTypes.carousel]: <MdViewCarousel />,
   [MetadataTypes.weeks]: <MdCalendarViewWeek />,
-  [MetadataTypes.github]: <FaGithub />
+  [MetadataTypes.github]: <FaGithub />,
+  [MetadataTypes.search]: <FaSearch />,
 };

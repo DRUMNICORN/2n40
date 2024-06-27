@@ -1,7 +1,7 @@
 .hamburger {
     display: block;
     position: relative;
-    width: 11rem;
+    width: 21%;
     height: 22.5px;
     z-index: 42;
     cursor: pointer;
@@ -11,6 +11,10 @@
     margin-right: 1rem;
     &:hover span:nth-child(2) {
         animation: hamburger-hover 0.25s ease-in-out forwards;
+    }
+    @media (max-width: 300px) {
+        width: 4rem;
+        // right: -65rem;
     }
 }
 
@@ -23,10 +27,6 @@
     }
 }
 .hamburger span {
-    @media (max-width: 300px) {
-        width: 0;
-        right: -4rem;
-    }
     display: block;
     position: absolute;
     width: 100%;

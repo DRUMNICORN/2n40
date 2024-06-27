@@ -47,21 +47,20 @@ const Controls: React.FC<EntityFilterProps> = React.memo(({ param, setParam, tog
           onKeyPress={handleKeyPress}
         />
         <div className={styles.filterSearchIcon} >
-          <Linked onClick={handleSwap}>
-            <FaSearch />
-          </Linked>
+          <Linked onClick={handleSwap} type={MetadataTypes.search} />
+        </div>
+        <div className={filterEntitiesClasses}>
+          <List
+            metadataEntries={metadataEntries}
+            // disableClick={true}
+            onEntryClick={(element) => toggleParam('connections', element as string)}
+          />
         </div>
         {/* <Link onClick={cycleViewMode} spinOnClick={true}>
           {REACT_ICONS[mode]}
         </Link> */}
       </div>
-      <div className={filterEntitiesClasses}>
-        <List
-          metadataEntries={metadataEntries}
-          // disableClick={true}
-          onEntryClick={(element) => toggleParam('connections', element as string)}
-        />
-      </div>
+
     </div>
   );
 });

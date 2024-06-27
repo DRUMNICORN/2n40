@@ -8,9 +8,7 @@ const Soon: React.FC = () => {
   return (
     <div className={styles.workContainer}>
       <h1>This page is currently under construction</h1>
-      <p>It will be updated soon.</p>
-      <p>Thank you for your patience.</p>
-
+      <p>Thank you for your patience, it will be updated soon! </p>
       <Logo />
       {SITE_METADATA.title as string}
     </div>
