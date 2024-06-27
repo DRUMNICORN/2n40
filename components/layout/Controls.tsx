@@ -9,17 +9,12 @@ import { MetadataType, MetadataTypes } from '@/app/types';
 // import { useViewMode } from '@/hooks/useViewMode';
 
 interface EntityFilterProps {
-  // cycleViewMode: () => void;
-  // mode: string;
   param: MetadataType;
   setParam: (key: any, value: string | string[] | null) => void;
   toggleParam: (key: any, value: string) => void;
 }
 
 const Controls: React.FC<EntityFilterProps> = React.memo(({ param, setParam, toggleParam }) => {
-  // const nextMode = mode === MetadataTypes.Carousel ? MetadataTypes.CalendarDays : MetadataTypes.Carousel;
-  // const { mode, cycleViewMode} = useViewMode();
-  // Memoized callbacks
   const handleSwap = useCallback(() => {
     if (!param) return;
     let name = param.name;

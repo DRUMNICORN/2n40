@@ -1,4 +1,4 @@
-// dateUtils.ts
+import { dateSplitRegex } from "./regex";
 
 export const formatDate = (dateString: string): string => {
     if (!dateString) {
@@ -6,7 +6,7 @@ export const formatDate = (dateString: string): string => {
         return `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`;
     }
 
-    let dateArr = dateString.split(/[-.]/gm);
+    let dateArr = dateString.split(dateSplitRegex);
     // filter out empty strings
     dateArr = dateArr.filter((date) => date !== '');
     if (dateArr.length < 3) dateArr.push(new Date().getFullYear().toString());

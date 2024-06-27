@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
 import Linked from '../design/Linked';
 import { MetadataTypes } from '@/app/types';
+import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/utils/regex';
 
 interface EntityContentProps {
   content: string;
@@ -13,14 +14,6 @@ interface EntityContentProps {
 }
 
 const applyMarkdown = (str: string) => {
-  const linkRegex = /\[\[([^\]]+)\]\]/g;
-  const headerRegex = /^(#+)\s+(.+)/gm;
-  const hrefRegex = /\[([^\]]+)\]\(([^\)]+)\)/g;
-  const noteRegex = />(.+)/gm;
-  const boldRegex = /\*\*(.*?)\*\*/g; // Regex to match text between **
-  const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g; // Regex to match URLs
-
-  const lineRegex = /\n/gm;
 
   const elements = str.split(lineRegex).map((line, i) => {
     if (line.startsWith('>')) {

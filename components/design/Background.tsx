@@ -70,9 +70,9 @@ const Background: React.FC<BackgroundProps> = ({ animationDisabled = true }) => 
   return (
     <div className={`${styles.background} ${shouldFadeIn ? styles.fadeIn : ''}`} ref={cursorStyleRef}>
       {/* Uncomment to show disabled animation message */}
-      {animationDisabled && (
+      {/* {animationDisabled && (
         <div className={styles.disabled}>Your hardware is struggling. Animation is disabled.</div>
-      )} 
+      )}  */}
     </div>
   );
 };

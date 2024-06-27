@@ -3,6 +3,7 @@ import { getContent, getMetadataString } from "../utils/string";
 import { TelegramService } from "./service";
 import { MarkdownParser } from "../utils/markdown";
 import fs from "fs";
+import { confirmedRegex } from "../utils/regex";
 
 export class CallbackQueryController {
   constructor(private telegramService: TelegramService) {}
@@ -153,7 +154,6 @@ export class CallbackQueryController {
 
     let member_count_mod_channel = await this.telegramService.bot.getChatMemberCount(this.telegramService.getModChannelId())
 
-    let confirmedRegex = /confirmed: (\d+)/g;
     let confirmedCount = 0;
     let match = confirmedRegex.exec(msg.text);
     if (match) {

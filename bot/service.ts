@@ -1,7 +1,6 @@
 import TelegramBot from "node-telegram-bot-api";
 import { CommandType, ContentType, Language, MessageType, Message, i18n } from "../app/types";
 import { MarkdownParser } from "../utils/markdown";
-import { getMetadataString } from "../utils/string";
 import dotenv from "dotenv";
 // telegram message type
 

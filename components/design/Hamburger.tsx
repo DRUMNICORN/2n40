@@ -8,7 +8,9 @@ interface HamburgerProps {
 }
 
 const Hamburger: React.FC<HamburgerProps> = ({ menuOpen = false, onClick, disabled = false }) => {
-  const handleMenuClick = () => {
+  const handleMenuClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
     if (disabled) return;
     if (onClick) onClick();
   };
