@@ -13,9 +13,13 @@ export async function handleFileGet(req: NextRequest, res: NextResponse): Promis
     if (!fileId) {
         return createResponse({ error: "fileId parameter is missing" }, 400);
     }
+    
+    if (!fileCategory)
+        return createResponse({ error: "category parameter is missing" }, 400)
+
 
     try {
-        const file = await loadFile(fileId.toString(), fileCategory || "collaborations");
+        const file = await loadFile(fileId.toString(), fileCategory);
 
         if (!file) {
             return createResponse({ error: "file not found" }, 404);
@@ -31,36 +35,6 @@ export async function handleFileGet(req: NextRequest, res: NextResponse): Promis
     }
 }
 
-// Handler for POST requests to update a file
-export async function handleFilePost(req: NextRequest, res: NextResponse): Promise<Response> {
-    const newFile = await req.json() as ContentType;
-    const { id: fileId } = newFile;
-
-    if (!fileId) {
-        return createResponse({ error: "fileId parameter is missing" }, 400);
-    }
-
-    try {
-        const existingFile = await loadFile(fileId.toString(), newFile.category || "collaborations");
-
-        if (!existingFile) {
-            return createResponse({ error: "file not found" }, 404);
-        }
-
-        // TODO: Implement changes to save file
-        // const changes: Change[] = getChanges(existingFile, newFile);
-        // if (changes.length === 0) {
-        //     return createResponse({ error: "no changes" }, 400);
-        // }
-
-        // const changesFile = generateChangesFile(newFile, existingFile.name);
-        // saveFile(changesFile);
-
-        return createResponse({ file: existingFile }, 200);
-    } catch (error) {
-        return createResponse({ error: "Error updating file" }, 500);
-    }
-}
 
 // Handler for GET requests to fetch multiple files
 export async function handleFilesGet(req: NextRequest, res: NextResponse): Promise<Response> {
@@ -78,6 +52,39 @@ export async function handleFilesGet(req: NextRequest, res: NextResponse): Promi
     }
 }
 
+// Handler for POST requests to update a file
+export async function handleFilePost(req: NextRequest, res: NextResponse): Promise<Response> {
+    const newFile = await req.json() as ContentType;
+    const { id: fileId } = newFile;
+
+    if (!fileId) 
+        return createResponse({ error: "fileId parameter is missing" }, 400);
+    
+    if (!newFile.category)
+        return createResponse({ error: "category parameter is missing" }, 400)
+
+    try {
+        const existingFile = await loadFile(fileId.toString(), newFile.category);
+
+        if (!existingFile) 
+            return createResponse({ error: "file not found" }, 404);
+        
+        // TODO: Implement changes to save file
+        // const changes: Change[] = getChanges(existingFile, newFile);
+        // if (changes.length === 0) {
+        //     return createResponse({ error: "no changes" }, 400);
+        // }
+
+        // const changesFile = generateChangesFile(newFile, existingFile.name);
+        // saveFile(changesFile);
+
+        return createResponse({ file: existingFile }, 200);
+    } catch (error) {
+        return createResponse({ error: "Error updating file" }, 500);
+    }
+}
+
+
 // Handler for GET requests to fetch connections
 export async function handleConnectionsGet(req: NextRequest, res: NextResponse): Promise<Response> {
     const params = parseContentFromNextRequest(req);
@@ -88,11 +95,16 @@ export async function handleConnectionsGet(req: NextRequest, res: NextResponse):
     }
 
     try {
-        const file = await loadFile(fileId?.toString() || "", params.category || "collaborations");
+        if (!fileId)
+            return createResponse({ error: "fileId parameter is missing" }, 400);
 
-        if (!file) {
+        if (!params.category)
+            return createResponse({ error: "category parameter is missing" }, 400)
+
+        const file = await loadFile(fileId?.toString(), params.category);
+
+        if (!file)
             return createResponse({ error: "file not found" }, 404);
-        }
 
         // const connection = await findConnections(file);
 

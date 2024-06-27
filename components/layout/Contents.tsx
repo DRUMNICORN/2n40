@@ -3,25 +3,22 @@
 import React, { useEffect, useMemo } from 'react';
 import styles from "./Contents.module.scss";
 // import Loading from "../design/Loading";
-import Controls from "./Controls";
 import { MetadataTypes } from '@/app/types';
 import { useContent } from '@/hooks/useContent';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';
 import CalendarDays from '../view/CalenderDays';
+import Soon from '../design/Soon';
 // import { useQuery } from '@/providers/QueryProvider';
 
-const Contents = ({mode}: {mode: MetadataTypes}) => {
+const Contents = ({ mode }: { mode: MetadataTypes }) => {
+  const { param, setParam } = useQuery()
   const ViewComponent = CalendarDays;
-  
-  const { param  } = useQuery();
-  const {  contentFiles, isLoading} = useContent();
+  const { contentFiles, isLoading, loadError } = useContent();
   const { setContent, setVisible, isVisible, content, setClosed, isClosed } = useContentOverlay();
-
-
   const MemoizedViewComponent = useMemo(() => (
     <ViewComponent contents={contentFiles} />
-  ), [contentFiles, param]); 
+  ), [contentFiles, param]);
 
   useEffect(() => {
     if (contentFiles.length == 1 && !isClosed) {
@@ -37,10 +34,19 @@ const Contents = ({mode}: {mode: MetadataTypes}) => {
     if (isVisible) setVisible(false);
   }, [param.name]);
 
+  useEffect(() => {
+    if (!mode) return;
+    setParam('category', mode as MetadataTypes);
+  }, []);
+
   return (
-    <div className={styles.container}>
+    (loadError && contentFiles.length == 0 && !isLoading)
+      ?
+      <Soon />
+      :
+      <div className={styles.container}>
         {MemoizedViewComponent}
-    </div>
+      </div>
   );
 }
 

@@ -13,14 +13,20 @@ const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const getUrl = (endpoint: string, params: Record<string, any>): string => {
     const url = new URL(`${BASE_API_URL}${endpoint}`);
     let params_ = { ...params };
-    if (!params_.category) {
-        params_.category = MetadataTypes.collaborations;
-    }
+    
+    let hasOne = false;
     Object.entries(params_).forEach(([key, value]) => {
-        if (value) {
+        if (value !== undefined && value !== null && value !== '') {
             url.searchParams.append(key, value.toString());
+            hasOne = true;
         }
     });
+
+    if (!hasOne) {
+        return '';
+    }
+
+    
     return url.toString();
 };
 
@@ -57,7 +63,16 @@ export const loadContents = async (url: string, params: Record<string, any> = {}
         if (Array.isArray(fetchedPaths)) {
             for (const path of fetchedPaths) {
                 const id = path.split(".")[0];
+
+                if (!id || isNaN(Number(id))) {
+                    continue;
+                }
+
                 const fileUrl = getUrl('content', { id, category });
+
+                if(fileUrl === '') {
+                    continue;
+                }
 
                 const data = await fetchData(fileUrl, { id, category }, cancelToken);
                 let file: ContentType = MarkdownParser.parse(data);

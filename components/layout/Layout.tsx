@@ -26,8 +26,8 @@ const Layout = React.memo((props: Props) => {
     <div className={styles.content}>
         <Background />
         <OverlayProvider>
-            <ContentOverlay />
           <QueryProvider>
+          <ContentOverlay />
             {/* <TooltipProvider> */}
             <Header />
             <main className={styles.main}>

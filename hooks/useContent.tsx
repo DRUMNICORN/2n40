@@ -2,8 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios, { CancelToken } from 'axios';
 import { getUrl, loadContents } from '@/utils/web';
-import { MetadataTypes, ContentType, MetadataType } from '@/app/types';
+import { MetadataTypes, ContentType } from '@/app/types';
 import { useQuery } from '@/providers/QueryProvider';
+import { useContentOverlay } from '@/providers/OverlayProvider';
 
 interface UseContentControllerReturn {
   contentFiles: ContentType[];
@@ -22,10 +23,10 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
   const [relatedContents, setRelatedContents] = useState<ContentType[]>([]);
 
   // const [param, setParamState] = useState<MetadataType>({} as MetadataType);
-  const { param, setParam, toggleParam, setParamState
-  } = useQuery();
+  const { param, setParamState} = useQuery();
   const { connections: paramConnections, name: paramName, category: paramCategory } = param;
 
+  const { setContent } = useContentOverlay();
   const searchParams = useSearchParams();
 
   const updateParamFromQuerys = useCallback(() => {
@@ -36,7 +37,7 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
     const newParam = {
       name,
       connections: (searchParams.get('connections')?.split(',') || []).filter(Boolean),
-      category: searchParams.get('category') || MetadataTypes.collaborations,
+      category: searchParams.get('category') as MetadataTypes,
     };
 
     setParamState(newParam);
@@ -76,17 +77,19 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
   }, [paramName, paramConnections]);
 
   const url = useMemo(() => getUrl('contents', {
-    name: paramName,
-    connections: (paramConnections as string[] || []).join(','),
-    category: paramCategory,
+    name: paramName || undefined,
+    connections: (paramConnections as string[] || []).join(',') || undefined,
+    category: paramCategory || undefined,
   }), [paramName, paramConnections, paramCategory]);
 
   // const [lastUrl, setLastUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchContentFiles = async (cancelToken: CancelToken) => {
-      setIsLoading(true);
       try {
+
+        if (!url) return;
 
         const result = await loadContents(url, { name: paramName, connections: paramConnections || [] }, paramCategory as string, cancelToken);
         setContentFiles(result.files);
