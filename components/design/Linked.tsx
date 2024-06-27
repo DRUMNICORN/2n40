@@ -58,7 +58,7 @@ const Linked: React.FC<LinkedProps> = ({
     }
 
     if ((type === 'address' || type === 'website' || (!!href && href.startsWith('http'))) && !disableClick) {
-      e.preventDefault();
+      // e.preventDefault();
       handleRedirect(href || label || '', type || 'website');
     }
   };
