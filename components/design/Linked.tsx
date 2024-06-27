@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import styles from './Linked.module.scss';
 import { REACT_ICONS } from '@/app/Icons';
