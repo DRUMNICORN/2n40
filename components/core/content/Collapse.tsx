@@ -1,7 +1,7 @@
 "use client"
 
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { MetadataTypes } from '../types';
+import { MetadataTypes } from '../../../app/types';
 import Logo from '@/components/core/design/Logo';
 import ContentsContainer from '@/components/core/content/ContentsContainer';
 
@@ -22,7 +22,7 @@ const CollapsePage: React.FC<CollapsePageProps> = ({ mode }) => {
   }, []);
 
 
-  if (!category) return <Logo rotating />
+  if (!category) return <> </>;
   else return <ContentsContainer mode={category || mode} />;
 };
 
