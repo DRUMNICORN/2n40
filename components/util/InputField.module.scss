@@ -1,0 +1,23 @@
+.inputField {
+    z-index: 5;
+    background-color: transparent;
+    border-radius: 12px;
+    outline: none;
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    padding: 8px 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+
+    &:focus {
+        background-color: rgba(var(--secondary-rgb), 0.3);
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    &:hover {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+}

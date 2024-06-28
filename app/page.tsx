@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import Contents from '@/components/layout/Contents';
 import { MetadataTypes } from './types';
+import ContentsContainer from '@/components/core/content/ContentsContainer';
 
 const homePage: React.FC = () => {
-  return <Contents mode={MetadataTypes.collaborations} />;
+  return <ContentsContainer mode={MetadataTypes.collaborations} />;
 };
 
 export default homePage;

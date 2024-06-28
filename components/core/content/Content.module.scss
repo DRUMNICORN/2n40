@@ -1,0 +1,79 @@
+.card {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 0.42rem 0.42rem rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: rgba(var(--dark-rgb), 0.42);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0.42rem 0.42rem rgba(0, 0, 0, 0.1);
+  }
+
+  &.detailsOverlay {
+    background-color: rgba(var(--dark-rgb), 0.42);
+    border-radius: 8px;
+    margin-left: 0;
+  }
+
+  .header {
+    .titleContainer {
+      background: rgba(var(--dark-rgb), 0.2);
+      border-radius: 8px;
+      margin: 0;
+      display: flex;
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--light-rgb);
+      min-height: 48px;
+      text-align: center;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      margin-bottom: 1rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  .contentContainer {
+    color: var(--light-rgb);
+    overflow: hidden;
+    mask-image: linear-gradient(to top, transparent, black 42%);
+
+    &.scrollable {
+      overflow: auto;
+      mask-image: none;
+    }
+  }
+
+  .imageContainer {
+    img {
+      transition: opacity 0.3s ease-in-out;
+
+      &.imageLoaded {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.selected {
+  border: 1px solid rgb(var(--light-rgb));
+  background-color: rgba(var(--light-rgb), 0.1);
+}
+
+@media (max-width: 768px) {
+  .cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,30 @@
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+
+  &.fadeIn {
+    opacity: 1;
+  }
+}
+
+.disabled {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.2); // Default disabled text color
+  font-size: 24px;
+  z-index: 0;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.4); // Hover state for disabled text
+  }
+}

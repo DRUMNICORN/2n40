@@ -9,7 +9,7 @@ import { useContentOverlay } from '@/providers/OverlayProvider';
 interface UseContentControllerReturn {
   contentFiles: ContentType[];
   isLoading: boolean;
-  loadError: string | null;
+  loadError: string;
   relatedContents: ContentType[];
 }
 
@@ -19,18 +19,18 @@ interface SearchParamsController {
 export const useContent = (): UseContentControllerReturn & SearchParamsController => {
   const [contentFiles, setContentFiles] = useState<ContentType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState('');
   const [relatedContents, setRelatedContents] = useState<ContentType[]>([]);
 
   // const [param, setParamState] = useState<MetadataType>({} as MetadataType);
-  const { param, setParamState} = useQuery();
+  const { param, setParamState } = useQuery();
   const { connections: paramConnections, name: paramName, category: paramCategory } = param;
 
   const { setContent } = useContentOverlay();
   const searchParams = useSearchParams();
 
   const updateParamFromQuerys = useCallback(() => {
-    
+
     const hash = window.location.hash || '';
     let name = hash ? decodeURI(hash.replace('#', '')) : searchParams.get('name') || '';
 
@@ -94,7 +94,7 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
         const result = await loadContents(url, { name: paramName, connections: paramConnections || [] }, paramCategory as string, cancelToken);
         setContentFiles(result.files);
         setRelatedContents(result.connections);
-        setLoadError(result.error || null);
+        setLoadError(result.error || '');
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.error('Error fetching files:', error);

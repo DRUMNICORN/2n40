@@ -2,8 +2,8 @@ import React from "react";
 import "./globals.css";
 import localFont from 'next/font/local';
 import { SITE_METADATA } from "./types";
-import Layout from "@/components/layout/Layout";
 import { Metadata as NextMetadata } from 'next';
+import Layout from "@/components/core/layout/Layout";
 
 const Inter = localFont({ src: './Inter.ttf' });
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
-import Linked from '../design/Linked';
+import Linked from './Linked';
 import { MetadataTypes } from '@/app/types';
 import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/utils/regex';
 
