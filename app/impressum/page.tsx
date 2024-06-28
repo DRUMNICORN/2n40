@@ -1,4 +1,4 @@
-import Impressum from '@/components/core/Impressum';
+import Impressum from '@/components/core/pages/Impressum';
 import React from 'react';
 
 const CreativePage: React.FC = () => {

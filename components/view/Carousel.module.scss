@@ -1,69 +1,69 @@
-/* Container */
-.container {
-  overflow: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 2rem;
-  overflow-x: hidden;
-  position: relative; /* Added to ensure button positioning is relative to the container */
-}
+// /* Container */
+// .container {
+//   overflow: hidden;
+//   scroll-snap-type: x mandatory;
+//   scroll-behavior: smooth;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   height: 100%;
+//   padding-bottom: 2rem;
+//   overflow-x: hidden;
+//   position: relative; /* Added to ensure button positioning is relative to the container */
+// }
 
-/* Card */
-.card {
-  padding: 1rem;
-  flex-shrink: 0; /* Prevents cards from shrinking */
-  min-width: 300px; /* Ensures cards maintain a minimum width */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for depth */
-  transition: transform 0.3s ease-in-out; /* Smooth transition for active slide */
-}
+// /* Card */
+// .card {
+//   padding: 1rem;
+//   flex-shrink: 0; /* Prevents cards from shrinking */
+//   min-width: 300px; /* Ensures cards maintain a minimum width */
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for depth */
+//   transition: transform 0.3s ease-in-out; /* Smooth transition for active slide */
+// }
 
-/* Button */
-.button {
-  position: absolute;
-  top: 50%; /* Centers vertically */
-  transform: translateY(-50%);
-  z-index: 10; /* Ensures buttons are above the slides */
-  cursor: pointer;
-  color: var(--light-color);
-  font-size: 1.2rem;
-  border: none;
-  background: transparent;
-  outline: none;
-  padding: 0.5rem 1rem; /* Adds some padding around the text */
-  border-radius: 50%; /* Rounds the corners of the button */
-}
+// /* Button */
+// .button {
+//   position: absolute;
+//   top: 50%; /* Centers vertically */
+//   transform: translateY(-50%);
+//   z-index: 10; /* Ensures buttons are above the slides */
+//   cursor: pointer;
+//   color: var(--light-color);
+//   font-size: 1.2rem;
+//   border: none;
+//   background: transparent;
+//   outline: none;
+//   padding: 0.5rem 1rem; /* Adds some padding around the text */
+//   border-radius: 50%; /* Rounds the corners of the button */
+// }
 
-.button:hover {
-  color: rgb(var(--secondary-rgb));
-  background-color: rgba(255, 255, 255, 0.1); /* Slightly visible background on hover */
-}
+// .button:hover {
+//   color: rgb(var(--secondary-rgb));
+//   background-color: rgba(255, 255, 255, 0.1); /* Slightly visible background on hover */
+// }
 
-/* Prev & Next Buttons */
-.prev {
-  left: -2rem; /* Positions slightly outside the container */
-}
+// /* Prev & Next Buttons */
+// .prev {
+//   left: -2rem; /* Positions slightly outside the container */
+// }
 
-.next {
-  right: -2rem; /* Positions slightly outside the container */
-}
+// .next {
+//   right: -2rem; /* Positions slightly outside the container */
+// }
 
-/* Responsive Adjustments */
-@media only screen and (max-width: 600px) {
- .container {
-    padding: 1rem; /* Reduces padding on smaller screens */
-  }
+// /* Responsive Adjustments */
+// @media only screen and (max-width: 600px) {
+//  .container {
+//     padding: 1rem; /* Reduces padding on smaller screens */
+//   }
 
- .button {
-    font-size: 1rem; /* Smaller text size for buttons */
-    padding: 0.25rem 0.5rem; /* Less padding */
-  }
+//  .button {
+//     font-size: 1rem; /* Smaller text size for buttons */
+//     padding: 0.25rem 0.5rem; /* Less padding */
+//   }
 
- .prev,.next {
-    top: calc(50% - 0.75rem); /* Adjusts vertical position */
-  }
-}
+//  .prev,.next {
+//     top: calc(50% - 0.75rem); /* Adjusts vertical position */
+//   }
+// }

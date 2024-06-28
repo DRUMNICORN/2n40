@@ -2,13 +2,14 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios, { CancelToken } from 'axios';
 import { getUrl, loadContents } from '@/utils/web';
-import { MetadataTypes, ContentType, MetadataType } from '@/app/types';
+import { MetadataTypes, ContentType } from '@/app/types';
 import { useQuery } from '@/providers/QueryProvider';
+import { useContentOverlay } from '@/providers/OverlayProvider';
 
 interface UseContentControllerReturn {
   contentFiles: ContentType[];
   isLoading: boolean;
-  loadError: string | null;
+  loadError: string;
   relatedContents: ContentType[];
 }
 
@@ -18,25 +19,25 @@ interface SearchParamsController {
 export const useContent = (): UseContentControllerReturn & SearchParamsController => {
   const [contentFiles, setContentFiles] = useState<ContentType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState('');
   const [relatedContents, setRelatedContents] = useState<ContentType[]>([]);
 
   // const [param, setParamState] = useState<MetadataType>({} as MetadataType);
-  const { param, setParam, toggleParam, setParamState
-  } = useQuery();
+  const { param, setParamState } = useQuery();
   const { connections: paramConnections, name: paramName, category: paramCategory } = param;
 
+  const { setContent } = useContentOverlay();
   const searchParams = useSearchParams();
 
   const updateParamFromQuerys = useCallback(() => {
-    
+
     const hash = window.location.hash || '';
     let name = hash ? decodeURI(hash.replace('#', '')) : searchParams.get('name') || '';
 
     const newParam = {
       name,
       connections: (searchParams.get('connections')?.split(',') || []).filter(Boolean),
-      category: searchParams.get('category') || MetadataTypes.collaborations,
+      category: searchParams.get('category') as MetadataTypes,
     };
 
     setParamState(newParam);
@@ -76,22 +77,24 @@ export const useContent = (): UseContentControllerReturn & SearchParamsControlle
   }, [paramName, paramConnections]);
 
   const url = useMemo(() => getUrl('contents', {
-    name: paramName,
-    connections: (paramConnections as string[] || []).join(','),
-    category: paramCategory,
+    name: paramName || undefined,
+    connections: (paramConnections as string[] || []).join(',') || undefined,
+    category: paramCategory || undefined,
   }), [paramName, paramConnections, paramCategory]);
 
   // const [lastUrl, setLastUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchContentFiles = async (cancelToken: CancelToken) => {
-      setIsLoading(true);
       try {
+
+        if (!url) return;
 
         const result = await loadContents(url, { name: paramName, connections: paramConnections || [] }, paramCategory as string, cancelToken);
         setContentFiles(result.files);
         setRelatedContents(result.connections);
-        setLoadError(result.error || null);
+        setLoadError(result.error || '');
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.error('Error fetching files:', error);

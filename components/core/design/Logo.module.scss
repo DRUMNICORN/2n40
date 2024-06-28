@@ -1,0 +1,47 @@
+.logoContainer {
+    display: inline-block;
+    border-radius: 50%;
+    // width: 42px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ensure it's a circle */
+    overflow: hidden;
+
+
+    &:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+}
+
+.logoContainer.rotating {
+    animation: rotationAnimation 4s linear infinite;
+    /* Use linear animation for smooth rotation */
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes rotationAnimation {
+    0% {
+        transform: scale(0.5) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(0.75) rotate(90deg);
+    }
+
+    50% {
+        transform: scale(0.5) rotate(180deg);
+    }
+
+    75% {
+        transform: scale(0.4) rotate(270deg);
+    }
+
+    100% {
+        transform: scale(0.5) rotate(360deg);
+    }
+}

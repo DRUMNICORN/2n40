@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createContext, ReactNode, useState } from "react";
 
 
@@ -26,8 +26,6 @@ export const QueryProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     };
 
     const toggleParam = (key: string, value: string) => {
-        // replace value in param "name" with ''
-
         setParamState(prevParam => {
             const currentValue = prevParam[key] || [];
             const newValue = Array.isArray(currentValue)
@@ -41,6 +39,7 @@ export const QueryProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             return { ...prevParam, [key]: newValue };
         });
     };
+
 
     const QueryContextValue: QueryContextInterface = {
         param,

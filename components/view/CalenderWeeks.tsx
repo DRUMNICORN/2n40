@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { MdAdd } from 'react-icons/md';
 import styles from './CalenderWeeks.module.scss';
-import Content from '../content/Content';
 import { ContentType, MetadataType } from '@/app/types';
-import Linked from '../design/Linked';
+import Linked from '../util/Linked';
+import ContentContainer from '../core/content/ContentContainer';
 
 interface CalendarProps {
   contents: ContentType[];
@@ -108,7 +108,7 @@ const CalenderWeeks: React.FC<CalendarProps> = (props) => {
           <div className={styles.cardsContainer}>
             {datedFiles[date] &&
               datedFiles[date].map((file, index) => (
-                <Content key={index} content={file} showDetailsOverlay={false} onConnectionClick={function (entry: string | MetadataType): void {
+                <ContentContainer key={index} content={file} showDetailsOverlay={false} onConnectionClick={function (entry: string | MetadataType): void {
                   throw new Error('Function not implemented.');
                 }} />
               ))}

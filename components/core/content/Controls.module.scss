@@ -1,0 +1,48 @@
+.filterSearchContainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  max-width: 100%;
+}
+
+.filterSearchIcon {
+  border-radius: 12px;
+}
+
+.icon {
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+      transform: scale(1.1);
+  }
+}
+
+.filter {
+  display: flex;
+  max-width: 98%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.filterEntities {
+  transition: width 0.42s ease-in-out;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  &.empty {
+      transition: width 0.42s ease-in-out;
+      width: 0%;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+      display: none;
+  }
+}

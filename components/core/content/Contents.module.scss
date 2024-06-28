@@ -1,0 +1,22 @@
+.container {
+    opacity: 1;
+    // animation: fadeIn 0.3s ease-in-out forwards;
+    // height: calc(101vh - var(--header-height) );
+    // // height: 100%;
+    // // position: absolute;
+    // padding-top: var(--header-height);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
