@@ -11,6 +11,11 @@
     transition: transform 0.3s ease;
     transform: translateX(0);
 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     @media (max-width: 260px) {
         font-size: var(--heading-font-size);
     }
@@ -27,4 +32,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

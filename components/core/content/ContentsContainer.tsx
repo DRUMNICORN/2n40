@@ -1,22 +1,23 @@
 "use client";
 
 import React, { useEffect, useMemo } from 'react';
-import { MetadataTypes } from '@/app/types';
-import { useContent } from '@/hooks/useContent';
+import { ContentTypes } from '@/app/types';
+// import { useContents } from '@/hooks/useContent';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';
 import CalendarDays from '../../view/CalendarDays';
 import ContentsComponent from './ContentsComponent';
+import { useContents } from '@/hooks/useContents';
 
 interface ContentsContainerProps {
-    mode: MetadataTypes;
+    contentType: ContentTypes;
 }
 
-const ContentsContainer: React.FC<ContentsContainerProps> = ({ mode }) => {
+const ContentsContainer: React.FC<ContentsContainerProps> = ({ contentType: mode }) => {
     const ViewComponent = CalendarDays;
 
     const { param, setParam } = useQuery();
-    const { contentFiles, isLoading, loadError } = useContent();
+    const { contentFiles, isLoading, loadError } = useContents();
     const { setContent, setVisible, isVisible, content, setClosed, isClosed } = useContentOverlay();
 
     const MemoizedViewComponent = useMemo(() => (
@@ -31,16 +32,15 @@ const ContentsContainer: React.FC<ContentsContainerProps> = ({ mode }) => {
             }
             if (!isVisible) setVisible(true);
         }
-    }, [contentFiles, isVisible]);
+    }, [contentFiles]);
 
     useEffect(() => {
         if (isVisible) setVisible(false);
     }, [param.name]);
 
     useEffect(() => {
-        if (!mode) return;
-        setParam('category', mode as MetadataTypes);
-    }, [mode]);
+        setParam('category', mode as ContentTypes || ContentTypes.collaborations);
+    }, [isLoading]);
 
     return (
         <ContentsComponent

@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import styles from './Linked.module.scss';
 import { REACT_ICONS } from '@/app/Icons';
-import { MetadataTypes } from '@/app/types';
 import NextLink from 'next/link';
+import { ContentTypes, ContentType, DetailsType } from '@/app/types';
+import { useContentOverlay } from '@/providers/OverlayProvider';
+import useContent from '@/hooks/useContent';
 
-export type { MetadataTypes };
+export type { ContentTypes };
 
 interface LinkedProps {
   href?: string;
@@ -14,10 +16,11 @@ interface LinkedProps {
   children?: React.ReactNode;
   spinOnClick?: boolean;
   disableClick?: boolean;
-  type?: MetadataTypes;
+  type?: ContentTypes;
   onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   inline?: boolean;
   noWrap?: boolean;
+  id?: number; // New prop to fetch content based on id
 }
 
 const Linked: React.FC<LinkedProps> = ({
@@ -30,8 +33,11 @@ const Linked: React.FC<LinkedProps> = ({
   onClick,
   inline = false,
   noWrap = false,
+  id, // Added id prop
 }) => {
   const [iconAnimated, setIconAnimated] = useState(false);
+  const { setContent: setOverlayContent, setVisible: setOverlayVisible } = useContentOverlay(); // Accessing setContent from OverlayProvider
+  const { contentFile } = useContent(id, type as ContentTypes); 
 
   const handleRedirect = (value: string, key: string): void => {
     const actions: Record<string, () => void> = {
@@ -49,6 +55,21 @@ const Linked: React.FC<LinkedProps> = ({
       e.preventDefault();
       return;
     }
+
+    if (id) 
+          {
+            e.preventDefault();
+            e.stopPropagation();
+            // Simulate loading content from id (replace with actual logic)
+            const fetchedContent: ContentType = contentFile as ContentType;
+
+            console.log(fetchedContent);
+      
+            setOverlayContent(fetchedContent);
+            setOverlayVisible(true);
+            return;
+          }
+
 
     onClick?.(e);
 

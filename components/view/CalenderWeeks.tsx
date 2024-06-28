@@ -11,7 +11,6 @@ interface CalendarProps {
 
 const CalenderWeeks: React.FC<CalendarProps> = (props) => {
   const { contents: files } = props;
-  //  const { setContent, toggleVisibility, visible, setEditing } = useEntityOverlay();
   const [datedFiles, setDatedFiles] = useState<{ [date: string]: any[] }>({});
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
 
@@ -73,12 +72,6 @@ const CalenderWeeks: React.FC<CalendarProps> = (props) => {
   };
 
   const handleDateClick = (date: string) => {
-    // setDate(date);
-    // setName("New Event");
-    // setContent({ date, name: 'New Event' } as ContentType);
-    // setContent((prev) => ({ ...prev, date, name: 'New Event' } as ContentType)); TODO: Fix this
-    // setEditing(true);
-    // toggleVisibility();
   };
 
 

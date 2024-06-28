@@ -9,7 +9,7 @@ const Soon: React.FC = () => {
     <div className={styles.workContainer}>
       <h1>This page is currently under construction</h1>
       <p>Thank you for your patience, it will be updated soon! </p>
-      <Logo />
+      <span><Logo rotating size={100} /></span>
       {SITE_METADATA.title as string}
     </div>
   );

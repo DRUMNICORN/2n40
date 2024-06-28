@@ -10,7 +10,7 @@ export const FILTER_REGEX: { [key: string]: RegExp } = {
 };
 
 // Enum for metadata types
-export enum MetadataTypes {
+export enum ContentTypes {
   default = "default",
   website = "website",
   mail = "mail",
@@ -125,7 +125,7 @@ export interface DetailsType {
 
 export interface ContentType {
   id: number;
-  category: MetadataTypes;
+  category: ContentTypes;
   metadata: MetadataType;
   context: string;
   connections: ContentConnectionType[];

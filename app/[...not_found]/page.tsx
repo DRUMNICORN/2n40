@@ -1,8 +1,8 @@
-import Impressum from '@/components/core/pages/Impressum';
 import React from 'react';
+import Soon from '../../components/core/design/Soon';
 
 const Page: React.FC = () => {
-  return <Impressum />;
+  return <Soon />;
 };
 
 export default Page;

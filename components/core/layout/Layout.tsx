@@ -16,11 +16,11 @@ interface Props {
 const Layout = React.memo((props: Props) => {
   const { children } = props;
 
-  const memoizedChildren = React.useMemo(() => {
-    return React.Children.map(children, (child, index) =>
-      React.cloneElement(child as React.ReactElement<any>, { key: index })
-    );
-  }, [children]);
+  // const memoizedChildren = React.useMemo(() => {
+  //   return React.Children.map(children, (child, index) =>
+  //     React.cloneElement(child as React.ReactElement<any>, { key: index })
+  //   );
+  // }, [children]);
 
   return (
     <div className={styles.content}>
@@ -30,7 +30,7 @@ const Layout = React.memo((props: Props) => {
           <ContentOverlay />
             <Header />
             <main className={styles.main}>
-              {memoizedChildren}
+              {children}
             </main>
           </QueryProvider>
         </OverlayProvider>

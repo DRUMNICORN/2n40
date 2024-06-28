@@ -1,19 +1,19 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import Linked from "../../util/Linked";
-import { MetadataTypes } from "@/app/types";
+import { ContentTypes } from "@/app/types";
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.left}>
-        <Linked type={MetadataTypes.instagram} href="https://www.instagram.com/singularity.2n40/" />
-        <Linked type={MetadataTypes.github} href="https://github.com/DRUMNICORN/2n40" />
+        <Linked type={ContentTypes.instagram} href="https://www.instagram.com/singularity.2n40/" />
+        <Linked type={ContentTypes.github} href="https://github.com/DRUMNICORN/2n40" />
       </div>
       <div className={styles.center}>
       </div>
       <div className={styles.right}>
-        <Linked label={'Impressum'} href='/impressum' type={MetadataTypes.info} />
+        <Linked label={'Impressum'} href='/impressum' type={ContentTypes.info} />
       </div>
     </footer>
   );

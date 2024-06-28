@@ -1,123 +1,84 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import axios, { CancelToken } from 'axios';
-import { getUrl, loadContents } from '@/utils/web';
-import { MetadataTypes, ContentType } from '@/app/types';
-import { useQuery } from '@/providers/QueryProvider';
-import { useContentOverlay } from '@/providers/OverlayProvider';
+import { fetchFileById, getUrl } from '@/utils/web';
+import { ContentType } from '@/app/types';
 
 interface UseContentControllerReturn {
-  contentFiles: ContentType[];
-  isLoading: boolean;
-  loadError: string;
-  relatedContents: ContentType[];
+    contentFile: ContentType | null;
+    isLoading: boolean;
+    loadError: string;
+    relatedContents: ContentType[];
 }
 
-interface SearchParamsController {
-}
+const useContent = (id: number | undefined, category: string, name?: string): UseContentControllerReturn => {
+    const [contentFile, setContentFile] = useState<ContentType | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadError, setLoadError] = useState('');
+    const [relatedContents, setRelatedContents] = useState<ContentType[]>([]);
 
-export const useContent = (): UseContentControllerReturn & SearchParamsController => {
-  const [contentFiles, setContentFiles] = useState<ContentType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState('');
-  const [relatedContents, setRelatedContents] = useState<ContentType[]>([]);
+    useEffect(() => {
+        const fetchContent = async (cancelToken: CancelToken) => {
+            setIsLoading(true);
+            try {
+                // Check if id is defined
+                if (!id) {
+                    setIsLoading(false);
+                    return;
+                }
 
-  // const [param, setParamState] = useState<MetadataType>({} as MetadataType);
-  const { param, setParamState } = useQuery();
-  const { connections: paramConnections, name: paramName, category: paramCategory } = param;
+                // Construct URL based on parameters
+                const url = getUrl('contents', {
+                    id,
+                    name: name || undefined,
+                    category,
+                });
 
-  const { setContent } = useContentOverlay();
-  const searchParams = useSearchParams();
+                if (!url) {
+                    setIsLoading(false);
+                    return;
+                }
 
-  const updateParamFromQuerys = useCallback(() => {
+                // Fetch content
+                const result = await fetchFileById(id, category, cancelToken);
+                
+                if (!result) {
+                    setIsLoading(false);
+                    return;
+                }   
+                
 
-    const hash = window.location.hash || '';
-    let name = hash ? decodeURI(hash.replace('#', '')) : searchParams.get('name') || '';
 
-    const newParam = {
-      name,
-      connections: (searchParams.get('connections')?.split(',') || []).filter(Boolean),
-      category: searchParams.get('category') as MetadataTypes,
-    };
+                setContentFile(result);
+                // setRelatedContents(result.connections);
+                setLoadError('');
+            } catch (error) {
+                if (!axios.isCancel(error)) {
+                    console.error('Error fetching file:', error);
+                    setLoadError('Error fetching file');
+                }
+            } finally {
+                setIsLoading(false);
+            }
+        };
 
-    setParamState(newParam);
-  }, []);
+        if (id) {
+            const cancelSource = axios.CancelToken.source();
+            fetchContent(cancelSource.token);
 
-  useEffect(() => {
-    updateParamFromQuerys();
-    // window.addEventListener('popstate', updateParamFromQuerys);
-    // return () => window.removeEventListener('popstate', updateParamFromQuerys);
-  }, []);
-
-  const syncSearchParams = useCallback(() => {
-    const params = new URLSearchParams();
-    const path = window.location.pathname.split('/').filter(p => p)[0];
-    let hash = window.location.hash || '';
-
-    for (const [key, value] of Object.entries(param)) {
-      if (!value) continue;
-      if (key === 'category' && value === path) continue;
-      if (Array.isArray(value) && value.length) {
-        params.set(key, value.join(','));
-      } else if (typeof value === 'string' && value.trim()) {
-        params.set(key, value);
-      }
-    }
-    // updateDecodedHash();
-    const newUrl = `${window.location.pathname}?${params}${hash}`;
-    window.history.replaceState({}, '', newUrl);
-  }, [param]);
-
-  const filter = useCallback((content: ContentType): boolean => {
-    const itemName = (content.metadata?.name as string || '').toLowerCase();
-    const itemConnections = (content.metadata?.connections as string[] || []).map(c => c.toLowerCase());
-    const isNameIncluded = !paramName || itemName.includes((paramName as string).toLowerCase());
-    const isConnectionsIncluded = !(paramConnections as string[] || []).length || (paramConnections as string[] || []).every(conn => itemConnections.includes(conn.toLowerCase()) || itemName.includes(conn.toLowerCase()) || content.context?.includes(conn.toLowerCase()));
-    return isNameIncluded && isConnectionsIncluded;
-  }, [paramName, paramConnections]);
-
-  const url = useMemo(() => getUrl('contents', {
-    name: paramName || undefined,
-    connections: (paramConnections as string[] || []).join(',') || undefined,
-    category: paramCategory || undefined,
-  }), [paramName, paramConnections, paramCategory]);
-
-  // const [lastUrl, setLastUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchContentFiles = async (cancelToken: CancelToken) => {
-      try {
-
-        if (!url) return;
-
-        const result = await loadContents(url, { name: paramName, connections: paramConnections || [] }, paramCategory as string, cancelToken);
-        setContentFiles(result.files);
-        setRelatedContents(result.connections);
-        setLoadError(result.error || '');
-      } catch (error) {
-        if (!axios.isCancel(error)) {
-          console.error('Error fetching files:', error);
-          setLoadError('Error fetching files');
+            return () => {
+                cancelSource.cancel('Operation canceled due to new fetch request.');
+            };
+        } else {
+            setIsLoading(false);
         }
-      } finally {
-        setIsLoading(false);
-      }
+    }, [id, category, name]);
+
+    return {
+        contentFile,
+        isLoading,
+        loadError,
+        relatedContents,
     };
-
-    const cancelSource = axios.CancelToken.source();
-    fetchContentFiles(cancelSource.token);
-    return () => cancelSource.cancel('Operation canceled due to new fetch request.');
-  }, [paramConnections]);
-
-  useEffect(() => {
-    syncSearchParams();
-  }, [param, syncSearchParams]);
-
-  return {
-    contentFiles: contentFiles.filter(filter),
-    isLoading,
-    loadError,
-    relatedContents,
-  };
 };
+
+export default useContent;

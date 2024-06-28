@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MetadataTypes, ContentType, MetadataType } from '@/app/types';
+import { ContentTypes, ContentType, MetadataType } from '@/app/types';
 import { MarkdownParser } from './markdown';
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -77,7 +77,7 @@ export const loadContents = async (url: string, params: Record<string, any> = {}
                 const data = await fetchData(fileUrl, { id, category }, cancelToken);
                 let file: ContentType = MarkdownParser.parse(data);
                 file.id = id;
-                file.category = MetadataTypes[category as keyof typeof MetadataTypes];
+                file.category = ContentTypes[category as keyof typeof ContentTypes];
                 newFiles.push(file);
 
                 // Extract and process connections metadata
@@ -120,5 +120,31 @@ export const loadContents = async (url: string, params: Record<string, any> = {}
                 error: (error as Error).message || 'Unknown error',
             };
         }
+    }
+};
+
+/**
+ * Fetches a single file by its id and category.
+ * @param id The id of the file to fetch.
+ * @param category The category of the content to load.
+ * @param cancelToken Axios cancellation token.
+ * @returns The fetched file data or throws an error.
+ */
+export const fetchFileById = async (id: number, category: string, cancelToken?: any): Promise<ContentType | null> => {
+    try {
+        const fileUrl = getUrl('content', { id, category });
+
+        if (fileUrl === '') {
+            throw new Error('Invalid file URL');
+        }
+
+        const data = await fetchData(fileUrl, { id, category }, cancelToken);
+        let file: ContentType = MarkdownParser.parse(data);
+        file.id = id;
+        file.category = ContentTypes[category as keyof typeof ContentTypes];
+
+        return file;
+    } catch (error) {
+        return null;
     }
 };

@@ -1,7 +1,7 @@
 .impressumPage {
   background-color: var(--background-color);
   width: 100%;
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 6rem);
   padding-top: 3rem;
   padding-bottom: 3rem;
   overflow-y: scroll;
@@ -16,6 +16,8 @@
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  animation: fadeIn 0.5s ease-in-out forwards;
+
 
 
   h1 {
@@ -101,7 +103,7 @@
   background-color: var(--light-gray);
   padding: 20px;
   border-radius: 8px;
-  // margin-bottom: 30px;
+  animation: fadeIn 0.5s ease-in-out forwards;
 
   h2 {
     font-size: 18px;
@@ -141,5 +143,17 @@
     .personalInfo p {
       margin: 3px 0;
     }
+  }
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

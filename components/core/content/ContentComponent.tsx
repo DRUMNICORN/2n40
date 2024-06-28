@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Content.module.scss";
-import { ContentType, MetadataType, MetadataTypes } from "@/app/types";
+import { ContentType, MetadataType, ContentTypes } from "@/app/types";
 import Markdown from "../../util/Markdown";
 import Linked from "../../util/Linked";
 import SoundCloudEmbed from "../../util/SoundCloudEmbed";
@@ -35,7 +35,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
   onClose,
 }) => {
   const { metadata, category, context } = content ?? {};
-  const { name, date, image, trackUrl } = metadata ?? {};
+  const { name, date, image, trackUrl, location } = metadata ?? {};
 
   return (
     <div
@@ -48,8 +48,8 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
           <Linked onClick={onFileClick} type={category} label={name as string} />
           {isOverlay && (
             <div className={styles.buttons}>
-              <Linked onClick={onShareClick} type={MetadataTypes.share} />
-              <Linked onClick={onClose} type={MetadataTypes.close} />
+              <Linked onClick={onShareClick} type={ContentTypes.share} />
+              <Linked onClick={onClose} type={ContentTypes.close} />
             </div>
           )}
         </h2>
@@ -71,8 +71,30 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
           />
         </div>
       )}
+      { location && <LocationComponent location={location as string} />}
     </div>
   );
 };
 
 export default ContentComponent;
+
+
+// Location Component
+
+interface LocationComponentProps {
+  location: string;
+}
+
+
+const LocationComponent = ({ location }: LocationComponentProps) => {
+  // location is [[collectives/2|RESET]]
+  // we want to get category / id and name
+
+  const [category, id, name] = location.replaceAll('|', '/').replaceAll(/\[\[/gm, '').replaceAll(/\]\]/gm, '').split("/");
+
+  return (
+    <div className={styles.locationContainer}>
+      <Linked type={category as any} label={name} id={Number(id)} />
+    </div>
+  );
+};
