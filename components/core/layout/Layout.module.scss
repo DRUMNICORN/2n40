@@ -7,10 +7,12 @@
 
 .main {
     padding-top: 3rem;
-    // width: 100vw;
+    // margin-top: 3rem;
+    width: 100vw;
     height: calc(100vh - 3rem);
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
+    // transform: translateY(-3rem);
 }
 
 // // Animations

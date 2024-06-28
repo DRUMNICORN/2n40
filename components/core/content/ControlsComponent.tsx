@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Controls.module.scss';
-import { MetadataType, MetadataTypes } from '@/app/types';
+import { MetadataType, ContentTypes } from '@/app/types';
 import Linked from '../../util/Linked';
 import List from '../../view/ListComponent';
 import InputField from '@/components/util/InputField';
@@ -35,7 +35,7 @@ const ControlsComponent: React.FC<ControlsComponentProps> = ({
                     onKeyPress={handleKeyPress}
                 />
                 <div className={styles.filterSearchIcon}>
-                    <Linked onClick={handleSwap} type={MetadataTypes.search} />
+                    <Linked onClick={handleSwap} type={ContentTypes.search} />
                 </div>
                 <div className={filterEntitiesClasses}>
                     <ListComponent

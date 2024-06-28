@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
 import Linked from './Linked';
-import { MetadataTypes } from '@/app/types';
+import { ContentTypes } from '@/app/types';
 import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/utils/regex';
 
 interface EntityContentProps {
@@ -58,7 +58,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`url-group-${i}`} className={styles.links}>
           {line.split(urlRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Linked key={`url-link-${k}`}  type={MetadataTypes.website} href={part} label={part} />
+            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Linked key={`url-link-${k}`}  type={ContentTypes.website} href={part} label={part} />
           ))}
         </div>
       );

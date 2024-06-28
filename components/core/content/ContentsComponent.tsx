@@ -24,7 +24,7 @@ const ContentsComponent: React.FC<ContentsComponentProps> = ({
     return (
         (loadError && contentFiles.length === 0 && !isLoading)
             ? <div className={styles.container}>
-                <Logo rotating size={420} />
+                {/* <Logo rotating size={420} /> */}
             </div>
             : <div className={styles.container}>
                 {MemoizedViewComponent}

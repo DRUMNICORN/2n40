@@ -1,19 +1,17 @@
 .workContainer {
   display: flex;
-  gap: 1rem;
   justify-content: center;
   align-items: center;
-  height: 100%;
   padding: 0 1rem;
-  padding-top: 42vh; // Original top padding
+  // padding-top: 42vh; // Original top padding
   position: relative; // Ensure the container is positioned relative
   background-color: rgba(var(--secondary-rgb), 0.3); // Using CSS variable for secondary color
-  
+  height: 100%;
   animation: dropDown 1s ease-out forwards; /* Apply the animation */
   
   h1 {
     font-size: 2rem; // Slightly larger for emphasis
-    margin-bottom: 1rem; // Adds space below the heading
+    // margin-bottom: 1rem; // Adds space below the heading
   }
   
   p {
@@ -22,7 +20,6 @@
     line-height: 1.5; // Enhanced line height for readability
     text-align: center; // Center-aligned text
     margin-top: 0.5rem; // Adds space above each paragraph
-    margin-bottom: 0.5rem; // Adds space below each paragraph
   }
 }
 
@@ -38,7 +35,6 @@
 
 @keyframes dropDown {
   from {
-    transform: translateY(-100%);
     opacity: 0; /* Optional: Start with reduced opacity */
   }
   to {

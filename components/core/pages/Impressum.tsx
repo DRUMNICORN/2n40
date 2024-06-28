@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Impressum.module.scss';
-import { MetadataTypes } from '@/app/types';
+import { ContentTypes } from '@/app/types';
 import Linked from '@/components/util/Linked';
 
 const Impressum: React.FC = () => {
@@ -36,10 +36,10 @@ const Impressum: React.FC = () => {
         <div className={styles.personCard}>
           <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV und Angaben gemäß § 5 TMG:</h2>
           <div className={styles.personalInfo}>
-            <Linked type={MetadataTypes.name} label="Robin Seerig" />
-            <Linked type={MetadataTypes.tel} label="+4917632583072" />
-            <Linked type={MetadataTypes.mail} label="robin@seerig.de" />
-            <Linked type={MetadataTypes.address} label="Erich Mühsam Straße 6 09112 Chemnitz" />
+            <Linked type={ContentTypes.name} label="Robin Seerig" />
+            <Linked type={ContentTypes.tel} label="+4917632583072" />
+            <Linked type={ContentTypes.mail} label="robin@seerig.de" />
+            <Linked type={ContentTypes.address} label="Erich Mühsam Straße 6 09112 Chemnitz" />
           </div>
         </div>
 

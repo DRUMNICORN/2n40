@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './Logo.module.scss';
+import Link from 'next/link';
 
 interface LogoProps {
   rotating?: boolean;
@@ -10,9 +11,9 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ rotating = false, size = 42 }) => {
   const logoClassName = `${styles.logoContainer} ${rotating ? styles.rotating : ''}`;
   return (
-    <a className={logoClassName} style={{ width: `${size}px`, height: `${size}px` }} href="/" >
+    <Link className={logoClassName} style={{ width: `${size}px`, height: `${size}px` }} href="/" >
       <Image src="/singularity.png" alt="Logo" width={size} height={size} priority />
-    </a>
+    </Link>
   );
 };
 

@@ -1,4 +1,4 @@
-import { MetadataTypes, ContentType } from "@/app/types";
+import { ContentTypes, ContentType } from "@/app/types";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -13,7 +13,7 @@ export const createResponse = (body: any, status: number): Response => {
 
 export const parseContentFromNextRequest = (req: NextRequest): ContentType => {
     const categoryString = req.nextUrl.searchParams.get("category") || "";
-    const category: MetadataTypes = categoryString as MetadataTypes;
+    const category: ContentTypes = categoryString as ContentTypes;
 
     const name = req.nextUrl.searchParams.get("name") || "";
 
@@ -40,7 +40,7 @@ export const parseContentFromNextRequest = (req: NextRequest): ContentType => {
 
 export const parseContentFromURLSearchParams = (searchParams: ReadonlyURLSearchParams): ContentType => {
     const categoryString = searchParams.get("category") || "";
-    const category: MetadataTypes = categoryString as MetadataTypes;
+    const category: ContentTypes = categoryString as ContentTypes;
 
     const name = searchParams.get("name") || "";
 

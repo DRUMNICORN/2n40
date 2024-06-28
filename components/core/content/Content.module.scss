@@ -77,3 +77,18 @@
     gap: 1rem;
   }
 }
+
+
+.locationContainer {
+  width: 100%;
+  // place left
+
+  justify-content: right;
+  display: flex;
+  align-items: right;
+
+  padding: 0 1rem;
+  margin-top: 1rem;
+  
+
+}
