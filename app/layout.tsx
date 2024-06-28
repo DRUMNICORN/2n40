@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import { SITE_METADATA } from "./types";
 import { Metadata as NextMetadata } from 'next';
 import Layout from "@/components/core/layout/Layout";
+import CollapsePage from "@/components/core/content/Collapse";
 
 const Inter = localFont({ src: './Inter.ttf' });
 
@@ -18,7 +19,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
     <html suppressHydrationWarning>
       <body className={Inter.className}>
         <Layout>
-          {children}
+          <CollapsePage />
         </Layout>
       </body>
     </html>
