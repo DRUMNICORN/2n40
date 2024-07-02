@@ -2,9 +2,9 @@
   background-color: var(--background-color);
   width: 100%;
   height: calc(100vh - 6rem);
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  overflow-y: scroll;
+  // padding-top: 3rem;
+  // padding-bottom: 3rem;
+  overflow-y: auto;
   justify-content: center;
   align-items: center;
 }
@@ -67,7 +67,7 @@
   }
 
   @media (max-width: 600px) {
-    padding: 20px;
+    // padding: 20px;
 
     .sectionsContainer {
       height: 40vh;

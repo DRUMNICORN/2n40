@@ -1,10 +1,8 @@
-// RefactoredMarkdown.tsx
-
 import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
 import Linked from './Linked';
-import { ContentTypes } from '@/app/types';
-import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/utils/regex';
+import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/exports/regex';
+import { ContentTypes } from '@/exports/enums';
 
 interface EntityContentProps {
   content: string;

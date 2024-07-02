@@ -3,42 +3,74 @@
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
-  // padding-top: 42vh; // Original top padding
-  position: relative; // Ensure the container is positioned relative
-  background-color: rgba(var(--secondary-rgb), 0.3); // Using CSS variable for secondary color
-  height: 100%;
-  animation: dropDown 1s ease-out forwards; /* Apply the animation */
-  
+  position: relative;
+  background-color: rgba(var(--secondary-rgb), 0.42);
+  height: calc(100vh - 6rem);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+
+  animation: dropDown 1s ease-in-out;
+
+
   h1 {
-    font-size: 2rem; // Slightly larger for emphasis
-    // margin-bottom: 1rem; // Adds space below the heading
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-rgb);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
   }
-  
+
   p {
-    font-size: 1.2rem; // Slightly smaller for balance
-    font-weight: 300;
-    line-height: 1.5; // Enhanced line height for readability
-    text-align: center; // Center-aligned text
-    margin-top: 0.5rem; // Adds space above each paragraph
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.7;
+    text-align: center;
+    margin-top: 0.75rem;
+    color: #fff;
+  }
+
+  span {
+    display: inline-block;
+    margin-top: 2rem;
   }
 }
 
 @media (max-width: 768px) {
-.workContainer {
-    flex-direction: column; // Stack items vertically on smaller screens
-    padding-top: 30vh; // Adjusted top padding for smaller screens
-    padding-bottom: 30vh; // Adjusted bottom padding for smaller screens
-    padding-left: 1rem; // Consistent left padding
-    padding-right: 1rem; // Consistent right padding
+  .workContainer {
+    flex-direction: column;
+    padding-top: 35vh;
+    padding-bottom: 35vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgba(var(--secondary-rgb), 0.9);
   }
 }
 
 @keyframes dropDown {
   from {
-    opacity: 0; /* Optional: Start with reduced opacity */
+    opacity: 0;
+    transform: translateY(-20px);
   }
+
   to {
     transform: translateY(0);
-    opacity: 1; /* Optional: End with full opacity */
+    opacity: 1;
+  }
+}
+
+.Logo {
+  width: 150px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

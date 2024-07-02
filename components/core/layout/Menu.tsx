@@ -1,10 +1,10 @@
 import React, { useMemo, useRef, useEffect, useCallback } from "react";
 import styles from "./Menu.module.scss";
 import { usePathname } from 'next/navigation';
-import { CATEGORY_DESCRIPTIONS } from "@/app/types";
 import { useContentOverlay } from "@/providers/OverlayProvider";
-import { REACT_ICONS } from "@/app/Icons";
 import Linked from "@/components/util/Linked";
+import { CATEGORY_DESCRIPTIONS } from "@/exports/metadata";
+import { REACT_ICONS } from "@/exports/icons";
 
 interface MenuProps {
   open: boolean;

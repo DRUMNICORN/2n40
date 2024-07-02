@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
-import { ContentType, MetadataType } from "@/app/types";
 import { useContentOverlay } from "@/providers/OverlayProvider";
 import ContentComponent from "./ContentComponent";
+import { ContentType, MetadataType } from "@/exports/interfaces";
 
 interface ContentContainerProps {
   content: ContentType;

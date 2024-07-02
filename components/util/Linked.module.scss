@@ -10,11 +10,8 @@
   display: inline-flex;
   align-items: center;
   // white-space: normal;
-  white-space: nowrap;;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  justify-content: left;
-  text-align: left;
 
   &:focus {
     outline: none;
@@ -69,6 +66,20 @@
     padding-right: 0.5rem;
     display: block;
     align-items: flex-start;
+
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        height: 1px;
+    }
+
+    // not selectable
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 
   &:hover {

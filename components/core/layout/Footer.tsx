@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import Linked from "../../util/Linked";
-import { ContentTypes } from "@/app/types";
+import { ContentTypes } from "@/exports/enums";
 
 const Footer = () => {
   return (

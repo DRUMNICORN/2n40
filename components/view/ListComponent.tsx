@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './List.module.scss'; // Import SCSS module for styling
-import Linked, { ContentTypes } from '../util/Linked';
+import { ContentTypes } from '@/exports/enums';
+import Linked from '../util/Linked';
 
 interface ListComponentProps {
   items: string[]; // Replace with your actual data type

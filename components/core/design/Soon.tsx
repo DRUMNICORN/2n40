@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './Soon.module.scss';
-import { SITE_METADATA } from '@/app/types';
 import Logo from './Logo';
-// import { SITE_METADATA } from '@/app/types';
+import { SITE_METADATA } from '@/exports/metadata';
 
 const Soon: React.FC = () => {
   return (

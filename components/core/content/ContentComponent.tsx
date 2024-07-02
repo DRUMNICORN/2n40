@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./Content.module.scss";
-import { ContentType, MetadataType, ContentTypes } from "@/app/types";
+// import { ContentType, MetadataType, ContentTypes } from "@/app/types";
 import Markdown from "../../util/Markdown";
 import Linked from "../../util/Linked";
 import SoundCloudEmbed from "../../util/SoundCloudEmbed";
 import List from "../../view/ListComponent";
 import DateContainer from "../design/DateContainer";
 import ListComponent from "../../view/ListComponent";
+import { ContentType, MetadataType } from "@/exports/interfaces";
+import { ContentTypes } from "@/exports/enums";
 // import DateContainer from "../../util/DateContainer";
 
 interface ContentComponentProps {
