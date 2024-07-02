@@ -6,24 +6,24 @@ import { ContentType, MetadataType } from "@/exports/interfaces";
 interface ContentContainerProps {
   content: ContentType;
   onConnectionClick: (entry: string | MetadataType) => void;
-  showDetailsOverlay?: boolean;
+  isScrollable?: boolean;
   isOverlay?: boolean;
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = ({
   content,
   onConnectionClick,
-  showDetailsOverlay = false,
+  isScrollable: isScrollable = false,
   isOverlay = false,
 }) => {
   const { setContent, toggleVisibility, setVisible, setClosed } = useContentOverlay();
-  const [isScrolling, setScrolling] = useState(showDetailsOverlay);
+  const [isScrolling, setScrolling] = useState(true && isOverlay);
 
   const handleClick = useCallback(() => {
-    if (showDetailsOverlay && isOverlay) return;
+    if (isScrollable && isOverlay) return;
     toggleVisibility();
     setContent(content);
-  }, [toggleVisibility, content, showDetailsOverlay, isOverlay]);
+  }, [toggleVisibility, content, isScrollable, isOverlay]);
 
   const handleDetailsButtonClick = useCallback(
     (e: React.MouseEvent) => {
@@ -38,23 +38,23 @@ const ContentContainer: React.FC<ContentContainerProps> = ({
   const handleContextMenu = useCallback(
     (e?: React.MouseEvent) => {
       e?.preventDefault();
-      if (showDetailsOverlay) setScrolling(showDetailsOverlay);
+      if (isScrollable) setScrolling(isScrollable);
       if (isOverlay) {
         setVisible(false);
       }
     },
-    [isScrolling, toggleVisibility, showDetailsOverlay, isOverlay]
+    [isScrolling, toggleVisibility, isScrollable, isOverlay]
   );
 
   const handleFileClick = useCallback(
     (e: React.MouseEvent) => {
-      if (showDetailsOverlay) return;
+      if (isScrollable) return;
       e.stopPropagation();
       toggleVisibility();
       setContent(content);
       setScrolling(false);
     },
-    [toggleVisibility, content, showDetailsOverlay]
+    [toggleVisibility, content, isScrollable]
   );
 
   const handleShareClick = useCallback(() => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios, { CancelToken } from 'axios';
 import { fetchFileById, getUrl } from '@/utils/web';
-import { ContentType } from '@/app/types';
+import { ContentType } from '@/exports/interfaces';
 
 interface UseContentControllerReturn {
     contentFile: ContentType | null;

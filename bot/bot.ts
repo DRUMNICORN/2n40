@@ -1,9 +1,10 @@
 import { TelegramService } from "./service";
 import { MessageController } from "./messages";
 import { CallbackQueryController } from "./callback";
-import { ContentType, DetailsType, Message } from '../exports/types';
+// import { ContentType, DetailsType, Message } from '../exports/types';
 import { getContent } from "../utils/string";
 import TelegramBot from "node-telegram-bot-api";
+import { ContentType, DetailsType, Message } from "../exports/interfaces";
 
 const telegramService = new TelegramService();
 const messageController = new MessageController(telegramService);

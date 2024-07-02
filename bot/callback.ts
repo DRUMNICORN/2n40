@@ -1,9 +1,10 @@
-import { Message, CommandType, MessageType, ContentType, MetadataType } from "../exports/types";
 import { getContent, getMetadataString } from "../utils/string";
 import { TelegramService } from "./service";
 import { MarkdownParser } from "../utils/markdown";
 import fs from "fs";
 import { confirmedRegex } from "../exports/regex";
+import { CommandType, MessageType } from "../exports/enums";
+import { ContentType, Message } from "../exports/interfaces";
 
 export class CallbackQueryController {
   constructor(private telegramService: TelegramService) {}
@@ -156,14 +157,23 @@ export class CallbackQueryController {
 
     let confirmedCount = 0;
     let match = confirmedRegex.exec(msg.text);
-    if (match) {
-      confirmedCount = parseInt(match[1]);
+    let text = match?.[0];
+    
+    if (text?.includes('0')){
+      confirmedCount = 0;
+    }else if (text?.includes('1')){
+      confirmedCount = 1;
+    }else if (text?.includes('2')){
+      confirmedCount = 2;
     }
+
     confirmedCount += 1;
+
     moderatedContent.metadata.confirmed = `${confirmedCount} / ${member_count_mod_channel}`;
 
     moderatedContent.id = msg.message_id;
     if (confirmedCount >= member_count_mod_channel) {
+      console.log("confirmed");
       return this.handleSave(moderatedContent);
     }
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './CalendarDays.module.scss';
 import ContentColumns from './ContentColumns';
-import { ContentType } from '@/app/types';
 import { formatDate } from '@/utils/date';
 import DateContainer from '../core/design/DateContainer';
+import { ContentType } from '@/exports/interfaces';
 
 interface CalendarProps {
   contents: ContentType[];

@@ -1,4 +1,4 @@
-import { NodeConnectionType } from "@/app/types";
+import { NodeConnectionType } from "@/exports/interfaces";
 import { getUrl } from "@/utils/web";
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ContentType } from "@/app/types";
-// import Graph from "../util/Graph";
-// import Loading from "../design/Loading";
 import { useConnections } from '@/hooks/useConnections';
+import { ContentType } from "@/exports/interfaces";
 
 interface ConnectionsProps {
   contents?: ContentType[];

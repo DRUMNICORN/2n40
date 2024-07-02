@@ -2,10 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios, { CancelToken } from 'axios';
 import { getUrl, loadContents } from '@/utils/web';
-import { ContentTypes, ContentType } from '@/app/types';
 import { useQuery } from '@/providers/QueryProvider';
-import { useContentOverlay } from '@/providers/OverlayProvider';
-
+import { ContentType } from '@/exports/interfaces';
+import { ContentTypes } from '@/exports/enums';
 interface UseContentControllerReturn {
   contentFiles: ContentType[];
   isLoading: boolean;

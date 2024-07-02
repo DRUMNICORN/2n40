@@ -41,7 +41,7 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
 
   return (
     <div
-      className={`${styles.card} ${isOverlay ? styles.detailsOverlay : ""}`}
+      className={`${styles.card} ${isOverlay ? styles.isOverlay : ""}`}
       onClick={onCardClick}
       onContextMenu={onContextMenu}
     >
