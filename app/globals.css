@@ -17,7 +17,9 @@
   --quaternary-rgb: 168, 64, 168;
   --quaternary: #a840a8;
   --quinary-rgb: 168, 168, 64;
-  --quinary: #a8a840;
+  --quinary: #a8a800;
+  --senary-rgb: 200, 168, 64;
+  --senary: #c8a800;
 }
 
 @font-face {

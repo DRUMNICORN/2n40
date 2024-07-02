@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Impressum.module.scss';
-import { ContentTypes } from '@/app/types';
 import Linked from '@/components/util/Linked';
+import { ContentTypes } from '@/exports/enums';
 
 const Impressum: React.FC = () => {
   return (

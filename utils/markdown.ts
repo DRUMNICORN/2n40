@@ -1,4 +1,5 @@
-import { ContentTypes, ContentType, MetadataType } from '@/app/types';
+import { ContentType, MetadataType } from "@/exports/interfaces";
+
 export class MarkdownParser {
 
     static parse(contentString: string): ContentType {

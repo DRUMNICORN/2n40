@@ -1,4 +1,4 @@
-import { dateSplitRegex } from "./regex";
+import { dateSplitRegex } from "../exports/regex";
 
 export const formatDate = (dateString: string): string => {
     if (!dateString) {

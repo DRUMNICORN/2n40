@@ -1,7 +1,6 @@
+import { ContentType } from '@/exports/interfaces';
 import fs from 'fs';
 import path from 'path';
-
-import { ContentType } from "@/app/types";
 
 const DATA_DIR = path.resolve('./data/');
 

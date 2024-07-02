@@ -1,0 +1,47 @@
+// i18n.ts
+import { Language, MessageType } from './enums';
+
+export const i18n: Record<Language, Record<MessageType, string>> = {
+  [Language.EN]: {
+    [MessageType.UNKNOWN]: "🤔 Unknown",
+    [MessageType.WELCOME]: "👋 Welcome to the Event Manager Bot! 🎉\nThis bot is your trusty sidekick for managing events. You can create, edit, and delete events with ease. To create an event, just send a message with the event details. To edit an event, reply to the event message with the updated info. To delete an event, simply delete the event message. Easy peasy!",
+    [MessageType.INVALID_COMMAND]: "🚫 Oops! Invalid command 😅",
+    [MessageType.NO_CHANGES_DETECTED]: "🕵️ No changes detected",
+    [MessageType.NO_CONTENT_DETECTED]: "✍️ Please provide some content",
+    [MessageType.FAILED_TO_DELETE_MESSAGE]: "❌ Failed to delete message: {error}",
+    [MessageType.FAILED_TO_SEND_MESSAGE]: "❌ Failed to send message: {error}",
+    [MessageType.EVENT_MANAGER_BOT]: "Event Manager Bot",
+    [MessageType.EXAMPLE_MESSAGE]: "🕛 12 PM, 📅 12/12/2021, 🎟️ Free Entry, Name: Event Name",
+    [MessageType.EXAMPLE_RESPONSE]: "```json\n{example_response}\n```",
+    [MessageType.CHANGE_MESSAGE]: "🔄 To change a message, reply to the message you want to change with the new content",
+    [MessageType.MODERATION_POLL]: "🗳️ Moderation Poll",
+    [MessageType.MODERATION_APPROVE]: "✅ Moderation Approved",
+    [MessageType.MODERATION_REQUEST]: "🚀 Your changes have been submitted for moderation. Please wait for approval.",
+    [MessageType.MODERATION_REJECT]: "❌ Moderation Rejected",
+    [MessageType.MODERATION_DELETE_REQUEST]: "🗑️ Delete Request",
+    [MessageType.NOT_CREATED_YET]: "🚧 This hasn't been created or released yet",
+    [MessageType.MODERATION_CANCEL]: "🚫 Moderation Cancelled",
+    [MessageType.MODERATION_CANCEL_REQUEST]: "❌ *Moderation Cancel Request*",
+  },
+  [Language.DE]: {
+    [MessageType.UNKNOWN]: "🤷 Unbekannt",
+    [MessageType.WELCOME]: "👋 **Willkommen beim Event Manager Bot!** 🎉\nDieser Bot ist dein treuer Helfer für die Verwaltung von Veranstaltungen. Du kannst Veranstaltungen erstellen, bearbeiten und löschen. Um eine Veranstaltung zu erstellen, sende einfach eine Nachricht mit den Veranstaltungsdetails. Um eine Veranstaltung zu bearbeiten, antworte auf die Veranstaltungsnachricht mit den aktualisierten Infos. Zum Löschen einer Veranstaltung, lösche einfach die Veranstaltungsnachricht. Kinderleicht!",
+    [MessageType.INVALID_COMMAND]: "🚫 Ups! Ungültiger Befehl 😅",
+    [MessageType.NO_CHANGES_DETECTED]: "🕵️ Keine Änderungen festgestellt",
+    [MessageType.NO_CONTENT_DETECTED]: "✍️ Bitte Inhalt angeben",
+    [MessageType.FAILED_TO_DELETE_MESSAGE]: "❌ Fehler beim Löschen der Nachricht: {error}",
+    [MessageType.FAILED_TO_SEND_MESSAGE]: "❌ Fehler beim Senden der Nachricht: {error}",
+    [MessageType.EVENT_MANAGER_BOT]: "Event Manager Bot",
+    [MessageType.EXAMPLE_MESSAGE]: "🕛 12 Uhr, 📅 12.12.2021, 🎟️ Eintritt frei, Name: Event Name",
+    [MessageType.EXAMPLE_RESPONSE]: "```json\n{example_response}\n```",
+    [MessageType.CHANGE_MESSAGE]: "🔄 Um eine Nachricht zu ändern, antworte mit dem neuen Inhalt auf die Nachricht, die du ändern möchtest",
+    [MessageType.MODERATION_POLL]: "🗳️ Moderation Abstimmung",
+    [MessageType.MODERATION_APPROVE]: "✅ Moderation Genehmigt",
+    [MessageType.MODERATION_REQUEST]: "🚀 Deine Änderungen wurden zur Moderation eingereicht. Bitte warte auf die Genehmigung.",
+    [MessageType.MODERATION_REJECT]: "❌ Moderation Abgelehnt",
+    [MessageType.MODERATION_DELETE_REQUEST]: "🗑️ Löschanfrage",
+    [MessageType.NOT_CREATED_YET]: "🚧 Dies wurde noch nicht erstellt oder veröffentlicht",
+    [MessageType.MODERATION_CANCEL]: "🚫 Moderation Abgebrochen",
+    [MessageType.MODERATION_CANCEL_REQUEST]: "❌ *Moderation Abbruch Anfrage*",
+  }
+};

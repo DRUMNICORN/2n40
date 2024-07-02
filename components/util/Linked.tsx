@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import styles from './Linked.module.scss';
-import { REACT_ICONS } from '@/app/Icons';
 import NextLink from 'next/link';
-import { ContentTypes, ContentType, DetailsType } from '@/app/types';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import useContent from '@/hooks/useContent';
+import { ContentTypes } from '@/exports/enums';
+import { ContentType } from '@/exports/interfaces';
+import { REACT_ICONS } from '@/exports/icons';
 
-export type { ContentTypes };
 
 interface LinkedProps {
   href?: string;

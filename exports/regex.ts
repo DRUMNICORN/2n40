@@ -24,3 +24,11 @@ export const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g; // Regex to match UR
 export const lineRegex = /\n/gm;
 export const confirmedRegex = /confirmed: (\d+)/g;
 export const dateSplitRegex = /[-.]/gm;
+
+
+export const FILTER_REGEX: { [key: string]: RegExp } = {
+    date: dateRegex,
+    cost: costRegex,
+    time: timeRegex,
+    connection: connectionRegex,
+};

@@ -31,7 +31,7 @@ import {
 import { IoLogIn, IoTimeSharp } from "react-icons/io5";
 import { BiSolidNetworkChart } from "react-icons/bi";
 import { IoMdPricetag } from "react-icons/io";
-import { ContentTypes } from "./types";
+import { ContentTypes } from "./enums";
 
 // Icons mapping for social media and metadata types
 export const REACT_ICONS: { [key in ContentTypes]: JSX.Element } = {

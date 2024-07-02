@@ -1,4 +1,4 @@
-import { Message, MessageType, CommandType, ContentType, DetailsType } from "../app/types";
+import { Message, MessageType, CommandType, ContentType, DetailsType } from "../exports/types";
 import { getContent, getMetadataString } from "../utils/string";
 import { TelegramService } from "./service";
 

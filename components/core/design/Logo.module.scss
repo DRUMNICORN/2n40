@@ -1,15 +1,17 @@
 .logoContainer {
     display: inline-block;
     border-radius: 50%;
-    // width: 42px;
-    height: 100%;
-    width: 100%;
+    width: 42px; /* Assuming you want a specific width */
+    height: 42px; /* Assuming you want a specific height */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Ensure it's a circle */
-    overflow: hidden;
+    overflow: hidden; /* Ensure it's a circle */
+    background-color: var(--dark);
+    cursor: pointer;
 
+    background-color: var(--dark);
+    cursor: pointer	;
 
     &:hover {
         transform: scale(1.1);

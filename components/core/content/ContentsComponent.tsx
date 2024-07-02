@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from "./Contents.module.scss";
-import { ContentType } from '@/app/types';
-import Logo from '../design/Logo';
+import { ContentType } from '@/exports/interfaces';
 
 interface ContentsComponentProps {
     contentFiles: ContentType[];

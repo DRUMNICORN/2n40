@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ContentType, NodeConnectionType } from '@/app/types';
 import { parseContentFromNextRequest, areParamsEmpty } from '@/utils/next';
 import { loadFile, loadFiles } from './file';
 import { createResponse } from './next';
-// import { MarkdownParser } from './markdown'; // Assuming MarkdownParser is not used in this snippet
+import { ContentType } from '@/exports/interfaces';
 
 // Handler for GET request to fetch a single file
 export async function handleFileGet(req: NextRequest, res: NextResponse): Promise<Response> {

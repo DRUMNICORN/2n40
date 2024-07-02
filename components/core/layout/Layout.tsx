@@ -8,6 +8,7 @@ import Background from "../design/Background";
 import ContentOverlay from "@/components/view/ContentOverlay";
 import Header from "./Header";
 import Footer from "./Footer";
+import Network from "../design/Network";
 
 interface Props {
   children: React.ReactNode;
@@ -16,14 +17,9 @@ interface Props {
 const Layout = React.memo((props: Props) => {
   const { children } = props;
 
-  // const memoizedChildren = React.useMemo(() => {
-  //   return React.Children.map(children, (child, index) =>
-  //     React.cloneElement(child as React.ReactElement<any>, { key: index })
-  //   );
-  // }, [children]);
-
   return (
     <div className={styles.content}>
+        <Network />
         <Background />
         <OverlayProvider>
           <QueryProvider>

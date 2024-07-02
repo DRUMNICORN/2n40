@@ -1,4 +1,5 @@
-import { ContentTypes, ContentType } from "@/app/types";
+import { ContentTypes } from "@/exports/enums";
+import { ContentType } from "@/exports/interfaces";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 

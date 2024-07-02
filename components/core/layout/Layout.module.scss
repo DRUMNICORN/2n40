@@ -12,6 +12,7 @@
     height: calc(100vh - 3rem);
     overflow: hidden;
     overflow-y: auto;
+    z-index: 2;
     // transform: translateY(-3rem);
 }
 

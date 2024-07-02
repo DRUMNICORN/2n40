@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './Controls.module.scss';
-import { MetadataType, ContentTypes } from '@/app/types';
 import Linked from '../../util/Linked';
-import List from '../../view/ListComponent';
 import InputField from '@/components/util/InputField';
 import ListComponent from '../../view/ListComponent';
+import { MetadataType } from '@/exports/interfaces';
+import { ContentTypes } from '@/exports/enums';
 
 interface ControlsComponentProps {
     param: MetadataType;

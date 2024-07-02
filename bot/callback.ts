@@ -1,9 +1,9 @@
-import { Message, CommandType, MessageType, ContentType, MetadataType } from "../app/types";
+import { Message, CommandType, MessageType, ContentType, MetadataType } from "../exports/types";
 import { getContent, getMetadataString } from "../utils/string";
 import { TelegramService } from "./service";
 import { MarkdownParser } from "../utils/markdown";
 import fs from "fs";
-import { confirmedRegex } from "../utils/regex";
+import { confirmedRegex } from "../exports/regex";
 
 export class CallbackQueryController {
   constructor(private telegramService: TelegramService) {}

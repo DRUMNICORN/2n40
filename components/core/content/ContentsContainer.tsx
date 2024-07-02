@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useEffect, useMemo } from 'react';
-import { ContentTypes } from '@/app/types';
-// import { useContents } from '@/hooks/useContent';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';
 import CalendarDays from '../../view/CalendarDays';
 import ContentsComponent from './ContentsComponent';
 import { useContents } from '@/hooks/useContents';
+import { ContentTypes } from '@/exports/enums';
 
 interface ContentsContainerProps {
     contentType: ContentTypes;
