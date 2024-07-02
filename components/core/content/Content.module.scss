@@ -44,13 +44,16 @@
   }
 
   .contentContainer {
+    
     color: var(--light-rgb);
+    // overflow: hidden;
     overflow: hidden;
-    mask-image: linear-gradient(to top, transparent, black 42%);
-
+    mask-image: linear-gradient(to top, transparent, black 80%);
+    
+    
     &.scrollable {
-      overflow: auto;
       mask-image: none;
+      overflow: auto;
     }
   }
 

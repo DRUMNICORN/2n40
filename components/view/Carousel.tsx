@@ -5,9 +5,9 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 import styles from './Carousel.module.scss';
-import { ContentType } from '@/app/types';
 import Swiper from 'swiper';
 import ContentContainer from '../core/content/ContentContainer';
+import { ContentType } from '@/exports/interfaces';
 
 // Swiper.use([Navigation, Pagination, Scrollbar]);
 
@@ -61,7 +61,7 @@ const Carousel: React.FC<EntityCardCarouselProps> = ({ contents }) => {
             <ContentContainer
               content={content}
               onConnectionClick={(entry) => {}}
-              showDetailsOverlay={true}
+              isScrollable={true}
             />
           </div>
         ))}

@@ -14,7 +14,7 @@ const ContentOverlay: React.FC<ContentOverlayProps> = () => {
   return (
     <div className={`${styles.popup} ${isVisible ? styles.show : styles.hide}`}>
       <div className={styles.contentContainer}>
-        <ContentContainer content={content} isOverlay showDetailsOverlay onConnectionClick={() => { }} />
+        <ContentContainer content={content} isOverlay isScrollable onConnectionClick={() => { }} />
       </div>
     </div>
   );

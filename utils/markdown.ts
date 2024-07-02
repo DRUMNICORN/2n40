@@ -1,3 +1,4 @@
+import { ContentTypes } from "@/exports/enums";
 import { ContentType, MetadataType } from "@/exports/interfaces";
 
 export class MarkdownParser {

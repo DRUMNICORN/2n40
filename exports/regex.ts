@@ -13,6 +13,8 @@ export const REGEX_MATRIX: Record<string, RegExp[]> = {
     price: [/eintritt.*frei/i, /eintritt.*kostenlos/i, /\bkostenlos\b/i, /\d{1,2}€/i, /\d{1,2} €/i, /free/],
     website: [/\bhttps?:\/\/\S+/],
     name: [/\bname:.*\b/i, /\b.*\b/i],
+    location: [/\[\[.*?\]\]/i]
+
 };
 
 export const linkRegex = /\[\[([^\]]+)\]\]/g;
@@ -22,7 +24,7 @@ export const noteRegex = />(.+)/gm;
 export const boldRegex = /\*\*(.*?)\*\*/g; // Regex to match text between **
 export const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+)/g; // Regex to match URLs
 export const lineRegex = /\n/gm;
-export const confirmedRegex = /confirmed: (\d+)/g;
+export const confirmedRegex = /confirmed: .*/i;
 export const dateSplitRegex = /[-.]/gm;
 
 

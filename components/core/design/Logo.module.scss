@@ -7,10 +7,9 @@
     justify-content: center;
     align-items: center;
     overflow: hidden; /* Ensure it's a circle */
-    background-color: var(--dark);
+    padding: 1rem;
     cursor: pointer;
 
-    background-color: var(--dark);
     cursor: pointer	;
 
     &:hover {

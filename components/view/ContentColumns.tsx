@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ContentColumns.module.scss";
-import { ContentType } from "@/app/types";
 import ContentContainer from "../core/content/ContentContainer";
+import { ContentType } from "@/exports/interfaces";
 
 interface CardsProps {
   contents: ContentType[];
@@ -12,7 +12,7 @@ const ContentColumns: React.FC<CardsProps> = ({ contents }) => {
     <div className={styles.cardGrid}>
       {contents.map((content: ContentType, index: number) => (
         !content ? <div key={index}></div> : (<div key={`card-${content.id || index}`} className={styles.cardWrapper}>
-          <ContentContainer content={content} showDetailsOverlay={true} onConnectionClick={() => {} } />
+          <ContentContainer content={content} isScrollable={true} onConnectionClick={() => {} } />
         </div>)
       )
       )}

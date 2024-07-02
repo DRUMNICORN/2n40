@@ -1,7 +1,10 @@
 import TelegramBot from "node-telegram-bot-api";
-import { CommandType, ContentType, Language, MessageType, Message, i18n } from "../exports/types";
+// import { CommandType, ContentType, Language, MessageType, Message, i18n } from "../exports/types";
 import { MarkdownParser } from "../utils/markdown";
 import dotenv from "dotenv";
+import { CommandType, Language, MessageType } from "../exports/enums";
+import { i18n } from "../exports/i18n";
+import { ContentType, Message } from "../exports/interfaces";
 // telegram message type
 
 export class TelegramService {

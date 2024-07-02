@@ -1,5 +1,5 @@
+import { ContentType } from '@/exports/interfaces';
 import React, { createContext, useCallback, useMemo, useState, useEffect } from 'react';
-import { ContentType } from '@/app/types';
 
 interface EntityContextInterface {
   content: ContentType;
