@@ -27,7 +27,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`link-group-${i}`} className={styles.links}>
           {line.split(linkRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Linked key={`link-${k}`} label={part}>{part}</Linked>
+            k % 2 === 0 ? <span key={`text-${k}`}>{part}</span> : <Linked key={`link-${k}`} href={part}>{part}</Linked>
           ))}
         </div>
       );
@@ -42,7 +42,7 @@ const applyMarkdown = (str: string) => {
             if (match) {
               const [_, name, href] = match;
               return (
-                k % 2 === 0 ? <span key={`href-text-${k}`}>{part}</span> : <Linked key={`href-link-${k}`} href={href} label={name} />
+                k % 2 === 0 ? <span key={`href-text-${k}`}>{part}</span> : <Linked key={`href-link-${k}`} href={href} />
               );
             }
             return <span key={`href-text-${k}`}>{part}</span>;
@@ -56,7 +56,7 @@ const applyMarkdown = (str: string) => {
       return (
         <div key={`url-group-${i}`} className={styles.links}>
           {line.split(urlRegex).map((part, k) => (
-            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Linked key={`url-link-${k}`}  type={ContentTypes.website} href={part} label={part} />
+            k % 2 === 0 ? <span key={`url-text-${k}`}>{part}</span> : <Linked key={`url-link-${k}`}  type={ContentTypes.website} href={part}/>
           ))}
         </div>
       );

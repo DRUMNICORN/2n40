@@ -27,6 +27,7 @@ import {
   FaFacebook,
   FaGithub,
   FaSearch,
+  FaDiscord,
 } from "react-icons/fa";
 import { IoLogIn, IoTimeSharp } from "react-icons/io5";
 import { BiSolidNetworkChart } from "react-icons/bi";
@@ -35,6 +36,7 @@ import { ContentTypes } from "./enums";
 
 // Icons mapping for social media and metadata types
 export const REACT_ICONS: { [key in ContentTypes]: JSX.Element } = {
+  [ContentTypes.discord]: <FaDiscord />,
   [ContentTypes.default]: <></>,
   [ContentTypes.website]: <MdWeb />,
   [ContentTypes.mail]: <FaEnvelope />,

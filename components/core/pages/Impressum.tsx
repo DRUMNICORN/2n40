@@ -36,10 +36,10 @@ const Impressum: React.FC = () => {
         <div className={styles.personCard}>
           <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV und Angaben gemäß § 5 TMG:</h2>
           <div className={styles.personalInfo}>
-            <Linked type={ContentTypes.name} label="Robin Seerig" />
-            <Linked type={ContentTypes.tel} label="+4917632583072" />
-            <Linked type={ContentTypes.mail} label="robin@seerig.de" />
-            <Linked type={ContentTypes.address} label="Erich Mühsam Straße 6 09112 Chemnitz" />
+            <Linked type={ContentTypes.name} href="Robin Seerig" />
+            <Linked type={ContentTypes.tel} href="+4917632583072" />
+            <Linked type={ContentTypes.mail} href="robin@seerig.de" />
+            <Linked type={ContentTypes.address} href="Erich Mühsam Straße 6 09112 Chemnitz" />
           </div>
         </div>
 

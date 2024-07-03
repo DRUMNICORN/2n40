@@ -47,11 +47,11 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
     >
       <div className={styles.header}>
         <h2 className={styles.titleContainer}>
-          <Linked onClick={onFileClick} type={category} label={name as string} />
+          <Linked text onClick={onFileClick} type={category} href={name as string} />
           {isOverlay && (
             <div className={styles.buttons}>
-              <Linked onClick={onShareClick} type={ContentTypes.share} />
-              <Linked onClick={onClose} type={ContentTypes.close} />
+              <Linked text onClick={onShareClick} type={ContentTypes.share} />
+              <Linked text onClick={onClose} type={ContentTypes.close} />
             </div>
           )}
         </h2>
@@ -96,7 +96,7 @@ const LocationComponent = ({ location }: LocationComponentProps) => {
 
   return (
     <div className={styles.locationContainer}>
-      <Linked type={category as any} label={name} id={Number(id)} />
+      <Linked text type={category as any} href={name} id={Number(id)} />
     </div>
   );
 };
