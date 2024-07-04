@@ -1,5 +1,3 @@
-"use client"
-
 import { useCallback, useState } from "react";
 import { useContentOverlay } from "@/providers/OverlayProvider";
 import { ContentType, MetadataType } from "@/utils/interfaces";

@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { parseContentFromNextRequest, areParamsEmpty } from '@/utils/next';
 import { loadFile, loadFiles } from './file';
-import { createResponse } from './next';
-import { ContentType } from '@/exports/interfaces';
+import { areParamsEmpty, createResponse, parseContentFromMockRequest } from './next';
+import { ContentType } from '@/utils/interfaces';
 
 // Handler for GET request to fetch a single file
 export async function handleFileGet(req: NextRequest, res: NextResponse): Promise<Response> {
-    const params = parseContentFromNextRequest(req);
+    const params = parseContentFromMockRequest(req as any);
     const { id: fileId, category: fileCategory } = params;
 
     if (!fileId) {
@@ -37,7 +36,7 @@ export async function handleFileGet(req: NextRequest, res: NextResponse): Promis
 
 // Handler for GET requests to fetch multiple files
 export async function handleFilesGet(req: NextRequest, res: NextResponse): Promise<Response> {
-    const params = parseContentFromNextRequest(req);
+    const params = parseContentFromMockRequest(req as any);
 
     if (areParamsEmpty(params)) {
         return createResponse([], 200);
@@ -86,7 +85,7 @@ export async function handleFilePost(req: NextRequest, res: NextResponse): Promi
 
 // Handler for GET requests to fetch connections
 export async function handleConnectionsGet(req: NextRequest, res: NextResponse): Promise<Response> {
-    const params = parseContentFromNextRequest(req);
+    const params = parseContentFromMockRequest(req as any);
     const { id: fileId, metadata } = params;
 
     if (!metadata?.name) {

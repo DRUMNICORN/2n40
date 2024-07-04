@@ -17,9 +17,9 @@ const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html suppressHydrationWarning>
       <body className={Inter.className}>
-        {/* <Layout> 
+        <Layout> 
           {children}
-        </Layout> */}
+        </Layout>
       </body>
     </html>
   );

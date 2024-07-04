@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import styles from "./ContentOverlay.module.scss";
 import { useContentOverlay } from "@/providers/OverlayProvider";

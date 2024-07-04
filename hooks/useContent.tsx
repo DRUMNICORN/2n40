@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from 'react';
 import axios, { CancelToken } from 'axios';
 import { fetchFileById, getUrl } from '@/utils/web';

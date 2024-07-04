@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import styles from './Header.module.scss';
 import Hamburger from '../design/Hamburger';

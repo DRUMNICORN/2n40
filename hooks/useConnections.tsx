@@ -1,5 +1,3 @@
-"use client"
-
 import { NodeConnectionType } from "@/utils/interfaces";
 import { getUrl } from "@/utils/web";
 import axios from "axios";

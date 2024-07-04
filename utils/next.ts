@@ -1,7 +1,7 @@
-import { ContentTypes } from "@/exports/enums";
-import { ContentType } from "@/exports/interfaces";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import { ContentType } from "./interfaces";
+import { ContentTypes } from "./enums";
 
 export const createResponse = (body: any, status: number): Response => {
     return new Response(JSON.stringify(body), {
@@ -11,6 +11,9 @@ export const createResponse = (body: any, status: number): Response => {
         },
     });
 }
+
+export const parseContentFromMockRequest = (req: Request): ContentType => JSON.parse((req as any).body) as ContentType;
+
 
 export const parseContentFromNextRequest = (req: NextRequest): ContentType => {
     const categoryString = req.nextUrl.searchParams.get("category") || "";

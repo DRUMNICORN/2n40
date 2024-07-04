@@ -1,5 +1,3 @@
-"use client"
-
 import { ContentType } from '@/utils/interfaces';
 import React, { createContext, useCallback, useMemo, useState, useEffect } from 'react';
 

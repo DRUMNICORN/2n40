@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useMemo } from 'react';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';

@@ -82,9 +82,6 @@ interface LocationComponentProps {
 }
 
 const LocationComponent = ({ location }: LocationComponentProps) => {
-  // location is [[collectives/2|RESET]]
-  // we want to get category / id and name
-
   const [category, id, name] = (location.replaceAll('|', '/').replaceAll(/\[\[/gm, '').replaceAll(/\]\]/gm, '') as string || '').split("/");
 
   return (
