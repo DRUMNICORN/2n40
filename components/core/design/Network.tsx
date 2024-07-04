@@ -1,7 +1,9 @@
+"use client"
+
 import React, { FC, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import styles from './Network.module.scss';
-import { Network } from '@/exports/neural';
+import { Network } from '@/utils/neural';
 
 
 interface NeuralNetworkProps {

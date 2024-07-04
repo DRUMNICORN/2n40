@@ -2,9 +2,9 @@ import { getContent, getMetadataString } from "../utils/string";
 import { TelegramService } from "./service";
 import { MarkdownParser } from "../utils/markdown";
 import fs from "fs";
-import { confirmedRegex } from "../exports/regex";
-import { CommandType, MessageType } from "../exports/enums";
-import { ContentType, Message } from "../exports/interfaces";
+import { confirmedRegex } from "../utils/regex";
+import { CommandType, MessageType } from "../utils/enums";
+import { ContentType, Message } from "../utils/interfaces";
 
 export class CallbackQueryController {
   constructor(private telegramService: TelegramService) {}

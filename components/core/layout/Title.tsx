@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Title.module.scss';
 import Link from 'next/link';
-import { SITE_METADATA } from '@/exports/metadata';
+import { SITE_METADATA } from '@/utils/metadata';
 
 interface TitleProps {
     onClick?: () => void;

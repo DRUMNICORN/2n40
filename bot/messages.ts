@@ -1,6 +1,6 @@
-import { CommandType, MessageType } from "../exports/enums";
+import { CommandType, MessageType } from "../utils/enums";
 import { TelegramService } from "./service";
-import { ContentType, DetailsType, Message } from "../exports/interfaces";
+import { ContentType, DetailsType, Message } from "../utils/interfaces";
 
 export class MessageController {
   handleCommand(message: any) {

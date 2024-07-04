@@ -1,18 +1,17 @@
-"use client";
+"use client"
 
-import React, { useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';
-import CalendarDays from '../../view/CalendarDays';
-import ContentsComponent from './ContentsComponent';
 import { useContents } from '@/hooks/useContents';
-import { ContentTypes } from '@/exports/enums';
+import { ContentTypes } from '@/utils/enums';
+import CalendarDays from '@/components/view/CalendarDays';
 
-interface ContentsContainerProps {
+interface UseContentsContainerProps {
     contentType: ContentTypes;
 }
 
-const ContentsContainer: React.FC<ContentsContainerProps> = ({ contentType: mode }) => {
+const useContentsContainer = ({ contentType: mode }: UseContentsContainerProps) => {
     const ViewComponent = CalendarDays;
 
     const { param, setParam } = useQuery();
@@ -31,25 +30,23 @@ const ContentsContainer: React.FC<ContentsContainerProps> = ({ contentType: mode
             }
             if (!isVisible) setVisible(true);
         }
-    }, [contentFiles]);
+    }, [contentFiles, content, isClosed, isVisible, setContent, setClosed, setVisible]);
 
     useEffect(() => {
         if (isVisible) setVisible(false);
-    }, [param.name]);
+    }, [param.name, setVisible]);
 
     useEffect(() => {
-        setParam('category', mode as ContentTypes || ContentTypes.collaborations);
-    }, [isLoading]);
+        setParam('category', mode || ContentTypes.collaborations);
+    }, [isLoading, mode, setParam]);
 
-    return (
-        <ContentsComponent
-            contentFiles={contentFiles}
-            isLoading={isLoading}
-            loadError={loadError}
-            isClosed={isClosed}
-            MemoizedViewComponent={MemoizedViewComponent}
-        />
-    );
-}
+    return {
+        contentFiles,
+        isLoading,
+        loadError,
+        isClosed,
+        MemoizedViewComponent
+    };
+};
 
-export default React.memo(ContentsContainer);
+export default useContentsContainer;

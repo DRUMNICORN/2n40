@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { MarkdownParser } from './markdown';
-import { ContentType, MetadataType } from '@/exports/interfaces';
-import { ContentTypes } from '@/exports/enums';
+import { ContentType, MetadataType } from '@/utils/interfaces';
+import { ContentTypes } from '@/utils/enums';
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -63,7 +63,7 @@ export const loadContents = async (url: string, params: Record<string, any> = {}
 
         if (Array.isArray(fetchedPaths)) {
             for (const path of fetchedPaths) {
-                const id = path.split(".")[0];
+                const id = (path || '').split(".")[0];
 
                 if (!id || isNaN(Number(id))) {
                     continue;

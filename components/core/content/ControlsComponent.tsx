@@ -3,8 +3,8 @@ import styles from './Controls.module.scss';
 import Linked from '../../util/Linked';
 import InputField from '@/components/util/InputField';
 import ListComponent from '../../view/ListComponent';
-import { MetadataType } from '@/exports/interfaces';
-import { ContentTypes } from '@/exports/enums';
+import { MetadataType } from '@/utils/interfaces';
+import { ContentTypes } from '@/utils/enums';
 
 interface ControlsComponentProps {
     param: MetadataType;

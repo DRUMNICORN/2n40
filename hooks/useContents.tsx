@@ -1,10 +1,12 @@
+"use client"
+
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import axios, { CancelToken } from 'axios';
 import { getUrl, loadContents } from '@/utils/web';
 import { useQuery } from '@/providers/QueryProvider';
-import { ContentType } from '@/exports/interfaces';
-import { ContentTypes } from '@/exports/enums';
+import { ContentType } from '@/utils/interfaces';
+import { ContentTypes } from '@/utils/enums';
 interface UseContentControllerReturn {
   contentFiles: ContentType[];
   isLoading: boolean;

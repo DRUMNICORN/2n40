@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import styles from "./Layout.module.scss";
 import { OverlayProvider } from "@/providers/OverlayProvider";

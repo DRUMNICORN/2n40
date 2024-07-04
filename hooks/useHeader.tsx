@@ -1,3 +1,5 @@
+"use client"
+
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import { useQuery } from '@/providers/QueryProvider';
 import React, { useCallback, useState } from 'react';

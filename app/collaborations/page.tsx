@@ -1,9 +1,9 @@
 import React from 'react';
-import ContentsContainer from '@/components/core/content/ContentsContainer';
-import { ContentTypes } from '@/exports/enums';
+import Contents from '@/components/core/content/Contents';
+import { ContentTypes } from '@/utils/enums';
 
 const Page: React.FC = () => {
-  return <ContentsContainer contentType={ContentTypes.collaborations} />;
+  return <Contents contentType={ContentTypes.collaborations} />;
 };
 
 export default Page;

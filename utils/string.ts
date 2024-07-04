@@ -1,5 +1,5 @@
-import { ContentType, Message, MetadataType } from "@/exports/interfaces";
-import { REGEX_MATRIX } from "../exports/regex";
+import { ContentType, Message, MetadataType } from "@/utils/interfaces";
+import { REGEX_MATRIX } from "./regex";
 
 export function getMetadataString(context: string): MetadataType {
   const metadata: MetadataType = {};

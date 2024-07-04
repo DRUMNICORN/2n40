@@ -1,8 +1,10 @@
+"use client" 
+
 import React, { useEffect, useState } from 'react';
 import styles from './Markdown.module.scss';
 import Linked from './Linked';
-import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/exports/regex';
-import { ContentTypes } from '@/exports/enums';
+import { boldRegex, headerRegex, hrefRegex, lineRegex, linkRegex, urlRegex } from '@/utils/regex';
+import { ContentTypes } from '@/utils/enums';
 
 interface EntityContentProps {
   content: string;

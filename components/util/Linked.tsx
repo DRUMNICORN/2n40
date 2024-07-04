@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import styles from './Linked.module.scss';
 import { useContentOverlay } from '@/providers/OverlayProvider';
 import useContent from '@/hooks/useContent';
-import { ContentTypes } from '@/exports/enums';
-import { ContentType } from '@/exports/interfaces';
-import { REACT_ICONS } from '@/exports/icons';
+import { ContentTypes } from '@/utils/enums';
+import { ContentType } from '@/utils/interfaces';
+import { REACT_ICONS } from '@/utils/icons';
 import Link from 'next/link';
 
 interface LinkedProps {
@@ -124,7 +124,7 @@ const Linked: React.FC<LinkedProps> = ({
 
       {confirmOpen && (
         <div className={styles.confirmModal}>
-          <p>Du wirst auf eine Drittanbieter {(isExternalLink ? extractedDomain : effectiveHref).toUpperCase()} weitergeleitet.</p>
+          <div>Du wirst auf eine Drittanbieter {(isExternalLink ? extractedDomain : effectiveHref).toUpperCase()} weitergeleitet.</div>
           <div>
             <Link href={href || ''} className={linkClassName} onClick={(e) => handleConfirmNavigation(e, true)}>Yes</Link>
             <Link href={''} className={linkClassName} onClick={(e) => handleConfirmNavigation(e, false)}>No</Link>

@@ -3,7 +3,7 @@ import "./globals.css";
 import localFont from 'next/font/local';
 import { Metadata as NextMetadata } from 'next';
 import Layout from "@/components/core/layout/Layout";
-import { SITE_METADATA } from "@/exports/metadata";
+import { SITE_METADATA } from "@/utils/metadata";
 
 const Inter = localFont({ src: './Inter.ttf' });
 
@@ -17,9 +17,9 @@ const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html suppressHydrationWarning>
       <body className={Inter.className}>
-        <Layout> 
+        {/* <Layout> 
           {children}
-        </Layout>
+        </Layout> */}
       </body>
     </html>
   );

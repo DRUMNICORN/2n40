@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import ControlsComponent from './ControlsComponent';
-import { MetadataType } from '@/exports/interfaces';
+import { MetadataType } from '@/utils/interfaces';
 
 interface EntityFilterProps {
     param: MetadataType;
