@@ -1,4 +1,11 @@
 .link {
+
+  
+  &:link {
+    color: rgb(var(--secondary-rgb));
+  } 
+
+
   font-size: var(--font-size);
   font-weight: bold;
   text-transform: uppercase;
@@ -25,17 +32,32 @@
     margin: 0.4rem;
   }
 
+
   &:hover {
     svg {
       animation: spin 0.42s ease-in-out forwards;
     }
   }
 
+  // make link default color to var(--primary-rgb)
 
+  // there is smt for links
   &.externalLink {
+        color: rgb(var(--light-rgb));
     border: 1px solid rgba(var(--primary-rgb), 0.2);
     background-color: rgba(var(--primary-rgb), 0.1);
   }
+
+  // if not external its light-rgb
+
+  &.internalLink {
+    &:link {
+      color: rgb(var(--light-rgb));
+    } 
+    background-color: rgba(var(--dark-rgb), 0.3);
+  }
+
+
 
   &.quadratic {
     width: 2rem !important;

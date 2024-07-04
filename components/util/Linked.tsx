@@ -7,6 +7,7 @@ import useContent from '@/hooks/useContent';
 import { ContentTypes } from '@/exports/enums';
 import { ContentType } from '@/exports/interfaces';
 import { REACT_ICONS } from '@/exports/icons';
+import Link from 'next/link';
 
 interface LinkedProps {
   href?: string;
@@ -25,7 +26,7 @@ const Linked: React.FC<LinkedProps> = ({
   href,
   children,
   spinOnClick = false,
-  disableClick = false,
+  disableClick: disable = false,
   type,
   onClick,
   inline = false,
@@ -47,6 +48,7 @@ const Linked: React.FC<LinkedProps> = ({
       tel: () => window.open(`tel:${value}`),
       website: () => window.open(value.startsWith('https://') ? value : `https://${value}`, '_blank'),
       form: () => window.open(value, '_blank'),
+      
     };
 
 
@@ -55,9 +57,14 @@ const Linked: React.FC<LinkedProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
 
-    if (disableClick) {
-      e.preventDefault();
+    if (disable) {
+      console.warn("Linked: disableClick is set to true, skipping click handling.");
       return;
+    }
+
+    if (spinOnClick) {
+      setIconAnimated(true);
+      setTimeout(() => setIconAnimated(false), 500);
     }
 
     if (id) {
@@ -69,34 +76,33 @@ const Linked: React.FC<LinkedProps> = ({
       return;
     }
 
-    if (spinOnClick) {
-      setIconAnimated(true);
-      setTimeout(() => setIconAnimated(false), 500);
-    }
-
-    if ((type === 'address' || type === 'website' || (!!href && href.startsWith('http'))) && !disableClick) {
+    if ((type === 'address' || type === 'website' || (!!href && href.startsWith('http'))) && !disable) {
       e.preventDefault();
-      // console.log(href, label);
+      e.stopPropagation();
       setPendingHref(href || '');
       setConfirmOpen(true); // Open the confirmation modal
     } else {
       onClick?.(e);
+      handleRedirect(href || '', type || '');
     }
   };
 
-  const handleConfirmNavigation = (confirm: boolean) => {
-    if (confirm && pendingHref) {
-      handleRedirect(pendingHref, type || 'website');
+  const handleConfirmNavigation = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, confirm: boolean): void => {
+    
+    if (!confirm) {
+      e.preventDefault();
+      e.stopPropagation();
     }
+
     setConfirmOpen(false);
     setPendingHref(null);
   };
 
   const extractDomain = (url: string): string => {
     try {
-      return new URL(url).hostname.replace('www.', '');
+      return new URL(url).hostname.replace('www.', '')
     } catch {
-      return url;
+      return url.replace('/', '');
     }
   };
 
@@ -104,25 +110,24 @@ const Linked: React.FC<LinkedProps> = ({
   const isExternalLink = effectiveHref.startsWith('http');
 
   const linkClassName = `${styles.link} ${iconAnimated && spinOnClick ? styles.iconAnimated : ''} 
-    ${isExternalLink ? styles.externalLink : ''} ${(!href && !type && !effectiveHref) ? styles.quadratic : ''} 
+    ${isExternalLink ? styles.externalLink :  styles.internalLink} ${(!href && !type && !effectiveHref) ? styles.quadratic : ''} 
     ${inline ? styles.inline : ''} ${noWrap ? styles.noWrap : ''}`;
 
   const extractedDomain = extractDomain(effectiveHref);
 
-
   return (
     <>
-      <button onClick={handleClick} className={linkClassName}>
+      <Link href={href || ''} onClick={handleClick} className={linkClassName}>
         {!isNaN(Number(children)) && children || REACT_ICONS[type as keyof typeof REACT_ICONS]}
         {text && (href || href) && <span className={styles.linkText}>{extractedDomain}</span>}
-      </button>
+      </Link>
 
       {confirmOpen && (
         <div className={styles.confirmModal}>
           <p>Du wirst auf eine Drittanbieter {(isExternalLink ? extractedDomain : effectiveHref).toUpperCase()} weitergeleitet.</p>
           <div>
-            <button className={linkClassName} onClick={() => handleConfirmNavigation(true)}>Yes</button>
-            <button className={linkClassName} onClick={() => handleConfirmNavigation(false)}>No</button>
+            <Link href={href || ''} className={linkClassName} onClick={(e) => handleConfirmNavigation(e, true)}>Yes</Link>
+            <Link href={''} className={linkClassName} onClick={(e) => handleConfirmNavigation(e, false)}>No</Link>
           </div>
         </div>
       )}

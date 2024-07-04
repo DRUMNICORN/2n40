@@ -173,7 +173,6 @@ export class CallbackQueryController {
 
     moderatedContent.id = msg.message_id;
     if (confirmedCount >= member_count_mod_channel) {
-      console.log("confirmed");
       return this.handleSave(moderatedContent);
     }
 
