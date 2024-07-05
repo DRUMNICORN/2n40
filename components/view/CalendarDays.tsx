@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './CalendarDays.module.scss';
 import ContentColumns from './ContentColumns';
-import { formatDate } from '@/utils/date';
+import { formatDate } from '@/exports/date';
 import DateContainer from '../core/design/DateContainer';
 import { ContentType } from '@/exports/interfaces';
 

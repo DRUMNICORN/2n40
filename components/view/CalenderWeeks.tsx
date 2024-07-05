@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { MdAdd } from 'react-icons/md';
 import styles from './CalenderWeeks.module.scss';
 import Linked from '../util/Linked';
-import ContentContainer from '../core/content/ContentContainer';
+import Content from '../core/content/Content';
 import { ContentType, MetadataType } from '@/exports/interfaces';
 
 interface CalendarProps {
@@ -101,7 +101,7 @@ const CalenderWeeks: React.FC<CalendarProps> = (props) => {
           <div className={styles.cardsContainer}>
             {datedFiles[date] &&
               datedFiles[date].map((file, index) => (
-                <ContentContainer key={index} content={file} isScrollable={false} onConnectionClick={function (entry: string | MetadataType): void {
+                <Content key={index} content={file} isScrollable={false} onConnectionClick={function (entry: string | MetadataType): void {
                   throw new Error('Function not implemented.');
                 }} />
               ))}

@@ -1,10 +1,10 @@
-import { getContent, getMetadataString } from "../utils/string";
+import { getContent, getMetadataString } from "../exports/string";
 import { TelegramService } from "./service";
-import { MarkdownParser } from "../utils/markdown";
 import fs from "fs";
 import { confirmedRegex } from "../exports/regex";
 import { CommandType, MessageType } from "../exports/enums";
 import { ContentType, Message } from "../exports/interfaces";
+import { MarkdownParser } from "@/exports/markdown";
 
 export class CallbackQueryController {
   constructor(private telegramService: TelegramService) {}
@@ -49,7 +49,6 @@ export class CallbackQueryController {
         break;
     }
   } catch (error) {
-    console.error(error);
   }
 
     this.telegramService.bot.answerCallbackQuery(callbackQuery.id);
@@ -101,7 +100,6 @@ export class CallbackQueryController {
   
     fs.writeFile(path, serializedContent, (err) => {
       if (err) {
-        console.error(err);
         return;
       }
     }
@@ -173,7 +171,6 @@ export class CallbackQueryController {
 
     moderatedContent.id = msg.message_id;
     if (confirmedCount >= member_count_mod_channel) {
-      console.log("confirmed");
       return this.handleSave(moderatedContent);
     }
 

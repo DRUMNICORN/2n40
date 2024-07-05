@@ -52,7 +52,7 @@ const Menu: React.FC<MenuProps> = ({ open, onClose }) => {
         const innerText = page.replace("/", "");
         return (
           <li key={index} className={`${styles.menuItem} ${getCurrentPageClass(page)}`}>
-            <Linked href={page} onClick={() => handleLinkClick(page)} type={innerText as keyof typeof REACT_ICONS} label={innerText} />
+            <Linked text href={page} onClick={() => handleLinkClick(page)} type={innerText as keyof typeof REACT_ICONS} />
           </li>
         );
       })}

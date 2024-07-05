@@ -15,6 +15,7 @@ export enum ContentTypes {
     facebook = "facebook",
     bandcamp = "bandcamp",
     telegram = "telegram",
+    discord = "discord",
     twitter = "twitter",
     add = "add",
     name = "name",

@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import styles from './Network.module.scss';
 import { Network } from '@/exports/neural';
 
-
 interface NeuralNetworkProps {
   neuronCount?: number; // Number of neurons
   mouseSensitivity?: number; // Mouse sensitivity factor
@@ -91,6 +90,16 @@ const NeuralNetwork: FC<NeuralNetworkProps> = ({
       renderer.setSize(width, height);
     };
 
+    const debounce = (func: Function, wait: number) => {
+      let timeout: NodeJS.Timeout;
+      return (...args: any[]) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    };
+
+    const debouncedHandleResize = debounce(handleResize, 1000); // Adjust the debounce wait time as needed
+
     const handleMouseMove = (event: MouseEvent) => {
       const { clientWidth, clientHeight } = containerRef.current!;
       mouseX = (event.clientX - clientWidth / 2) * mouseSensitivity; // Adjust sensitivity here
@@ -137,7 +146,7 @@ const NeuralNetwork: FC<NeuralNetworkProps> = ({
 
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mousemove', handleNeuronHover); // Add listener for neuron hover
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', debouncedHandleResize);
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -154,7 +163,7 @@ const NeuralNetwork: FC<NeuralNetworkProps> = ({
       renderer.dispose();
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mousemove', handleNeuronHover); // Remove neuron hover listener
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', debouncedHandleResize);
     };
   }, [neuronCount, mouseSensitivity, neuronSpacing, neuronSize, initialCameraPosition, renderConnections, lineColor, sphereColor]);
 
