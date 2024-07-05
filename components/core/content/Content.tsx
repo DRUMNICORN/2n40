@@ -1,57 +1,54 @@
 import React from "react";
 import styles from "./Content.module.scss";
-// import { ContentType, MetadataType, ContentTypes } from "@/app/types";
-import Markdown from "../../util/Markdown";
 import Linked from "../../util/Linked";
 import SoundCloudEmbed from "../../util/SoundCloudEmbed";
-import List from "../../view/ListComponent";
 import DateContainer from "../design/DateContainer";
 import ListComponent from "../../view/ListComponent";
-import { ContentType, MetadataType } from "@/exports/interfaces";
 import { ContentTypes } from "@/exports/enums";
-// import DateContainer from "../../util/DateContainer";
+import { ContentType, MetadataType } from "@/exports/interfaces";
+import useContent from "./Content.hook";
+import Markdown from "@/components/util/Markdown";
 
-interface ContentComponentProps {
+interface ContentContainerProps {
   content: ContentType;
   onConnectionClick: (entry: string | MetadataType) => void;
-  isScrolling: boolean;
-  isOverlay: boolean;
-  onCardClick: () => void;
-  onDetailsButtonClick: (e: React.MouseEvent) => void;
-  onContextMenu: (e?: React.MouseEvent) => void;
-  onFileClick: (e: React.MouseEvent) => void;
-  onShareClick: () => void;
-  onClose: () => void;
+  isScrollable?: boolean;
+  isOverlay?: boolean;
 }
 
-const ContentComponent: React.FC<ContentComponentProps> = ({
+const Content: React.FC<ContentContainerProps> = ({
   content,
   onConnectionClick,
-  isScrolling,
-  isOverlay,
-  onCardClick,
-  onDetailsButtonClick,
-  onContextMenu,
-  onFileClick,
-  onShareClick,
-  onClose,
+  isScrollable = false,
+  isOverlay = false,
 }) => {
+  const {
+    isScrolling,
+    handleClick,
+    handleDetailsButtonClick,
+    handleContextMenu,
+    handleFileClick,
+    handleShareClick,
+    handleClose,
+  } = useContent({ content, isScrollable, isOverlay, onConnectionClick});
+
+
   const { metadata, category, context } = content ?? {};
   const { name, date, image, trackUrl, location } = metadata ?? {};
 
   return (
     <div
       className={`${styles.card} ${isOverlay ? styles.isOverlay : ""}`}
-      onClick={onCardClick}
-      onContextMenu={onContextMenu}
+      onClick={handleClick}
+      onContextMenu={handleContextMenu}
     >
       <div className={styles.header}>
         <h2 className={styles.titleContainer}>
-          <Linked text onClick={onFileClick} type={category} href={name as string} />
+          <Linked text onClick={handleClick} type={category} href={name as string} />
           {isOverlay && (
             <div className={styles.buttons}>
-              <Linked text onClick={onShareClick} type={ContentTypes.share} />
-              <Linked text onClick={onClose} type={ContentTypes.close} />
+              <Linked text onClick={handleShareClick} type={ContentTypes.share} />
+              <Linked text onClick={handleClose} type={ContentTypes.close} />
             </div>
           )}
         </h2>
@@ -78,21 +75,14 @@ const ContentComponent: React.FC<ContentComponentProps> = ({
   );
 };
 
-export default ContentComponent;
-
-
-// Location Component
+export default Content;
 
 interface LocationComponentProps {
   location: string;
 }
 
-
 const LocationComponent = ({ location }: LocationComponentProps) => {
-  // location is [[collectives/2|RESET]]
-  // we want to get category / id and name
-
-  const [category, id, name] = location.replaceAll('|', '/').replaceAll(/\[\[/gm, '').replaceAll(/\]\]/gm, '').split("/");
+  const [category, id, name] = (location.replaceAll('|', '/').replaceAll(/\[\[/gm, '').replaceAll(/\]\]/gm, '') as string || '').split("/");
 
   return (
     <div className={styles.locationContainer}>

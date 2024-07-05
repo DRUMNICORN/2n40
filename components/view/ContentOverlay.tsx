@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ContentOverlay.module.scss";
 import { useContentOverlay } from "@/providers/OverlayProvider";
-import ContentContainer from "../core/content/ContentContainer";
+import Content from "../core/content/Content";
 
 interface ContentOverlayProps { }
 
@@ -14,7 +14,7 @@ const ContentOverlay: React.FC<ContentOverlayProps> = () => {
   return (
     <div className={`${styles.popup} ${isVisible ? styles.show : styles.hide}`}>
       <div className={styles.contentContainer}>
-        <ContentContainer content={content} isOverlay isScrollable onConnectionClick={() => { }} />
+        <Content content={content} isOverlay isScrollable onConnectionClick={() => { }} />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import styles from "./DateContainer.module.scss";
-import { formatDate, getDayOfWeek } from "@/utils/date"; // Adjust the path as per your project structure
+import { formatDate, getDayOfWeek } from "@/exports/date"; // Adjust the path as per your project structure
 import Until from "./Until";
 
 interface DateContainerProps {

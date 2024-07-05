@@ -6,7 +6,7 @@ import 'swiper/scss/pagination';
 import 'swiper/scss/scrollbar';
 import styles from './Carousel.module.scss';
 import Swiper from 'swiper';
-import ContentContainer from '../core/content/ContentContainer';
+import Content from '../core/content/Content';
 import { ContentType } from '@/exports/interfaces';
 
 // Swiper.use([Navigation, Pagination, Scrollbar]);
@@ -58,7 +58,7 @@ const Carousel: React.FC<EntityCardCarouselProps> = ({ contents }) => {
       <div className="swiper-wrapper">
         {contents.map((content, index) => (
           <div className={`swiper-slide ${styles.card}`} key={index}>
-            <ContentContainer
+            <Content
               content={content}
               onConnectionClick={(entry) => {}}
               isScrollable={true}

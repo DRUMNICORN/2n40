@@ -11,7 +11,7 @@ interface LinkedProps {
   href?: string;
   children?: React.ReactNode;
   spinOnClick?: boolean;
-  disableClick?: boolean;
+  disabled?: boolean;
   type?: ContentTypes;
   onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   inline?: boolean;
@@ -24,7 +24,7 @@ const Linked: React.FC<LinkedProps> = ({
   href,
   children,
   spinOnClick = false,
-  disableClick = false,
+  disabled = false,
   type,
   onClick,
   inline = false,
@@ -38,7 +38,7 @@ const Linked: React.FC<LinkedProps> = ({
     handleClick,
     handleConfirmNavigation,
     extractDomain,
-  } = useLinked({ id, type, href, spinOnClick, disableClick, onClick });
+  } = useLinked({ id, type, href, spinOnClick, disabled, onClick });
 
   const effectiveHref = href || '';
   const isExternalLink = effectiveHref.startsWith('http');

@@ -83,14 +83,11 @@ const NeuralNetwork: FC<NeuralNetworkProps> = ({
     }
 
     const handleResize = () => {
-      console.log('Handling resize');
       const width = window.innerWidth;
       const height = window.innerHeight;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-
-      console.log('Resized');
     };
 
     const debounce = (func: Function, wait: number) => {

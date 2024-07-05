@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { MarkdownParser } from './markdown';
 import { ContentType, MetadataType } from '@/exports/interfaces';
 import { ContentTypes } from '@/exports/enums';
+import { MarkdownParser } from './markdown';
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL;
 

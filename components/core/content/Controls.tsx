@@ -12,10 +12,10 @@ interface ControlsComponentProps {
     handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     setParam: (key: any, value: string | string[] | null) => void;
     toggleParam: (key: any, value: string) => void;
-    metadataEntries: string[];
+    metadataEntries?: string[];
 }
 
-const ControlsComponent: React.FC<ControlsComponentProps> = ({
+const Controls: React.FC<ControlsComponentProps> = ({
     param,
     handleSwap,
     handleKeyPress,
@@ -23,7 +23,7 @@ const ControlsComponent: React.FC<ControlsComponentProps> = ({
     toggleParam,
     metadataEntries,
 }) => {
-    const filterEntitiesClasses = `${styles.filterEntities} ${metadataEntries.length > 0 ? '' : styles.empty}`;
+    const filterEntitiesClasses = `${styles.filterEntities} ${(metadataEntries || []).length > 0 ? '' : styles.empty}`;
 
     return (
         <div className={styles.filter}>
@@ -39,9 +39,9 @@ const ControlsComponent: React.FC<ControlsComponentProps> = ({
                 </div>
                 <div className={filterEntitiesClasses}>
                     <ListComponent
-                        items={metadataEntries}
+                        items={metadataEntries || []}
                         onClick={(label, type) => {
-                            toggleParam("connections", label);
+                            toggleParam('connections', label);
                         }}
                     />
                 </div>
@@ -50,4 +50,4 @@ const ControlsComponent: React.FC<ControlsComponentProps> = ({
     );
 };
 
-export default React.memo(ControlsComponent);
+export default React.memo(Controls);

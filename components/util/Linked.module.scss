@@ -24,13 +24,6 @@
     margin: 0.4rem;
   }
 
-  &:hover {
-    svg {
-      animation: spin 0.42s ease-in-out forwards;
-    }
-    color: rgb(var(--secondary-rgb));
-    background-color: rgba(var(--secondary-rgb), 0.42);
-  }
 
   &:active {
     background-color: rgba(var(--secondary-rgb), 0.84);
@@ -71,6 +64,13 @@
 
   &.noWrap {
     white-space: nowrap;
+  }
+  &:hover {
+    svg {
+      animation: spin 0.42s ease-in-out forwards;
+    }
+    color: rgb(var(--secondary-rgb));
+    background-color: rgba(var(--secondary-rgb), 0.42);
   }
 
   .linkText {

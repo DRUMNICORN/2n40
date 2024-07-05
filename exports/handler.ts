@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { parseContentFromNextRequest, areParamsEmpty } from '@/utils/next';
+import { parseContentFromNextRequest, areParamsEmpty } from '@/exports/next';
 import { loadFile, loadFiles } from './file';
 import { createResponse } from './next';
 import { ContentType } from '@/exports/interfaces';
@@ -24,7 +24,7 @@ export async function handleFileGet(req: NextRequest, res: NextResponse): Promis
             return createResponse({ error: "file not found" }, 404);
         }
 
-        // Process file content (if needed)
+        // TODO Process file content (if needed)
         // const content = MarkdownParser.parse(file || "");
         // content.id = Number(fileId);
 

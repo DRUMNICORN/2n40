@@ -1,6 +1,4 @@
-import React from "react";
-import { createContext, ReactNode, useState } from "react";
-
+import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 interface QueryContextInterface {
     param: Record<string, string | string[]>; // Current query parameters
@@ -11,51 +9,53 @@ interface QueryContextInterface {
 
 const QueryContext = createContext<QueryContextInterface>({
     param: {},
-    setParam: () => { },
-    setParamState: () => { },
-    toggleParam: () => { },
+    setParam: () => {},
+    setParamState: () => {},
+    toggleParam: () => {},
 });
+
+export const useQuery = () => {
+    return useContext(QueryContext);
+};
 
 export const QueryProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [param, setParamState] = useState<Record<string, string | string[]>>({});
 
     const setParam = (key: string, value: string | string[] | null) => {
         setParamState((prevParam: any) => {
-            return { ...prevParam, [key]: value };
+            if (value === null) {
+                delete prevParam[key];
+            } else {
+                prevParam[key] = value;
+            }
+            return { ...prevParam };
         });
     };
 
+    const setParamStateHandler = (newParam: Record<string, string | string[]>) => {
+        setParamState(newParam);
+    };
+
     const toggleParam = (key: string, value: string) => {
-        setParamState(prevParam => {
+        setParamState((prevParam) => {
             const currentValue = prevParam[key] || [];
-            const newValue = Array.isArray(currentValue)
-                ? currentValue.includes(value)
-                    ? currentValue.filter(v => v !== value)
-                    : [...currentValue, value]
-                : value;
-            let name = prevParam.name as string;
-            name = name.replace(value, '');
-            prevParam.name = name;
+            const newValue =
+                Array.isArray(currentValue) ?
+                    currentValue.includes(value) ?
+                        currentValue.filter((v) => v !== value) :
+                        [...currentValue, value] :
+                    value;
+
             return { ...prevParam, [key]: newValue };
         });
     };
 
-
     const QueryContextValue: QueryContextInterface = {
         param,
         setParam,
-        setParamState,
+        setParamState: setParamStateHandler,
         toggleParam,
     };
 
-    return (
-        <QueryContext.Provider value={QueryContextValue}>
-            {children}
-        </QueryContext.Provider>
-    );
-};
-
-
-export const useQuery = () => {
-    return React.useContext(QueryContext);
+    return <QueryContext.Provider value={QueryContextValue}>{children}</QueryContext.Provider>;
 };

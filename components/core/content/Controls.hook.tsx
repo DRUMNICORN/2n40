@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react';
-import ControlsComponent from './ControlsComponent';
 import { MetadataType } from '@/exports/interfaces';
 
 interface EntityFilterProps {
@@ -8,7 +7,7 @@ interface EntityFilterProps {
     toggleParam: (key: any, value: string) => void;
 }
 
-const ControlsContainer: React.FC<EntityFilterProps> = ({ param, setParam, toggleParam }) => {
+export const useControls = ({ param, setParam, toggleParam }: EntityFilterProps) => {
     const handleSwap = useCallback(() => {
         if (!param) return;
         let name = param.name;
@@ -24,16 +23,12 @@ const ControlsContainer: React.FC<EntityFilterProps> = ({ param, setParam, toggl
 
     const metadataEntries = useMemo(() => param?.connections || [], [param]) as string[];
 
-    return (
-        <ControlsComponent
-            param={param}
-            handleSwap={handleSwap}
-            handleKeyPress={handleKeyPress}
-            setParam={setParam}
-            toggleParam={toggleParam}
-            metadataEntries={metadataEntries}
-        />
-    );
+    return {
+        param,
+        handleSwap,
+        handleKeyPress,
+        setParam,
+        toggleParam,
+        metadataEntries,
+    };
 };
-
-export default React.memo(ControlsContainer);

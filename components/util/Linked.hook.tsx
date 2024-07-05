@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useContentOverlay } from '@/providers/OverlayProvider';
-import useContent from '@/hooks/useContent';
 import { ContentTypes } from '@/exports/enums';
 import { ContentType } from '@/exports/interfaces';
+import { useContentContext } from '@/providers/ContentProvider';
 
 interface UseLinkedProps {
     id?: number;
     type?: ContentTypes;
     href?: string;
     spinOnClick?: boolean;
-    disableClick?: boolean;
+    disabled?: boolean;
     onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
@@ -18,14 +18,30 @@ const useLinked = ({
     type,
     href,
     spinOnClick = false,
-    disableClick = false,
+    disabled = false,
     onClick,
 }: UseLinkedProps) => {
     const [iconAnimated, setIconAnimated] = useState(false);
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pendingHref, setPendingHref] = useState<string | null>(null);
     const { setContent: setOverlayContent, setVisible: setOverlayVisible } = useContentOverlay();
-    const { contentFile } = useContent(id, type as ContentTypes);
+    // const { contentFile } = useFetchedContent(id, type as ContentTypes);
+    const { fetchContentNode } = useContentContext();
+    const [contentFile, setContentFile] = useState<ContentType | null>(null);
+    // const contentFile = id ? fetchContentNode(id, type as ContentTypes) : null;
+
+    useEffect(() => {
+        const fetchContent = async () => {
+            if (id && type) {
+                const fetchedContent = await fetchContentNode(id, type);
+                setContentFile(fetchedContent);
+            }
+        };
+
+        fetchContent();
+    }, [id, type, fetchContentNode]);
+
+
 
     const handleRedirect = (value: string, key: string): void => {
         const actions: Record<string, () => void> = {
@@ -40,8 +56,9 @@ const useLinked = ({
     };
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>): void => {
-        if (disableClick) {
-            console.warn('Linked: disableClick is set to true, skipping click handling.');
+        if (disabled) {           
+            e.preventDefault();
+            e.stopPropagation();
             return;
         }
 
@@ -53,13 +70,14 @@ const useLinked = ({
         if (id) {
             e.preventDefault();
             e.stopPropagation();
-            const fetchedContent: ContentType = contentFile as ContentType;
-            setOverlayContent(fetchedContent);
+            if (contentFile != null){
+                setOverlayContent(contentFile);
+            }
             setOverlayVisible(true);
             return;
         }
 
-        if ((type === 'address' || type === 'website' || (href && href.startsWith('http'))) && !disableClick) {
+        if ((type === 'address' || type === 'website' || (href && href.startsWith('http'))) && !disabled) {
             e.preventDefault();
             e.stopPropagation();
             setPendingHref(href || '');
