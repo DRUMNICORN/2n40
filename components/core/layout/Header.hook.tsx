@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react';
 const useHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isVisible, toggleVisibility } = useContentOverlay();
-  const { toggleParam, setParam } = useQuery();
+  const { toggleParam, setParam, param } = useQuery();
 
   const handleHamburgerClick = useCallback(() => {
     setMenuOpen(prevMenuOpen => !prevMenuOpen);
@@ -21,6 +21,20 @@ const useHeader = () => {
     toggleParam(key, value);
   }, [toggleParam]);
 
+  const handleSwap = useCallback(() => {
+    console.log("sawp")
+    let name = param.name;
+    setParam("name", null);
+    toggleParam("connections", name as string);
+    console.log(param)
+  }, [setParam, param.name]);
+
+  const handleKeyPress = useCallback((e: any) => {
+    if (e.key === "Enter") {
+      handleSwap();
+    }
+  }, [handleSwap]);
+
   return {
     setMenuOpen,
     setParam,
@@ -29,6 +43,8 @@ const useHeader = () => {
     handleHamburgerClick,
     handleTitleClick,
     handleToggleParam,
+    handleSwap,
+    handleKeyPress
   };
 };
 
