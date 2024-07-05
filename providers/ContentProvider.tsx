@@ -2,7 +2,6 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 import axios, { CancelToken } from 'axios';
 import { fetchFileById, getUrl, loadContents } from '@/exports/web';
 import { ContentType } from '@/exports/interfaces';
-import { ContentTypes } from '@/exports/enums';
 import { cacheHandler } from '@/exports/cache';
 
 interface ContentContextType {
@@ -29,6 +28,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const [contentFiles, setContentFiles] = useState<ContentType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [loadError, setLoadError] = useState('');
+    const [loadedCategories, setLoadedCategories] = useState<string[]>([]); // Track loaded categories
 
     const fetchContentNode = useCallback(async (id: number, category: string, name?: string): Promise<ContentType | null> => {
         const cachedNode = cacheHandler.getNode(id, category);
@@ -67,6 +67,11 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
             result.files.forEach(file => {
                 cacheHandler.setNode(file.id, file.category, file);
             });
+
+            // Track loaded categories
+            const loadedCategoriesSet = new Set(loadedCategories);
+            result.files.forEach(file => loadedCategoriesSet.add(file.category));
+            setLoadedCategories(Array.from(loadedCategoriesSet));
         } catch (error) {
             if (!axios.isCancel(error)) {
                 setLoadError('Error fetching files');
@@ -74,7 +79,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [loadedCategories]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -88,8 +93,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }, []);
 
     const fetchNodesByCategory = useCallback(async (category: string): Promise<void> => {
-        const cachedNodes = cacheHandler.getNodesByCategory(category);
-        if (cachedNodes.length === 0) {
+        if (!loadedCategories.includes(category)) { // Check if category is already fully loaded
             try {
                 const cancelSource = axios.CancelToken.source();
                 const url = getUrl('contents', { category });
@@ -100,6 +104,10 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
                 result.files.forEach(file => {
                     cacheHandler.setNode(file.id, file.category, file);
                 });
+
+                // Update loaded categories
+                const updatedLoadedCategories = [...loadedCategories, category];
+                setLoadedCategories(updatedLoadedCategories);
             } catch (error) {
                 if (!axios.isCancel(error)) {
                     setLoadError('Error fetching files');
@@ -108,7 +116,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
                 setIsLoading(false);
             }
         }
-    }, []);
+    }, [loadedCategories]);
 
     const contextValue = useMemo(() => ({
         contentFiles,

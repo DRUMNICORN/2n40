@@ -12,7 +12,6 @@ interface ControlsComponentProps {
     handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     setParam: (key: any, value: string | string[] | null) => void;
     toggleParam: (key: any, value: string) => void;
-    metadataEntries?: string[];
 }
 
 const Controls: React.FC<ControlsComponentProps> = ({
@@ -21,9 +20,8 @@ const Controls: React.FC<ControlsComponentProps> = ({
     handleKeyPress,
     setParam,
     toggleParam,
-    metadataEntries,
 }) => {
-    const filterEntitiesClasses = `${styles.filterEntities} ${(metadataEntries || []).length > 0 ? '' : styles.empty}`;
+    const filterEntitiesClasses = `${styles.filterEntities} ${(param.connections as string[] || []).length > 0 ? '' : styles.empty}`;
 
     return (
         <div className={styles.filter}>
@@ -39,7 +37,7 @@ const Controls: React.FC<ControlsComponentProps> = ({
                 </div>
                 <div className={filterEntitiesClasses}>
                     <ListComponent
-                        items={metadataEntries || []}
+                        items={param.connections as string[] || []}
                         onClick={(label, type) => {
                             toggleParam('connections', label);
                         }}
