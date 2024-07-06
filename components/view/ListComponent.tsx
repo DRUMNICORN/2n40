@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './List.module.scss'; // Import SCSS module for styling
-import { ContentTypes } from '@/utils/enums';
+import { ContentTypes } from '@/exports/enums';
 import Linked from '../util/Linked';
 
 interface ListComponentProps {

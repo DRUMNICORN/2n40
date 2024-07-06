@@ -6,7 +6,7 @@
 
 .calendarItem {
     opacity: 0; // Hide elements initially
-    transition: opacity 0.5s ease-in-out; // Smooth transition for opacity change
+    transition: opacity 0.2s ease-in-out; // Smooth transition for opacity change
 
     &.reveal {
         opacity: 1; // Fully visible

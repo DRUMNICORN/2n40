@@ -1,4 +1,4 @@
-import { ContentType } from '@/utils/interfaces';
+import { ContentType } from '@/exports/interfaces';
 import fs from 'fs';
 import path from 'path';
 

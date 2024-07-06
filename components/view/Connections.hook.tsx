@@ -1,5 +1,5 @@
-import { NodeConnectionType } from "@/utils/interfaces";
-import { getUrl } from "@/utils/web";
+import { NodeConnectionType } from "@/exports/interfaces";
+import { getUrl } from "@/exports/web";
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 
@@ -32,7 +32,6 @@ export const useConnections = (names: string[]) => {
 
             setError(null);
         } catch (error) {
-            console.error('Error fetching connections:', error);
             setError((error as Error).message || 'Unknown error');
             setConnections(null);
         } finally {

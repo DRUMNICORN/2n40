@@ -1,5 +1,3 @@
-"use client" 
-
 import React, { useEffect, useRef } from 'react';
 import styles from './SoundCloudEmbed.module.scss'
 interface SoundCloudEmbedProps {

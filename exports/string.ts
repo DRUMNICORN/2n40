@@ -1,4 +1,4 @@
-import { ContentType, Message, MetadataType } from "@/utils/interfaces";
+import { ContentType, Message, MetadataType } from "@/exports/interfaces";
 import { REGEX_MATRIX } from "./regex";
 
 export function getMetadataString(context: string): MetadataType {

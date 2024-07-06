@@ -7,7 +7,7 @@ import 'swiper/scss/scrollbar';
 import styles from './Carousel.module.scss';
 import Swiper from 'swiper';
 import Content from '../core/content/Content';
-import { ContentType } from '@/utils/interfaces';
+import { ContentType } from '@/exports/interfaces';
 
 // Swiper.use([Navigation, Pagination, Scrollbar]);
 

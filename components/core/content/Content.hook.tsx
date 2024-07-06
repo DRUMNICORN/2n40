@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useContentOverlay } from "@/providers/OverlayProvider";
-import { ContentType, MetadataType } from "@/utils/interfaces";
+import { ContentType, MetadataType } from "@/exports/interfaces";
 
 interface UseContentContainerProps {
     content: ContentType;
@@ -9,7 +9,7 @@ interface UseContentContainerProps {
     isOverlay?: boolean;
 }
 
-const useContentContainer = ({
+const useContent = ({
     content,
     isScrollable = false,
     isOverlay = false,
@@ -76,4 +76,4 @@ const useContentContainer = ({
     };
 };
 
-export default useContentContainer;
+export default useContent;

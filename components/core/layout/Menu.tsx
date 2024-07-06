@@ -1,12 +1,10 @@
-"use client"
-
 import React, { useMemo, useRef, useEffect, useCallback } from "react";
 import styles from "./Menu.module.scss";
 import { usePathname } from 'next/navigation';
 import { useContentOverlay } from "@/providers/OverlayProvider";
 import Linked from "@/components/util/Linked";
-import { CATEGORY_DESCRIPTIONS } from "@/utils/metadata";
-import { REACT_ICONS } from "@/utils/icons";
+import { CATEGORY_DESCRIPTIONS } from "@/exports/metadata";
+import { REACT_ICONS } from "@/exports/icons";
 
 interface MenuProps {
   open: boolean;

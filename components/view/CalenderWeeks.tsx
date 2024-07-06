@@ -3,7 +3,7 @@ import { MdAdd } from 'react-icons/md';
 import styles from './CalenderWeeks.module.scss';
 import Linked from '../util/Linked';
 import Content from '../core/content/Content';
-import { ContentType, MetadataType } from '@/utils/interfaces';
+import { ContentType, MetadataType } from '@/exports/interfaces';
 
 interface CalendarProps {
   contents: ContentType[];

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useConnections } from '@/hooks/useConnections';
-import { ContentType } from "@/utils/interfaces";
+import { ContentType } from "@/exports/interfaces";
+import { useConnections } from "./Connections.hook";
 
 interface ConnectionsProps {
   contents?: ContentType[];

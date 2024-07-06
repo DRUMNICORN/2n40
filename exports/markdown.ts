@@ -1,5 +1,5 @@
-import { ContentTypes } from "@/utils/enums";
-import { ContentType, MetadataType } from "@/utils/interfaces";
+import { ContentTypes } from "@/exports/enums";
+import { ContentType, MetadataType } from "@/exports/interfaces";
 
 export class MarkdownParser {
 

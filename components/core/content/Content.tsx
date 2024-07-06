@@ -1,13 +1,13 @@
 import React from "react";
-import useContentContainer from "@/hooks/useContentContainer";
 import styles from "./Content.module.scss";
-import Markdown from "../../util/Markdown";
 import Linked from "../../util/Linked";
 import SoundCloudEmbed from "../../util/SoundCloudEmbed";
 import DateContainer from "../design/DateContainer";
 import ListComponent from "../../view/ListComponent";
-import { ContentTypes } from "@/utils/enums";
-import { ContentType, MetadataType } from "@/utils/interfaces";
+import { ContentTypes } from "@/exports/enums";
+import { ContentType, MetadataType } from "@/exports/interfaces";
+import useContent from "./Content.hook";
+import Markdown from "@/components/util/Markdown";
 
 interface ContentContainerProps {
   content: ContentType;
@@ -30,7 +30,7 @@ const Content: React.FC<ContentContainerProps> = ({
     handleFileClick,
     handleShareClick,
     handleClose,
-  } = useContentContainer({ content, isScrollable, isOverlay, onConnectionClick});
+  } = useContent({ content, isScrollable, isOverlay, onConnectionClick});
 
 
   const { metadata, category, context } = content ?? {};

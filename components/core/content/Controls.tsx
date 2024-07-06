@@ -3,8 +3,8 @@ import styles from './Controls.module.scss';
 import Linked from '../../util/Linked';
 import InputField from '@/components/util/InputField';
 import ListComponent from '../../view/ListComponent';
-import { MetadataType } from '@/utils/interfaces';
-import { ContentTypes } from '@/utils/enums';
+import { MetadataType } from '@/exports/interfaces';
+import { ContentTypes } from '@/exports/enums';
 
 interface ControlsComponentProps {
     param: MetadataType;
@@ -12,18 +12,16 @@ interface ControlsComponentProps {
     handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     setParam: (key: any, value: string | string[] | null) => void;
     toggleParam: (key: any, value: string) => void;
-    metadataEntries: string[];
 }
 
-const ControlsComponent: React.FC<ControlsComponentProps> = ({
+const Controls: React.FC<ControlsComponentProps> = ({
     param,
     handleSwap,
     handleKeyPress,
     setParam,
     toggleParam,
-    metadataEntries,
 }) => {
-    const filterEntitiesClasses = `${styles.filterEntities} ${metadataEntries.length > 0 ? '' : styles.empty}`;
+    const filterEntitiesClasses = `${styles.filterEntities} ${(param.connections as string[] || []).length > 0 ? '' : styles.empty}`;
 
     return (
         <div className={styles.filter}>
@@ -39,9 +37,9 @@ const ControlsComponent: React.FC<ControlsComponentProps> = ({
                 </div>
                 <div className={filterEntitiesClasses}>
                     <ListComponent
-                        items={metadataEntries}
+                        items={param.connections as string[] || []}
                         onClick={(label, type) => {
-                            toggleParam("connections", label);
+                            toggleParam('connections', label);
                         }}
                     />
                 </div>
@@ -50,4 +48,4 @@ const ControlsComponent: React.FC<ControlsComponentProps> = ({
     );
 };
 
-export default React.memo(ControlsComponent);
+export default React.memo(Controls);

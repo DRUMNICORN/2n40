@@ -1,4 +1,4 @@
-import { ContentType } from '@/utils/interfaces';
+import { ContentType } from '@/exports/interfaces';
 import React, { createContext, useCallback, useMemo, useState, useEffect } from 'react';
 
 interface EntityContextInterface {

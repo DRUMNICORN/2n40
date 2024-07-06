@@ -48,3 +48,7 @@ package-lock.json
 !next.config.js
 # node_modules
 .env
+
+
+/android
+/ios
